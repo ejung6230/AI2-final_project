@@ -368,6 +368,8 @@ if 'voice_recording' not in st.session_state:
     st.session_state.voice_recording = False
 if 'transcribed_text' not in st.session_state:
     st.session_state.transcribed_text = ""
+if 'recognizing_speech' not in st.session_state:
+    st.session_state.recognizing_speech = False
 if 'audio_queue' not in st.session_state:
     st.session_state.audio_queue = queue.Queue()
 if 'audio_frames_queue' not in st.session_state:
@@ -1656,7 +1658,21 @@ if not st.session_state.pending_save:
         start_recording = st.button("🔴 녹화 시작", type="primary", use_container_width=True)
     else:
         start_recording = False
-        stop_recording = st.button("⏹️ 녹화 중지 & 저장", type="secondary", use_container_width=True)
+        
+        # 음성 인식 진행 중인지 확인 (큐에 데이터가 있는지)
+        is_processing_speech = False
+        if hasattr(st.session_state, 'audio_queue') and not st.session_state.audio_queue.empty():
+            is_processing_speech = True
+        
+        # 버튼 텍스트 및 비활성화 상태 결정
+        if is_processing_speech:
+            button_text = "⏹️ 녹화 중지 & 저장 (음성 인식 처리 중...)"
+            button_disabled = True
+        else:
+            button_text = "⏹️ 녹화 중지 & 저장"
+            button_disabled = False
+        
+        stop_recording = st.button(button_text, type="secondary", use_container_width=True, disabled=button_disabled)
 
 
 # 녹화 시작 처리
@@ -1912,7 +1928,7 @@ if st.session_state.pending_save and st.session_state.save_data:
     if not st.session_state.emotion_confirmed:
         # 로딩 중일 때 메시지 표시
         if st.session_state.get('advice_loading', False):
-            status_placeholder.info("제미나이 AI가 일기를 분석하고 조언을 작성하고 있습니다...")
+            status_placeholder.info("💭 제미나이 AI가 일기를 분석하고 조언을 작성하고 있습니다...")
         # AI 추천 표시 (로딩 중이 아닐 때)
         elif save_data['is_personalized']:
             status_placeholder.success(
@@ -2603,6 +2619,61 @@ if st.session_state.diary_entries:
                         )
                 else:
                     st.warning("⚠️ 텍스트 파일 없음")
+            
+            # 삭제 버튼
+            st.markdown("---")
+            delete_key = f"delete_diary_{entry.get('timestamp', i)}"
+            
+            # 삭제 확인 상태 관리
+            if delete_key not in st.session_state:
+                st.session_state[delete_key] = False
+            
+            if not st.session_state[delete_key]:
+                # 첫 번째 클릭: 삭제 확인 요청
+                if st.button("🗑️ 이 일기 삭제", key=f"delete_btn_{i}", type="primary", use_container_width=True):
+                    st.session_state[delete_key] = True
+                    st.rerun()
+            else:
+                # 두 번째 단계: 확인 버튼 표시
+                col_confirm1, col_confirm2 = st.columns(2)
+
+                # ⚠️ 경고 / 성공 메시지를 표시할 고정 영역
+                message_placeholder = st.empty()
+
+                # 최초에는 경고 표시
+                message_placeholder.warning(
+                    "⚠️ 정말로 이 일기를 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+                )
+                with col_confirm1:
+                    if st.button("✅ 삭제 확인", key=f"confirm_delete_{i}", type="primary", use_container_width=True):
+                        # 파일 삭제
+                        try:
+                            if os.path.exists(entry.get('video_path', '')):
+                                os.remove(entry['video_path'])
+                            if os.path.exists(entry.get('text_path', '')):
+                                os.remove(entry['text_path'])
+                        except Exception as e:
+                            st.error(f"파일 삭제 오류: {e}")
+                        
+                        # diary_entries에서 제거 (reversed 고려)
+                        original_index = len(st.session_state.diary_entries) - 1 - i
+                        st.session_state.diary_entries.pop(original_index)
+                        
+                        # 로컬 파일에 저장
+                        save_local_data(st.session_state.diary_entries)
+                        
+                        # 상태 초기화
+                        del st.session_state[delete_key]
+                        
+                        message_placeholder.success("✅ 일기가 삭제되었습니다.")
+                        
+                        time.sleep(1)
+                        st.rerun()
+                
+                with col_confirm2:
+                    if st.button("❌ 취소", key=f"cancel_delete_{i}", use_container_width=True):
+                        st.session_state[delete_key] = False
+                        st.rerun()
     # 전체 통계
     st.markdown("---")
     st.markdown("### 📊 전체 감정 분석")
