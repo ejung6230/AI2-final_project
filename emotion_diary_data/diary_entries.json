@@ -1,0 +1,4904 @@
+[
+  {
+    "timestamp": "20251216_221244",
+    "emotion": "담담함",
+    "diary_text": "안녕하세요 오늘의 일기를 좀 남겨 보려고 웹캠으로 제 얘기를 좀 해 보려고 해요 이게 일단 목소리랑 화면이랑 동기화가 잘 돼서 립싱크가 잘 맞아야 될 텐데 그게 조금 고민이네요 이게 잘 될까",
+    "video_filename": "emotion_diary_20251216_221244.mp4",
+    "video_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_221244.mp4",
+    "text_filename": "emotion_diary_20251216_221244.txt",
+    "text_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_221244.txt",
+    "dominant_emotion": "담담함",
+    "avg_confidence": 0.41078284450212316,
+    "frame_count": 597,
+    "recording_duration": "00:36",
+    "emotion_timeline": [
+      {
+        "frame": 1,
+        "emotion": "슬픔",
+        "confidence": 0.6621161103248596,
+        "timestamp": "22:12:12"
+      },
+      {
+        "frame": 4,
+        "emotion": "행복함",
+        "confidence": 0.41810858249664307,
+        "timestamp": "22:12:13"
+      },
+      {
+        "frame": 7,
+        "emotion": "행복함",
+        "confidence": 0.7341554164886475,
+        "timestamp": "22:12:13"
+      },
+      {
+        "frame": 10,
+        "emotion": "행복함",
+        "confidence": 0.5171143412590027,
+        "timestamp": "22:12:13"
+      },
+      {
+        "frame": 13,
+        "emotion": "행복함",
+        "confidence": 0.6600037813186646,
+        "timestamp": "22:12:13"
+      },
+      {
+        "frame": 16,
+        "emotion": "행복함",
+        "confidence": 0.5406020283699036,
+        "timestamp": "22:12:13"
+      },
+      {
+        "frame": 19,
+        "emotion": "행복함",
+        "confidence": 0.600532591342926,
+        "timestamp": "22:12:13"
+      },
+      {
+        "frame": 22,
+        "emotion": "담담함",
+        "confidence": 0.6551106572151184,
+        "timestamp": "22:12:13"
+      },
+      {
+        "frame": 25,
+        "emotion": "슬픔",
+        "confidence": 0.3048799932003021,
+        "timestamp": "22:12:14"
+      },
+      {
+        "frame": 28,
+        "emotion": "행복함",
+        "confidence": 0.3235749900341034,
+        "timestamp": "22:12:14"
+      },
+      {
+        "frame": 31,
+        "emotion": "화남",
+        "confidence": 0.28035205602645874,
+        "timestamp": "22:12:14"
+      },
+      {
+        "frame": 34,
+        "emotion": "슬픔",
+        "confidence": 0.605566680431366,
+        "timestamp": "22:12:14"
+      },
+      {
+        "frame": 37,
+        "emotion": "슬픔",
+        "confidence": 0.6665090322494507,
+        "timestamp": "22:12:14"
+      },
+      {
+        "frame": 40,
+        "emotion": "슬픔",
+        "confidence": 0.363984078168869,
+        "timestamp": "22:12:14"
+      },
+      {
+        "frame": 43,
+        "emotion": "슬픔",
+        "confidence": 0.40029340982437134,
+        "timestamp": "22:12:14"
+      },
+      {
+        "frame": 46,
+        "emotion": "행복함",
+        "confidence": 0.4840470552444458,
+        "timestamp": "22:12:14"
+      },
+      {
+        "frame": 49,
+        "emotion": "행복함",
+        "confidence": 0.40893301367759705,
+        "timestamp": "22:12:15"
+      },
+      {
+        "frame": 52,
+        "emotion": "슬픔",
+        "confidence": 0.31194645166397095,
+        "timestamp": "22:12:15"
+      },
+      {
+        "frame": 55,
+        "emotion": "담담함",
+        "confidence": 0.41835707426071167,
+        "timestamp": "22:12:15"
+      },
+      {
+        "frame": 58,
+        "emotion": "담담함",
+        "confidence": 0.2885221242904663,
+        "timestamp": "22:12:15"
+      },
+      {
+        "frame": 61,
+        "emotion": "슬픔",
+        "confidence": 0.31335553526878357,
+        "timestamp": "22:12:15"
+      },
+      {
+        "frame": 64,
+        "emotion": "행복함",
+        "confidence": 0.3546835482120514,
+        "timestamp": "22:12:15"
+      },
+      {
+        "frame": 67,
+        "emotion": "행복함",
+        "confidence": 0.43191444873809814,
+        "timestamp": "22:12:15"
+      },
+      {
+        "frame": 70,
+        "emotion": "행복함",
+        "confidence": 0.5394594073295593,
+        "timestamp": "22:12:16"
+      },
+      {
+        "frame": 73,
+        "emotion": "슬픔",
+        "confidence": 0.4854893982410431,
+        "timestamp": "22:12:16"
+      },
+      {
+        "frame": 76,
+        "emotion": "슬픔",
+        "confidence": 0.39086416363716125,
+        "timestamp": "22:12:16"
+      },
+      {
+        "frame": 79,
+        "emotion": "슬픔",
+        "confidence": 0.5444384813308716,
+        "timestamp": "22:12:16"
+      },
+      {
+        "frame": 82,
+        "emotion": "두려움",
+        "confidence": 0.492423415184021,
+        "timestamp": "22:12:16"
+      },
+      {
+        "frame": 85,
+        "emotion": "담담함",
+        "confidence": 0.36120057106018066,
+        "timestamp": "22:12:16"
+      },
+      {
+        "frame": 88,
+        "emotion": "담담함",
+        "confidence": 0.42322665452957153,
+        "timestamp": "22:12:16"
+      },
+      {
+        "frame": 91,
+        "emotion": "담담함",
+        "confidence": 0.5303792357444763,
+        "timestamp": "22:12:17"
+      },
+      {
+        "frame": 94,
+        "emotion": "담담함",
+        "confidence": 0.37029388546943665,
+        "timestamp": "22:12:17"
+      },
+      {
+        "frame": 97,
+        "emotion": "담담함",
+        "confidence": 0.33499234914779663,
+        "timestamp": "22:12:17"
+      },
+      {
+        "frame": 100,
+        "emotion": "담담함",
+        "confidence": 0.3786483705043793,
+        "timestamp": "22:12:17"
+      },
+      {
+        "frame": 103,
+        "emotion": "담담함",
+        "confidence": 0.4681446850299835,
+        "timestamp": "22:12:17"
+      },
+      {
+        "frame": 106,
+        "emotion": "담담함",
+        "confidence": 0.35441091656684875,
+        "timestamp": "22:12:17"
+      },
+      {
+        "frame": 109,
+        "emotion": "담담함",
+        "confidence": 0.3192301392555237,
+        "timestamp": "22:12:17"
+      },
+      {
+        "frame": 112,
+        "emotion": "행복함",
+        "confidence": 0.21284219622612,
+        "timestamp": "22:12:18"
+      },
+      {
+        "frame": 115,
+        "emotion": "화남",
+        "confidence": 0.2648700475692749,
+        "timestamp": "22:12:18"
+      },
+      {
+        "frame": 118,
+        "emotion": "슬픔",
+        "confidence": 0.37629517912864685,
+        "timestamp": "22:12:18"
+      },
+      {
+        "frame": 121,
+        "emotion": "슬픔",
+        "confidence": 0.4552288353443146,
+        "timestamp": "22:12:18"
+      },
+      {
+        "frame": 124,
+        "emotion": "화남",
+        "confidence": 0.3660334348678589,
+        "timestamp": "22:12:18"
+      },
+      {
+        "frame": 127,
+        "emotion": "담담함",
+        "confidence": 0.25104475021362305,
+        "timestamp": "22:12:18"
+      },
+      {
+        "frame": 130,
+        "emotion": "슬픔",
+        "confidence": 0.3445681929588318,
+        "timestamp": "22:12:18"
+      },
+      {
+        "frame": 133,
+        "emotion": "담담함",
+        "confidence": 0.6290056705474854,
+        "timestamp": "22:12:19"
+      },
+      {
+        "frame": 136,
+        "emotion": "담담함",
+        "confidence": 0.6192436218261719,
+        "timestamp": "22:12:19"
+      },
+      {
+        "frame": 139,
+        "emotion": "담담함",
+        "confidence": 0.6374157071113586,
+        "timestamp": "22:12:19"
+      },
+      {
+        "frame": 142,
+        "emotion": "담담함",
+        "confidence": 0.6132416725158691,
+        "timestamp": "22:12:19"
+      },
+      {
+        "frame": 145,
+        "emotion": "담담함",
+        "confidence": 0.3768868148326874,
+        "timestamp": "22:12:19"
+      },
+      {
+        "frame": 148,
+        "emotion": "행복함",
+        "confidence": 0.33311861753463745,
+        "timestamp": "22:12:20"
+      },
+      {
+        "frame": 151,
+        "emotion": "담담함",
+        "confidence": 0.3177025616168976,
+        "timestamp": "22:12:20"
+      },
+      {
+        "frame": 154,
+        "emotion": "담담함",
+        "confidence": 0.5598591566085815,
+        "timestamp": "22:12:20"
+      },
+      {
+        "frame": 157,
+        "emotion": "담담함",
+        "confidence": 0.6306125521659851,
+        "timestamp": "22:12:20"
+      },
+      {
+        "frame": 160,
+        "emotion": "담담함",
+        "confidence": 0.5874620676040649,
+        "timestamp": "22:12:20"
+      },
+      {
+        "frame": 163,
+        "emotion": "담담함",
+        "confidence": 0.47192615270614624,
+        "timestamp": "22:12:20"
+      },
+      {
+        "frame": 166,
+        "emotion": "담담함",
+        "confidence": 0.6847834587097168,
+        "timestamp": "22:12:20"
+      },
+      {
+        "frame": 169,
+        "emotion": "담담함",
+        "confidence": 0.5567372441291809,
+        "timestamp": "22:12:21"
+      },
+      {
+        "frame": 172,
+        "emotion": "담담함",
+        "confidence": 0.3611361086368561,
+        "timestamp": "22:12:21"
+      },
+      {
+        "frame": 175,
+        "emotion": "화남",
+        "confidence": 0.3676665723323822,
+        "timestamp": "22:12:21"
+      },
+      {
+        "frame": 178,
+        "emotion": "담담함",
+        "confidence": 0.33258116245269775,
+        "timestamp": "22:12:21"
+      },
+      {
+        "frame": 181,
+        "emotion": "담담함",
+        "confidence": 0.4407523274421692,
+        "timestamp": "22:12:21"
+      },
+      {
+        "frame": 184,
+        "emotion": "담담함",
+        "confidence": 0.4020719826221466,
+        "timestamp": "22:12:21"
+      },
+      {
+        "frame": 187,
+        "emotion": "화남",
+        "confidence": 0.296701043844223,
+        "timestamp": "22:12:22"
+      },
+      {
+        "frame": 190,
+        "emotion": "화남",
+        "confidence": 0.28778547048568726,
+        "timestamp": "22:12:22"
+      },
+      {
+        "frame": 193,
+        "emotion": "담담함",
+        "confidence": 0.27382487058639526,
+        "timestamp": "22:12:22"
+      },
+      {
+        "frame": 196,
+        "emotion": "화남",
+        "confidence": 0.2741062641143799,
+        "timestamp": "22:12:22"
+      },
+      {
+        "frame": 199,
+        "emotion": "두려움",
+        "confidence": 0.31974172592163086,
+        "timestamp": "22:12:22"
+      },
+      {
+        "frame": 202,
+        "emotion": "슬픔",
+        "confidence": 0.33280956745147705,
+        "timestamp": "22:12:22"
+      },
+      {
+        "frame": 205,
+        "emotion": "슬픔",
+        "confidence": 0.2678297162055969,
+        "timestamp": "22:12:22"
+      },
+      {
+        "frame": 208,
+        "emotion": "슬픔",
+        "confidence": 0.3432750701904297,
+        "timestamp": "22:12:23"
+      },
+      {
+        "frame": 211,
+        "emotion": "화남",
+        "confidence": 0.2713142931461334,
+        "timestamp": "22:12:23"
+      },
+      {
+        "frame": 214,
+        "emotion": "슬픔",
+        "confidence": 0.27959054708480835,
+        "timestamp": "22:12:23"
+      },
+      {
+        "frame": 217,
+        "emotion": "슬픔",
+        "confidence": 0.33843833208084106,
+        "timestamp": "22:12:23"
+      },
+      {
+        "frame": 220,
+        "emotion": "화남",
+        "confidence": 0.32460707426071167,
+        "timestamp": "22:12:23"
+      },
+      {
+        "frame": 223,
+        "emotion": "화남",
+        "confidence": 0.2609189450740814,
+        "timestamp": "22:12:23"
+      },
+      {
+        "frame": 226,
+        "emotion": "슬픔",
+        "confidence": 0.3118768334388733,
+        "timestamp": "22:12:23"
+      },
+      {
+        "frame": 229,
+        "emotion": "담담함",
+        "confidence": 0.580480694770813,
+        "timestamp": "22:12:24"
+      },
+      {
+        "frame": 232,
+        "emotion": "슬픔",
+        "confidence": 0.31544578075408936,
+        "timestamp": "22:12:24"
+      },
+      {
+        "frame": 235,
+        "emotion": "담담함",
+        "confidence": 0.36751240491867065,
+        "timestamp": "22:12:24"
+      },
+      {
+        "frame": 238,
+        "emotion": "담담함",
+        "confidence": 0.24949420988559723,
+        "timestamp": "22:12:24"
+      },
+      {
+        "frame": 241,
+        "emotion": "두려움",
+        "confidence": 0.2528996765613556,
+        "timestamp": "22:12:24"
+      },
+      {
+        "frame": 244,
+        "emotion": "화남",
+        "confidence": 0.35749244689941406,
+        "timestamp": "22:12:24"
+      },
+      {
+        "frame": 247,
+        "emotion": "슬픔",
+        "confidence": 0.3040177822113037,
+        "timestamp": "22:12:25"
+      },
+      {
+        "frame": 250,
+        "emotion": "슬픔",
+        "confidence": 0.31191736459732056,
+        "timestamp": "22:12:25"
+      },
+      {
+        "frame": 253,
+        "emotion": "슬픔",
+        "confidence": 0.33755964040756226,
+        "timestamp": "22:12:25"
+      },
+      {
+        "frame": 256,
+        "emotion": "담담함",
+        "confidence": 0.28092193603515625,
+        "timestamp": "22:12:25"
+      },
+      {
+        "frame": 259,
+        "emotion": "화남",
+        "confidence": 0.4042787551879883,
+        "timestamp": "22:12:25"
+      },
+      {
+        "frame": 262,
+        "emotion": "화남",
+        "confidence": 0.3918570578098297,
+        "timestamp": "22:12:25"
+      },
+      {
+        "frame": 265,
+        "emotion": "두려움",
+        "confidence": 0.7467957735061646,
+        "timestamp": "22:12:25"
+      },
+      {
+        "frame": 268,
+        "emotion": "슬픔",
+        "confidence": 0.324586421251297,
+        "timestamp": "22:12:26"
+      },
+      {
+        "frame": 271,
+        "emotion": "슬픔",
+        "confidence": 0.3218848705291748,
+        "timestamp": "22:12:26"
+      },
+      {
+        "frame": 274,
+        "emotion": "슬픔",
+        "confidence": 0.27881866693496704,
+        "timestamp": "22:12:26"
+      },
+      {
+        "frame": 277,
+        "emotion": "화남",
+        "confidence": 0.2687581479549408,
+        "timestamp": "22:12:26"
+      },
+      {
+        "frame": 280,
+        "emotion": "슬픔",
+        "confidence": 0.2322472780942917,
+        "timestamp": "22:12:26"
+      },
+      {
+        "frame": 283,
+        "emotion": "담담함",
+        "confidence": 0.47955602407455444,
+        "timestamp": "22:12:27"
+      },
+      {
+        "frame": 286,
+        "emotion": "담담함",
+        "confidence": 0.43762052059173584,
+        "timestamp": "22:12:27"
+      },
+      {
+        "frame": 289,
+        "emotion": "담담함",
+        "confidence": 0.3429967761039734,
+        "timestamp": "22:12:27"
+      },
+      {
+        "frame": 292,
+        "emotion": "담담함",
+        "confidence": 0.35526877641677856,
+        "timestamp": "22:12:27"
+      },
+      {
+        "frame": 295,
+        "emotion": "두려움",
+        "confidence": 0.7605378031730652,
+        "timestamp": "22:12:27"
+      },
+      {
+        "frame": 298,
+        "emotion": "슬픔",
+        "confidence": 0.4223628640174866,
+        "timestamp": "22:12:27"
+      },
+      {
+        "frame": 301,
+        "emotion": "담담함",
+        "confidence": 0.4593045711517334,
+        "timestamp": "22:12:27"
+      },
+      {
+        "frame": 304,
+        "emotion": "담담함",
+        "confidence": 0.2721356451511383,
+        "timestamp": "22:12:28"
+      },
+      {
+        "frame": 307,
+        "emotion": "담담함",
+        "confidence": 0.29065874218940735,
+        "timestamp": "22:12:28"
+      },
+      {
+        "frame": 310,
+        "emotion": "담담함",
+        "confidence": 0.30544066429138184,
+        "timestamp": "22:12:28"
+      },
+      {
+        "frame": 313,
+        "emotion": "슬픔",
+        "confidence": 0.45019304752349854,
+        "timestamp": "22:12:28"
+      },
+      {
+        "frame": 316,
+        "emotion": "슬픔",
+        "confidence": 0.38812321424484253,
+        "timestamp": "22:12:28"
+      },
+      {
+        "frame": 319,
+        "emotion": "슬픔",
+        "confidence": 0.39707037806510925,
+        "timestamp": "22:12:28"
+      },
+      {
+        "frame": 322,
+        "emotion": "담담함",
+        "confidence": 0.3659690320491791,
+        "timestamp": "22:12:29"
+      },
+      {
+        "frame": 325,
+        "emotion": "화남",
+        "confidence": 0.3957023322582245,
+        "timestamp": "22:12:29"
+      },
+      {
+        "frame": 328,
+        "emotion": "화남",
+        "confidence": 0.3710293173789978,
+        "timestamp": "22:12:29"
+      },
+      {
+        "frame": 331,
+        "emotion": "두려움",
+        "confidence": 0.5147808790206909,
+        "timestamp": "22:12:29"
+      },
+      {
+        "frame": 334,
+        "emotion": "슬픔",
+        "confidence": 0.47602489590644836,
+        "timestamp": "22:12:29"
+      },
+      {
+        "frame": 337,
+        "emotion": "담담함",
+        "confidence": 0.35292673110961914,
+        "timestamp": "22:12:29"
+      },
+      {
+        "frame": 340,
+        "emotion": "담담함",
+        "confidence": 0.3083460330963135,
+        "timestamp": "22:12:30"
+      },
+      {
+        "frame": 343,
+        "emotion": "화남",
+        "confidence": 0.4047779142856598,
+        "timestamp": "22:12:30"
+      },
+      {
+        "frame": 346,
+        "emotion": "담담함",
+        "confidence": 0.2555088996887207,
+        "timestamp": "22:12:30"
+      },
+      {
+        "frame": 349,
+        "emotion": "슬픔",
+        "confidence": 0.34472981095314026,
+        "timestamp": "22:12:30"
+      },
+      {
+        "frame": 352,
+        "emotion": "슬픔",
+        "confidence": 0.32124364376068115,
+        "timestamp": "22:12:30"
+      },
+      {
+        "frame": 355,
+        "emotion": "담담함",
+        "confidence": 0.3422829508781433,
+        "timestamp": "22:12:30"
+      },
+      {
+        "frame": 358,
+        "emotion": "담담함",
+        "confidence": 0.2556036114692688,
+        "timestamp": "22:12:30"
+      },
+      {
+        "frame": 361,
+        "emotion": "담담함",
+        "confidence": 0.40063542127609253,
+        "timestamp": "22:12:31"
+      },
+      {
+        "frame": 364,
+        "emotion": "담담함",
+        "confidence": 0.41990673542022705,
+        "timestamp": "22:12:31"
+      },
+      {
+        "frame": 367,
+        "emotion": "화남",
+        "confidence": 0.310115784406662,
+        "timestamp": "22:12:31"
+      },
+      {
+        "frame": 370,
+        "emotion": "화남",
+        "confidence": 0.42934948205947876,
+        "timestamp": "22:12:31"
+      },
+      {
+        "frame": 373,
+        "emotion": "화남",
+        "confidence": 0.4162469804286957,
+        "timestamp": "22:12:31"
+      },
+      {
+        "frame": 376,
+        "emotion": "화남",
+        "confidence": 0.3855026364326477,
+        "timestamp": "22:12:31"
+      },
+      {
+        "frame": 379,
+        "emotion": "화남",
+        "confidence": 0.3966894745826721,
+        "timestamp": "22:12:32"
+      },
+      {
+        "frame": 382,
+        "emotion": "화남",
+        "confidence": 0.2751132547855377,
+        "timestamp": "22:12:32"
+      },
+      {
+        "frame": 385,
+        "emotion": "화남",
+        "confidence": 0.41881173849105835,
+        "timestamp": "22:12:32"
+      },
+      {
+        "frame": 388,
+        "emotion": "두려움",
+        "confidence": 0.4649917185306549,
+        "timestamp": "22:12:32"
+      },
+      {
+        "frame": 391,
+        "emotion": "화남",
+        "confidence": 0.371928334236145,
+        "timestamp": "22:12:32"
+      },
+      {
+        "frame": 394,
+        "emotion": "화남",
+        "confidence": 0.5625349879264832,
+        "timestamp": "22:12:33"
+      },
+      {
+        "frame": 397,
+        "emotion": "담담함",
+        "confidence": 0.4384097754955292,
+        "timestamp": "22:12:33"
+      },
+      {
+        "frame": 400,
+        "emotion": "담담함",
+        "confidence": 0.4326506555080414,
+        "timestamp": "22:12:33"
+      },
+      {
+        "frame": 403,
+        "emotion": "담담함",
+        "confidence": 0.44870346784591675,
+        "timestamp": "22:12:33"
+      },
+      {
+        "frame": 406,
+        "emotion": "담담함",
+        "confidence": 0.5379093289375305,
+        "timestamp": "22:12:33"
+      },
+      {
+        "frame": 409,
+        "emotion": "담담함",
+        "confidence": 0.29492470622062683,
+        "timestamp": "22:12:33"
+      },
+      {
+        "frame": 412,
+        "emotion": "슬픔",
+        "confidence": 0.3487846851348877,
+        "timestamp": "22:12:34"
+      },
+      {
+        "frame": 415,
+        "emotion": "슬픔",
+        "confidence": 0.44128870964050293,
+        "timestamp": "22:12:34"
+      },
+      {
+        "frame": 418,
+        "emotion": "슬픔",
+        "confidence": 0.40240752696990967,
+        "timestamp": "22:12:34"
+      },
+      {
+        "frame": 421,
+        "emotion": "슬픔",
+        "confidence": 0.32271721959114075,
+        "timestamp": "22:12:34"
+      },
+      {
+        "frame": 424,
+        "emotion": "담담함",
+        "confidence": 0.36508092284202576,
+        "timestamp": "22:12:34"
+      },
+      {
+        "frame": 427,
+        "emotion": "담담함",
+        "confidence": 0.38028064370155334,
+        "timestamp": "22:12:34"
+      },
+      {
+        "frame": 430,
+        "emotion": "담담함",
+        "confidence": 0.3857727348804474,
+        "timestamp": "22:12:35"
+      },
+      {
+        "frame": 433,
+        "emotion": "슬픔",
+        "confidence": 0.36179617047309875,
+        "timestamp": "22:12:35"
+      },
+      {
+        "frame": 436,
+        "emotion": "슬픔",
+        "confidence": 0.37356850504875183,
+        "timestamp": "22:12:35"
+      },
+      {
+        "frame": 439,
+        "emotion": "담담함",
+        "confidence": 0.3975777328014374,
+        "timestamp": "22:12:35"
+      },
+      {
+        "frame": 442,
+        "emotion": "슬픔",
+        "confidence": 0.3855048418045044,
+        "timestamp": "22:12:35"
+      },
+      {
+        "frame": 445,
+        "emotion": "슬픔",
+        "confidence": 0.4587614834308624,
+        "timestamp": "22:12:35"
+      },
+      {
+        "frame": 448,
+        "emotion": "슬픔",
+        "confidence": 0.5998838543891907,
+        "timestamp": "22:12:35"
+      },
+      {
+        "frame": 451,
+        "emotion": "슬픔",
+        "confidence": 0.3096469044685364,
+        "timestamp": "22:12:36"
+      },
+      {
+        "frame": 454,
+        "emotion": "슬픔",
+        "confidence": 0.31394442915916443,
+        "timestamp": "22:12:36"
+      },
+      {
+        "frame": 457,
+        "emotion": "슬픔",
+        "confidence": 0.361248254776001,
+        "timestamp": "22:12:36"
+      },
+      {
+        "frame": 460,
+        "emotion": "슬픔",
+        "confidence": 0.2607215344905853,
+        "timestamp": "22:12:36"
+      },
+      {
+        "frame": 463,
+        "emotion": "슬픔",
+        "confidence": 0.32560229301452637,
+        "timestamp": "22:12:36"
+      },
+      {
+        "frame": 466,
+        "emotion": "슬픔",
+        "confidence": 0.3321376144886017,
+        "timestamp": "22:12:37"
+      },
+      {
+        "frame": 469,
+        "emotion": "슬픔",
+        "confidence": 0.4007995128631592,
+        "timestamp": "22:12:37"
+      },
+      {
+        "frame": 472,
+        "emotion": "슬픔",
+        "confidence": 0.30852803587913513,
+        "timestamp": "22:12:37"
+      },
+      {
+        "frame": 475,
+        "emotion": "슬픔",
+        "confidence": 0.25683802366256714,
+        "timestamp": "22:12:37"
+      },
+      {
+        "frame": 478,
+        "emotion": "슬픔",
+        "confidence": 0.24806682765483856,
+        "timestamp": "22:12:37"
+      },
+      {
+        "frame": 481,
+        "emotion": "화남",
+        "confidence": 0.33112823963165283,
+        "timestamp": "22:12:37"
+      },
+      {
+        "frame": 484,
+        "emotion": "두려움",
+        "confidence": 0.6918954253196716,
+        "timestamp": "22:12:37"
+      },
+      {
+        "frame": 487,
+        "emotion": "두려움",
+        "confidence": 0.4346174895763397,
+        "timestamp": "22:12:38"
+      },
+      {
+        "frame": 490,
+        "emotion": "슬픔",
+        "confidence": 0.32308849692344666,
+        "timestamp": "22:12:38"
+      },
+      {
+        "frame": 493,
+        "emotion": "슬픔",
+        "confidence": 0.45628947019577026,
+        "timestamp": "22:12:38"
+      },
+      {
+        "frame": 496,
+        "emotion": "슬픔",
+        "confidence": 0.3357289433479309,
+        "timestamp": "22:12:38"
+      },
+      {
+        "frame": 499,
+        "emotion": "슬픔",
+        "confidence": 0.41947200894355774,
+        "timestamp": "22:12:38"
+      },
+      {
+        "frame": 502,
+        "emotion": "슬픔",
+        "confidence": 0.4439272880554199,
+        "timestamp": "22:12:38"
+      },
+      {
+        "frame": 505,
+        "emotion": "슬픔",
+        "confidence": 0.4090462625026703,
+        "timestamp": "22:12:39"
+      },
+      {
+        "frame": 508,
+        "emotion": "슬픔",
+        "confidence": 0.42876341938972473,
+        "timestamp": "22:12:39"
+      },
+      {
+        "frame": 511,
+        "emotion": "슬픔",
+        "confidence": 0.38942891359329224,
+        "timestamp": "22:12:39"
+      },
+      {
+        "frame": 514,
+        "emotion": "슬픔",
+        "confidence": 0.4694877564907074,
+        "timestamp": "22:12:39"
+      },
+      {
+        "frame": 517,
+        "emotion": "슬픔",
+        "confidence": 0.3997485041618347,
+        "timestamp": "22:12:39"
+      },
+      {
+        "frame": 520,
+        "emotion": "슬픔",
+        "confidence": 0.3309314548969269,
+        "timestamp": "22:12:39"
+      },
+      {
+        "frame": 523,
+        "emotion": "담담함",
+        "confidence": 0.36166390776634216,
+        "timestamp": "22:12:40"
+      },
+      {
+        "frame": 526,
+        "emotion": "슬픔",
+        "confidence": 0.4649428129196167,
+        "timestamp": "22:12:40"
+      },
+      {
+        "frame": 529,
+        "emotion": "슬픔",
+        "confidence": 0.5187113881111145,
+        "timestamp": "22:12:40"
+      },
+      {
+        "frame": 532,
+        "emotion": "슬픔",
+        "confidence": 0.5594274401664734,
+        "timestamp": "22:12:40"
+      },
+      {
+        "frame": 535,
+        "emotion": "담담함",
+        "confidence": 0.33167099952697754,
+        "timestamp": "22:12:40"
+      },
+      {
+        "frame": 538,
+        "emotion": "담담함",
+        "confidence": 0.4305644929409027,
+        "timestamp": "22:12:40"
+      },
+      {
+        "frame": 541,
+        "emotion": "두려움",
+        "confidence": 0.4496375322341919,
+        "timestamp": "22:12:40"
+      },
+      {
+        "frame": 544,
+        "emotion": "슬픔",
+        "confidence": 0.3868716061115265,
+        "timestamp": "22:12:41"
+      },
+      {
+        "frame": 547,
+        "emotion": "담담함",
+        "confidence": 0.7039211392402649,
+        "timestamp": "22:12:41"
+      },
+      {
+        "frame": 550,
+        "emotion": "담담함",
+        "confidence": 0.733924925327301,
+        "timestamp": "22:12:41"
+      },
+      {
+        "frame": 553,
+        "emotion": "담담함",
+        "confidence": 0.5236262083053589,
+        "timestamp": "22:12:41"
+      },
+      {
+        "frame": 556,
+        "emotion": "담담함",
+        "confidence": 0.6742677688598633,
+        "timestamp": "22:12:41"
+      },
+      {
+        "frame": 559,
+        "emotion": "슬픔",
+        "confidence": 0.46091583371162415,
+        "timestamp": "22:12:41"
+      },
+      {
+        "frame": 562,
+        "emotion": "담담함",
+        "confidence": 0.3945114314556122,
+        "timestamp": "22:12:42"
+      },
+      {
+        "frame": 565,
+        "emotion": "담담함",
+        "confidence": 0.4135339558124542,
+        "timestamp": "22:12:42"
+      },
+      {
+        "frame": 568,
+        "emotion": "담담함",
+        "confidence": 0.48243391513824463,
+        "timestamp": "22:12:42"
+      },
+      {
+        "frame": 571,
+        "emotion": "담담함",
+        "confidence": 0.4807685315608978,
+        "timestamp": "22:12:42"
+      },
+      {
+        "frame": 574,
+        "emotion": "담담함",
+        "confidence": 0.4908545911312103,
+        "timestamp": "22:12:42"
+      },
+      {
+        "frame": 577,
+        "emotion": "담담함",
+        "confidence": 0.43335315585136414,
+        "timestamp": "22:12:42"
+      },
+      {
+        "frame": 580,
+        "emotion": "담담함",
+        "confidence": 0.5277959704399109,
+        "timestamp": "22:12:43"
+      },
+      {
+        "frame": 583,
+        "emotion": "담담함",
+        "confidence": 0.6221075057983398,
+        "timestamp": "22:12:43"
+      },
+      {
+        "frame": 586,
+        "emotion": "담담함",
+        "confidence": 0.38853487372398376,
+        "timestamp": "22:12:43"
+      },
+      {
+        "frame": 589,
+        "emotion": "슬픔",
+        "confidence": 0.3619811236858368,
+        "timestamp": "22:12:43"
+      },
+      {
+        "frame": 592,
+        "emotion": "담담함",
+        "confidence": 0.4269023835659027,
+        "timestamp": "22:12:43"
+      },
+      {
+        "frame": 595,
+        "emotion": "담담함",
+        "confidence": 0.4029914438724518,
+        "timestamp": "22:12:43"
+      }
+    ],
+    "anonymize_method": "원본",
+    "voice_input_used": true,
+    "ai_recommended": "담담함",
+    "is_personalized": false,
+    "gemini_advice": "⚠️ AI 조언 서비스 오류\n\n하지만 오늘 '담담함' 감정을 기록하신 것은 매우 의미있는 행동입니다. 감정을 글로 표현하는 것만으로도 마음이 정리되고 치유될 수 있습니다. 💚\n\n💪 지금 이 순간 느끼는 감정을 있는 그대로 받아들여 주세요. 내일은 또 다른 하루가 시작됩니다!"
+  },
+  {
+    "timestamp": "20251216_221741",
+    "emotion": "담담함",
+    "diary_text": "립싱크를 하면은 싱크가 완벽하게 맞는지 그게 조금 궁금하더라고요 얼굴 인식도 제대로 잘 되고 있는지도 모르겠고 하여튼 궁금해요",
+    "video_filename": "emotion_diary_20251216_221741.mp4",
+    "video_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_221741.mp4",
+    "text_filename": "emotion_diary_20251216_221741.txt",
+    "text_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_221741.txt",
+    "dominant_emotion": "담담함",
+    "avg_confidence": 0.5609733293715277,
+    "frame_count": 456,
+    "recording_duration": "00:31",
+    "emotion_timeline": [
+      {
+        "frame": 1,
+        "emotion": "담담함",
+        "confidence": 0.5108973383903503,
+        "timestamp": "22:17:14"
+      },
+      {
+        "frame": 4,
+        "emotion": "담담함",
+        "confidence": 0.7070663571357727,
+        "timestamp": "22:17:14"
+      },
+      {
+        "frame": 7,
+        "emotion": "담담함",
+        "confidence": 0.5717599391937256,
+        "timestamp": "22:17:14"
+      },
+      {
+        "frame": 10,
+        "emotion": "담담함",
+        "confidence": 0.691003143787384,
+        "timestamp": "22:17:15"
+      },
+      {
+        "frame": 13,
+        "emotion": "슬픔",
+        "confidence": 0.38338837027549744,
+        "timestamp": "22:17:15"
+      },
+      {
+        "frame": 16,
+        "emotion": "담담함",
+        "confidence": 0.4017326831817627,
+        "timestamp": "22:17:15"
+      },
+      {
+        "frame": 19,
+        "emotion": "슬픔",
+        "confidence": 0.6831654906272888,
+        "timestamp": "22:17:15"
+      },
+      {
+        "frame": 22,
+        "emotion": "담담함",
+        "confidence": 0.5052629709243774,
+        "timestamp": "22:17:15"
+      },
+      {
+        "frame": 25,
+        "emotion": "담담함",
+        "confidence": 0.7373884320259094,
+        "timestamp": "22:17:15"
+      },
+      {
+        "frame": 28,
+        "emotion": "담담함",
+        "confidence": 0.6252800822257996,
+        "timestamp": "22:17:16"
+      },
+      {
+        "frame": 31,
+        "emotion": "담담함",
+        "confidence": 0.5480493903160095,
+        "timestamp": "22:17:16"
+      },
+      {
+        "frame": 34,
+        "emotion": "담담함",
+        "confidence": 0.5844358801841736,
+        "timestamp": "22:17:16"
+      },
+      {
+        "frame": 37,
+        "emotion": "담담함",
+        "confidence": 0.5985204577445984,
+        "timestamp": "22:17:16"
+      },
+      {
+        "frame": 40,
+        "emotion": "담담함",
+        "confidence": 0.6908937096595764,
+        "timestamp": "22:17:16"
+      },
+      {
+        "frame": 43,
+        "emotion": "담담함",
+        "confidence": 0.7714139223098755,
+        "timestamp": "22:17:16"
+      },
+      {
+        "frame": 46,
+        "emotion": "담담함",
+        "confidence": 0.3546254336833954,
+        "timestamp": "22:17:16"
+      },
+      {
+        "frame": 49,
+        "emotion": "화남",
+        "confidence": 0.29632216691970825,
+        "timestamp": "22:17:16"
+      },
+      {
+        "frame": 52,
+        "emotion": "담담함",
+        "confidence": 0.31380695104599,
+        "timestamp": "22:17:17"
+      },
+      {
+        "frame": 55,
+        "emotion": "슬픔",
+        "confidence": 0.5314568281173706,
+        "timestamp": "22:17:17"
+      },
+      {
+        "frame": 58,
+        "emotion": "화남",
+        "confidence": 0.26774099469184875,
+        "timestamp": "22:17:17"
+      },
+      {
+        "frame": 61,
+        "emotion": "담담함",
+        "confidence": 0.377903014421463,
+        "timestamp": "22:17:17"
+      },
+      {
+        "frame": 64,
+        "emotion": "담담함",
+        "confidence": 0.5327814817428589,
+        "timestamp": "22:17:17"
+      },
+      {
+        "frame": 67,
+        "emotion": "화남",
+        "confidence": 0.25921618938446045,
+        "timestamp": "22:17:17"
+      },
+      {
+        "frame": 70,
+        "emotion": "화남",
+        "confidence": 0.3239263892173767,
+        "timestamp": "22:17:18"
+      },
+      {
+        "frame": 73,
+        "emotion": "슬픔",
+        "confidence": 0.351288765668869,
+        "timestamp": "22:17:18"
+      },
+      {
+        "frame": 76,
+        "emotion": "화남",
+        "confidence": 0.3616584539413452,
+        "timestamp": "22:17:18"
+      },
+      {
+        "frame": 79,
+        "emotion": "슬픔",
+        "confidence": 0.3822017312049866,
+        "timestamp": "22:17:18"
+      },
+      {
+        "frame": 82,
+        "emotion": "슬픔",
+        "confidence": 0.4567644000053406,
+        "timestamp": "22:17:18"
+      },
+      {
+        "frame": 85,
+        "emotion": "슬픔",
+        "confidence": 0.4008218050003052,
+        "timestamp": "22:17:18"
+      },
+      {
+        "frame": 88,
+        "emotion": "두려움",
+        "confidence": 0.6794788837432861,
+        "timestamp": "22:17:18"
+      },
+      {
+        "frame": 91,
+        "emotion": "슬픔",
+        "confidence": 0.31006744503974915,
+        "timestamp": "22:17:18"
+      },
+      {
+        "frame": 94,
+        "emotion": "담담함",
+        "confidence": 0.2784460186958313,
+        "timestamp": "22:17:19"
+      },
+      {
+        "frame": 97,
+        "emotion": "담담함",
+        "confidence": 0.3607684373855591,
+        "timestamp": "22:17:19"
+      },
+      {
+        "frame": 100,
+        "emotion": "담담함",
+        "confidence": 0.3625584840774536,
+        "timestamp": "22:17:19"
+      },
+      {
+        "frame": 103,
+        "emotion": "담담함",
+        "confidence": 0.3547217547893524,
+        "timestamp": "22:17:19"
+      },
+      {
+        "frame": 106,
+        "emotion": "담담함",
+        "confidence": 0.2519283890724182,
+        "timestamp": "22:17:19"
+      },
+      {
+        "frame": 109,
+        "emotion": "담담함",
+        "confidence": 0.42242667078971863,
+        "timestamp": "22:17:20"
+      },
+      {
+        "frame": 112,
+        "emotion": "담담함",
+        "confidence": 0.3420053720474243,
+        "timestamp": "22:17:20"
+      },
+      {
+        "frame": 115,
+        "emotion": "슬픔",
+        "confidence": 0.2807871401309967,
+        "timestamp": "22:17:20"
+      },
+      {
+        "frame": 118,
+        "emotion": "슬픔",
+        "confidence": 0.4523402452468872,
+        "timestamp": "22:17:20"
+      },
+      {
+        "frame": 121,
+        "emotion": "담담함",
+        "confidence": 0.4862867593765259,
+        "timestamp": "22:17:20"
+      },
+      {
+        "frame": 124,
+        "emotion": "담담함",
+        "confidence": 0.3944777846336365,
+        "timestamp": "22:17:21"
+      },
+      {
+        "frame": 127,
+        "emotion": "담담함",
+        "confidence": 0.5896807312965393,
+        "timestamp": "22:17:21"
+      },
+      {
+        "frame": 130,
+        "emotion": "담담함",
+        "confidence": 0.3946755826473236,
+        "timestamp": "22:17:21"
+      },
+      {
+        "frame": 133,
+        "emotion": "두려움",
+        "confidence": 0.45415395498275757,
+        "timestamp": "22:17:21"
+      },
+      {
+        "frame": 136,
+        "emotion": "슬픔",
+        "confidence": 0.6007390022277832,
+        "timestamp": "22:17:21"
+      },
+      {
+        "frame": 139,
+        "emotion": "담담함",
+        "confidence": 0.6749182343482971,
+        "timestamp": "22:17:22"
+      },
+      {
+        "frame": 142,
+        "emotion": "담담함",
+        "confidence": 0.5599472522735596,
+        "timestamp": "22:17:22"
+      },
+      {
+        "frame": 145,
+        "emotion": "담담함",
+        "confidence": 0.6909440755844116,
+        "timestamp": "22:17:22"
+      },
+      {
+        "frame": 148,
+        "emotion": "담담함",
+        "confidence": 0.5382407307624817,
+        "timestamp": "22:17:22"
+      },
+      {
+        "frame": 151,
+        "emotion": "담담함",
+        "confidence": 0.47760841250419617,
+        "timestamp": "22:17:22"
+      },
+      {
+        "frame": 154,
+        "emotion": "담담함",
+        "confidence": 0.4774983525276184,
+        "timestamp": "22:17:22"
+      },
+      {
+        "frame": 157,
+        "emotion": "담담함",
+        "confidence": 0.3581402897834778,
+        "timestamp": "22:17:23"
+      },
+      {
+        "frame": 160,
+        "emotion": "담담함",
+        "confidence": 0.713848888874054,
+        "timestamp": "22:17:23"
+      },
+      {
+        "frame": 163,
+        "emotion": "담담함",
+        "confidence": 0.40789905190467834,
+        "timestamp": "22:17:23"
+      },
+      {
+        "frame": 166,
+        "emotion": "담담함",
+        "confidence": 0.5886930823326111,
+        "timestamp": "22:17:23"
+      },
+      {
+        "frame": 169,
+        "emotion": "담담함",
+        "confidence": 0.5694627165794373,
+        "timestamp": "22:17:23"
+      },
+      {
+        "frame": 172,
+        "emotion": "담담함",
+        "confidence": 0.3460516631603241,
+        "timestamp": "22:17:24"
+      },
+      {
+        "frame": 175,
+        "emotion": "담담함",
+        "confidence": 0.3756992220878601,
+        "timestamp": "22:17:24"
+      },
+      {
+        "frame": 178,
+        "emotion": "담담함",
+        "confidence": 0.3530285656452179,
+        "timestamp": "22:17:24"
+      },
+      {
+        "frame": 181,
+        "emotion": "담담함",
+        "confidence": 0.30101263523101807,
+        "timestamp": "22:17:24"
+      },
+      {
+        "frame": 184,
+        "emotion": "슬픔",
+        "confidence": 0.39145421981811523,
+        "timestamp": "22:17:24"
+      },
+      {
+        "frame": 187,
+        "emotion": "담담함",
+        "confidence": 0.638148844242096,
+        "timestamp": "22:17:24"
+      },
+      {
+        "frame": 190,
+        "emotion": "담담함",
+        "confidence": 0.6223708987236023,
+        "timestamp": "22:17:25"
+      },
+      {
+        "frame": 193,
+        "emotion": "담담함",
+        "confidence": 0.6513938307762146,
+        "timestamp": "22:17:25"
+      },
+      {
+        "frame": 196,
+        "emotion": "담담함",
+        "confidence": 0.6541365385055542,
+        "timestamp": "22:17:25"
+      },
+      {
+        "frame": 199,
+        "emotion": "담담함",
+        "confidence": 0.5324230790138245,
+        "timestamp": "22:17:25"
+      },
+      {
+        "frame": 202,
+        "emotion": "담담함",
+        "confidence": 0.5682151317596436,
+        "timestamp": "22:17:25"
+      },
+      {
+        "frame": 205,
+        "emotion": "담담함",
+        "confidence": 0.4083864986896515,
+        "timestamp": "22:17:26"
+      },
+      {
+        "frame": 208,
+        "emotion": "담담함",
+        "confidence": 0.5587201118469238,
+        "timestamp": "22:17:26"
+      },
+      {
+        "frame": 211,
+        "emotion": "담담함",
+        "confidence": 0.6123981475830078,
+        "timestamp": "22:17:26"
+      },
+      {
+        "frame": 214,
+        "emotion": "담담함",
+        "confidence": 0.37448495626449585,
+        "timestamp": "22:17:26"
+      },
+      {
+        "frame": 217,
+        "emotion": "담담함",
+        "confidence": 0.6550403237342834,
+        "timestamp": "22:17:26"
+      },
+      {
+        "frame": 220,
+        "emotion": "담담함",
+        "confidence": 0.5220962762832642,
+        "timestamp": "22:17:26"
+      },
+      {
+        "frame": 223,
+        "emotion": "담담함",
+        "confidence": 0.48709020018577576,
+        "timestamp": "22:17:27"
+      },
+      {
+        "frame": 226,
+        "emotion": "화남",
+        "confidence": 0.32946398854255676,
+        "timestamp": "22:17:27"
+      },
+      {
+        "frame": 229,
+        "emotion": "담담함",
+        "confidence": 0.2904960513114929,
+        "timestamp": "22:17:27"
+      },
+      {
+        "frame": 232,
+        "emotion": "담담함",
+        "confidence": 0.2948606014251709,
+        "timestamp": "22:17:27"
+      },
+      {
+        "frame": 235,
+        "emotion": "두려움",
+        "confidence": 0.5209081172943115,
+        "timestamp": "22:17:27"
+      },
+      {
+        "frame": 238,
+        "emotion": "담담함",
+        "confidence": 0.5104767680168152,
+        "timestamp": "22:17:28"
+      },
+      {
+        "frame": 241,
+        "emotion": "담담함",
+        "confidence": 0.6382473111152649,
+        "timestamp": "22:17:28"
+      },
+      {
+        "frame": 244,
+        "emotion": "담담함",
+        "confidence": 0.6148456335067749,
+        "timestamp": "22:17:28"
+      },
+      {
+        "frame": 247,
+        "emotion": "담담함",
+        "confidence": 0.5736092925071716,
+        "timestamp": "22:17:28"
+      },
+      {
+        "frame": 250,
+        "emotion": "담담함",
+        "confidence": 0.5634729862213135,
+        "timestamp": "22:17:28"
+      },
+      {
+        "frame": 253,
+        "emotion": "담담함",
+        "confidence": 0.6314437389373779,
+        "timestamp": "22:17:29"
+      },
+      {
+        "frame": 256,
+        "emotion": "담담함",
+        "confidence": 0.3838283121585846,
+        "timestamp": "22:17:29"
+      },
+      {
+        "frame": 259,
+        "emotion": "담담함",
+        "confidence": 0.610379159450531,
+        "timestamp": "22:17:29"
+      },
+      {
+        "frame": 262,
+        "emotion": "담담함",
+        "confidence": 0.4967347979545593,
+        "timestamp": "22:17:29"
+      },
+      {
+        "frame": 265,
+        "emotion": "담담함",
+        "confidence": 0.47498229146003723,
+        "timestamp": "22:17:29"
+      },
+      {
+        "frame": 268,
+        "emotion": "담담함",
+        "confidence": 0.667417585849762,
+        "timestamp": "22:17:30"
+      },
+      {
+        "frame": 271,
+        "emotion": "담담함",
+        "confidence": 0.751259982585907,
+        "timestamp": "22:17:30"
+      },
+      {
+        "frame": 274,
+        "emotion": "담담함",
+        "confidence": 0.7223817110061646,
+        "timestamp": "22:17:30"
+      },
+      {
+        "frame": 277,
+        "emotion": "담담함",
+        "confidence": 0.6332358121871948,
+        "timestamp": "22:17:30"
+      },
+      {
+        "frame": 280,
+        "emotion": "슬픔",
+        "confidence": 0.4214513897895813,
+        "timestamp": "22:17:30"
+      },
+      {
+        "frame": 283,
+        "emotion": "담담함",
+        "confidence": 0.5908458828926086,
+        "timestamp": "22:17:31"
+      },
+      {
+        "frame": 286,
+        "emotion": "담담함",
+        "confidence": 0.7142364382743835,
+        "timestamp": "22:17:31"
+      },
+      {
+        "frame": 289,
+        "emotion": "담담함",
+        "confidence": 0.7835074067115784,
+        "timestamp": "22:17:31"
+      },
+      {
+        "frame": 292,
+        "emotion": "담담함",
+        "confidence": 0.748345673084259,
+        "timestamp": "22:17:31"
+      },
+      {
+        "frame": 295,
+        "emotion": "담담함",
+        "confidence": 0.637106716632843,
+        "timestamp": "22:17:31"
+      },
+      {
+        "frame": 298,
+        "emotion": "담담함",
+        "confidence": 0.7339960932731628,
+        "timestamp": "22:17:32"
+      },
+      {
+        "frame": 301,
+        "emotion": "담담함",
+        "confidence": 0.7132264375686646,
+        "timestamp": "22:17:32"
+      },
+      {
+        "frame": 304,
+        "emotion": "담담함",
+        "confidence": 0.68816077709198,
+        "timestamp": "22:17:32"
+      },
+      {
+        "frame": 307,
+        "emotion": "담담함",
+        "confidence": 0.7116028666496277,
+        "timestamp": "22:17:32"
+      },
+      {
+        "frame": 310,
+        "emotion": "담담함",
+        "confidence": 0.7281811237335205,
+        "timestamp": "22:17:32"
+      },
+      {
+        "frame": 313,
+        "emotion": "담담함",
+        "confidence": 0.7710217833518982,
+        "timestamp": "22:17:33"
+      },
+      {
+        "frame": 316,
+        "emotion": "담담함",
+        "confidence": 0.7837938070297241,
+        "timestamp": "22:17:33"
+      },
+      {
+        "frame": 319,
+        "emotion": "담담함",
+        "confidence": 0.7458615303039551,
+        "timestamp": "22:17:33"
+      },
+      {
+        "frame": 322,
+        "emotion": "담담함",
+        "confidence": 0.626563310623169,
+        "timestamp": "22:17:33"
+      },
+      {
+        "frame": 325,
+        "emotion": "담담함",
+        "confidence": 0.8031671643257141,
+        "timestamp": "22:17:33"
+      },
+      {
+        "frame": 328,
+        "emotion": "담담함",
+        "confidence": 0.7628174424171448,
+        "timestamp": "22:17:34"
+      },
+      {
+        "frame": 331,
+        "emotion": "슬픔",
+        "confidence": 0.40575090050697327,
+        "timestamp": "22:17:34"
+      },
+      {
+        "frame": 334,
+        "emotion": "담담함",
+        "confidence": 0.7023040056228638,
+        "timestamp": "22:17:34"
+      },
+      {
+        "frame": 337,
+        "emotion": "담담함",
+        "confidence": 0.773156464099884,
+        "timestamp": "22:17:34"
+      },
+      {
+        "frame": 340,
+        "emotion": "담담함",
+        "confidence": 0.8230845928192139,
+        "timestamp": "22:17:34"
+      },
+      {
+        "frame": 343,
+        "emotion": "담담함",
+        "confidence": 0.41191738843917847,
+        "timestamp": "22:17:34"
+      },
+      {
+        "frame": 346,
+        "emotion": "담담함",
+        "confidence": 0.7901284694671631,
+        "timestamp": "22:17:34"
+      },
+      {
+        "frame": 349,
+        "emotion": "담담함",
+        "confidence": 0.5289084911346436,
+        "timestamp": "22:17:35"
+      },
+      {
+        "frame": 352,
+        "emotion": "담담함",
+        "confidence": 0.6478635668754578,
+        "timestamp": "22:17:35"
+      },
+      {
+        "frame": 355,
+        "emotion": "담담함",
+        "confidence": 0.8030034303665161,
+        "timestamp": "22:17:35"
+      },
+      {
+        "frame": 358,
+        "emotion": "담담함",
+        "confidence": 0.76104736328125,
+        "timestamp": "22:17:35"
+      },
+      {
+        "frame": 361,
+        "emotion": "담담함",
+        "confidence": 0.5404459238052368,
+        "timestamp": "22:17:35"
+      },
+      {
+        "frame": 364,
+        "emotion": "담담함",
+        "confidence": 0.729256272315979,
+        "timestamp": "22:17:36"
+      },
+      {
+        "frame": 367,
+        "emotion": "담담함",
+        "confidence": 0.7315390706062317,
+        "timestamp": "22:17:36"
+      },
+      {
+        "frame": 370,
+        "emotion": "담담함",
+        "confidence": 0.6684011220932007,
+        "timestamp": "22:17:36"
+      },
+      {
+        "frame": 373,
+        "emotion": "담담함",
+        "confidence": 0.7923548221588135,
+        "timestamp": "22:17:36"
+      },
+      {
+        "frame": 376,
+        "emotion": "담담함",
+        "confidence": 0.7786435484886169,
+        "timestamp": "22:17:36"
+      },
+      {
+        "frame": 379,
+        "emotion": "담담함",
+        "confidence": 0.7232722640037537,
+        "timestamp": "22:17:36"
+      },
+      {
+        "frame": 382,
+        "emotion": "담담함",
+        "confidence": 0.8470368981361389,
+        "timestamp": "22:17:37"
+      },
+      {
+        "frame": 385,
+        "emotion": "담담함",
+        "confidence": 0.8368773460388184,
+        "timestamp": "22:17:37"
+      },
+      {
+        "frame": 388,
+        "emotion": "담담함",
+        "confidence": 0.7469456791877747,
+        "timestamp": "22:17:37"
+      },
+      {
+        "frame": 391,
+        "emotion": "담담함",
+        "confidence": 0.7752342820167542,
+        "timestamp": "22:17:37"
+      },
+      {
+        "frame": 394,
+        "emotion": "담담함",
+        "confidence": 0.7570846080780029,
+        "timestamp": "22:17:37"
+      },
+      {
+        "frame": 397,
+        "emotion": "담담함",
+        "confidence": 0.7652458548545837,
+        "timestamp": "22:17:38"
+      },
+      {
+        "frame": 400,
+        "emotion": "담담함",
+        "confidence": 0.7339522242546082,
+        "timestamp": "22:17:38"
+      },
+      {
+        "frame": 403,
+        "emotion": "담담함",
+        "confidence": 0.8193670511245728,
+        "timestamp": "22:17:38"
+      },
+      {
+        "frame": 406,
+        "emotion": "담담함",
+        "confidence": 0.46566951274871826,
+        "timestamp": "22:17:38"
+      },
+      {
+        "frame": 409,
+        "emotion": "담담함",
+        "confidence": 0.7680186033248901,
+        "timestamp": "22:17:38"
+      },
+      {
+        "frame": 412,
+        "emotion": "담담함",
+        "confidence": 0.5573612451553345,
+        "timestamp": "22:17:38"
+      },
+      {
+        "frame": 415,
+        "emotion": "슬픔",
+        "confidence": 0.6988500356674194,
+        "timestamp": "22:17:39"
+      },
+      {
+        "frame": 418,
+        "emotion": "슬픔",
+        "confidence": 0.5923393368721008,
+        "timestamp": "22:17:39"
+      },
+      {
+        "frame": 421,
+        "emotion": "담담함",
+        "confidence": 0.5009046792984009,
+        "timestamp": "22:17:39"
+      },
+      {
+        "frame": 424,
+        "emotion": "두려움",
+        "confidence": 0.3771125376224518,
+        "timestamp": "22:17:39"
+      },
+      {
+        "frame": 427,
+        "emotion": "담담함",
+        "confidence": 0.464961975812912,
+        "timestamp": "22:17:39"
+      },
+      {
+        "frame": 430,
+        "emotion": "슬픔",
+        "confidence": 0.5704050064086914,
+        "timestamp": "22:17:39"
+      },
+      {
+        "frame": 433,
+        "emotion": "담담함",
+        "confidence": 0.7600207328796387,
+        "timestamp": "22:17:40"
+      },
+      {
+        "frame": 436,
+        "emotion": "담담함",
+        "confidence": 0.6563271284103394,
+        "timestamp": "22:17:40"
+      },
+      {
+        "frame": 439,
+        "emotion": "슬픔",
+        "confidence": 0.48737767338752747,
+        "timestamp": "22:17:40"
+      },
+      {
+        "frame": 442,
+        "emotion": "슬픔",
+        "confidence": 0.516502320766449,
+        "timestamp": "22:17:40"
+      },
+      {
+        "frame": 445,
+        "emotion": "슬픔",
+        "confidence": 0.6186633706092834,
+        "timestamp": "22:17:40"
+      },
+      {
+        "frame": 448,
+        "emotion": "슬픔",
+        "confidence": 0.39783206582069397,
+        "timestamp": "22:17:40"
+      },
+      {
+        "frame": 451,
+        "emotion": "담담함",
+        "confidence": 0.5335354208946228,
+        "timestamp": "22:17:40"
+      },
+      {
+        "frame": 454,
+        "emotion": "담담함",
+        "confidence": 0.3916451334953308,
+        "timestamp": "22:17:41"
+      }
+    ],
+    "anonymize_method": "원본",
+    "voice_input_used": true,
+    "ai_recommended": "담담함",
+    "is_personalized": false,
+    "gemini_advice": "⚠️ AI 조언 서비스 오류\n\n하지만 오늘 '담담함' 감정을 기록하신 것은 매우 의미있는 행동입니다. 감정을 글로 표현하는 것만으로도 마음이 정리되고 치유될 수 있습니다. 💚\n\n💪 지금 이 순간 느끼는 감정을 있는 그대로 받아들여 주세요. 내일은 또 다른 하루가 시작됩니다!"
+  },
+  {
+    "timestamp": "20251216_222603",
+    "emotion": "담담함",
+    "diary_text": "(음성 입력 없음)",
+    "video_filename": "emotion_diary_20251216_222603.mp4",
+    "video_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_222603.mp4",
+    "text_filename": "emotion_diary_20251216_222603.txt",
+    "text_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_222603.txt",
+    "dominant_emotion": "담담함",
+    "avg_confidence": 0.6155718578200035,
+    "frame_count": 609,
+    "recording_duration": "00:40",
+    "emotion_timeline": [
+      {
+        "frame": 1,
+        "emotion": "담담함",
+        "confidence": 0.6801194548606873,
+        "timestamp": "22:25:28"
+      },
+      {
+        "frame": 4,
+        "emotion": "담담함",
+        "confidence": 0.5222431421279907,
+        "timestamp": "22:25:28"
+      },
+      {
+        "frame": 7,
+        "emotion": "담담함",
+        "confidence": 0.5322369933128357,
+        "timestamp": "22:25:28"
+      },
+      {
+        "frame": 10,
+        "emotion": "슬픔",
+        "confidence": 0.8257509469985962,
+        "timestamp": "22:25:28"
+      },
+      {
+        "frame": 13,
+        "emotion": "담담함",
+        "confidence": 0.4115082025527954,
+        "timestamp": "22:25:28"
+      },
+      {
+        "frame": 16,
+        "emotion": "담담함",
+        "confidence": 0.6857488751411438,
+        "timestamp": "22:25:28"
+      },
+      {
+        "frame": 19,
+        "emotion": "담담함",
+        "confidence": 0.6798332929611206,
+        "timestamp": "22:25:29"
+      },
+      {
+        "frame": 22,
+        "emotion": "담담함",
+        "confidence": 0.7592101097106934,
+        "timestamp": "22:25:29"
+      },
+      {
+        "frame": 25,
+        "emotion": "담담함",
+        "confidence": 0.4302089512348175,
+        "timestamp": "22:25:29"
+      },
+      {
+        "frame": 28,
+        "emotion": "담담함",
+        "confidence": 0.6245903968811035,
+        "timestamp": "22:25:29"
+      },
+      {
+        "frame": 31,
+        "emotion": "담담함",
+        "confidence": 0.7425482273101807,
+        "timestamp": "22:25:29"
+      },
+      {
+        "frame": 34,
+        "emotion": "담담함",
+        "confidence": 0.7151570916175842,
+        "timestamp": "22:25:29"
+      },
+      {
+        "frame": 37,
+        "emotion": "담담함",
+        "confidence": 0.6049938201904297,
+        "timestamp": "22:25:29"
+      },
+      {
+        "frame": 40,
+        "emotion": "담담함",
+        "confidence": 0.5755326747894287,
+        "timestamp": "22:25:30"
+      },
+      {
+        "frame": 43,
+        "emotion": "담담함",
+        "confidence": 0.5434945821762085,
+        "timestamp": "22:25:30"
+      },
+      {
+        "frame": 46,
+        "emotion": "담담함",
+        "confidence": 0.6771010160446167,
+        "timestamp": "22:25:30"
+      },
+      {
+        "frame": 49,
+        "emotion": "담담함",
+        "confidence": 0.48624762892723083,
+        "timestamp": "22:25:30"
+      },
+      {
+        "frame": 52,
+        "emotion": "담담함",
+        "confidence": 0.4424639344215393,
+        "timestamp": "22:25:30"
+      },
+      {
+        "frame": 55,
+        "emotion": "담담함",
+        "confidence": 0.2950189709663391,
+        "timestamp": "22:25:30"
+      },
+      {
+        "frame": 58,
+        "emotion": "놀람",
+        "confidence": 0.3487797677516937,
+        "timestamp": "22:25:30"
+      },
+      {
+        "frame": 61,
+        "emotion": "놀람",
+        "confidence": 0.5201529860496521,
+        "timestamp": "22:25:31"
+      },
+      {
+        "frame": 64,
+        "emotion": "놀람",
+        "confidence": 0.381691038608551,
+        "timestamp": "22:25:31"
+      },
+      {
+        "frame": 67,
+        "emotion": "두려움",
+        "confidence": 0.680382251739502,
+        "timestamp": "22:25:31"
+      },
+      {
+        "frame": 70,
+        "emotion": "담담함",
+        "confidence": 0.30326345562934875,
+        "timestamp": "22:25:31"
+      },
+      {
+        "frame": 73,
+        "emotion": "담담함",
+        "confidence": 0.4919629693031311,
+        "timestamp": "22:25:31"
+      },
+      {
+        "frame": 76,
+        "emotion": "담담함",
+        "confidence": 0.4570292830467224,
+        "timestamp": "22:25:31"
+      },
+      {
+        "frame": 79,
+        "emotion": "담담함",
+        "confidence": 0.47277528047561646,
+        "timestamp": "22:25:31"
+      },
+      {
+        "frame": 82,
+        "emotion": "담담함",
+        "confidence": 0.7503474950790405,
+        "timestamp": "22:25:32"
+      },
+      {
+        "frame": 85,
+        "emotion": "담담함",
+        "confidence": 0.6624823808670044,
+        "timestamp": "22:25:32"
+      },
+      {
+        "frame": 88,
+        "emotion": "담담함",
+        "confidence": 0.7021722197532654,
+        "timestamp": "22:25:32"
+      },
+      {
+        "frame": 91,
+        "emotion": "담담함",
+        "confidence": 0.715826153755188,
+        "timestamp": "22:25:32"
+      },
+      {
+        "frame": 94,
+        "emotion": "담담함",
+        "confidence": 0.44796013832092285,
+        "timestamp": "22:25:32"
+      },
+      {
+        "frame": 97,
+        "emotion": "담담함",
+        "confidence": 0.8137325644493103,
+        "timestamp": "22:25:32"
+      },
+      {
+        "frame": 100,
+        "emotion": "담담함",
+        "confidence": 0.5594558715820312,
+        "timestamp": "22:25:33"
+      },
+      {
+        "frame": 103,
+        "emotion": "슬픔",
+        "confidence": 0.6905560493469238,
+        "timestamp": "22:25:33"
+      },
+      {
+        "frame": 106,
+        "emotion": "담담함",
+        "confidence": 0.5280678868293762,
+        "timestamp": "22:25:33"
+      },
+      {
+        "frame": 109,
+        "emotion": "담담함",
+        "confidence": 0.4645311236381531,
+        "timestamp": "22:25:33"
+      },
+      {
+        "frame": 112,
+        "emotion": "슬픔",
+        "confidence": 0.5953394770622253,
+        "timestamp": "22:25:33"
+      },
+      {
+        "frame": 115,
+        "emotion": "담담함",
+        "confidence": 0.6234884858131409,
+        "timestamp": "22:25:33"
+      },
+      {
+        "frame": 118,
+        "emotion": "슬픔",
+        "confidence": 0.5916877388954163,
+        "timestamp": "22:25:34"
+      },
+      {
+        "frame": 121,
+        "emotion": "담담함",
+        "confidence": 0.6346306800842285,
+        "timestamp": "22:25:34"
+      },
+      {
+        "frame": 124,
+        "emotion": "슬픔",
+        "confidence": 0.42623233795166016,
+        "timestamp": "22:25:34"
+      },
+      {
+        "frame": 127,
+        "emotion": "담담함",
+        "confidence": 0.514927089214325,
+        "timestamp": "22:25:34"
+      },
+      {
+        "frame": 130,
+        "emotion": "담담함",
+        "confidence": 0.5824572443962097,
+        "timestamp": "22:25:34"
+      },
+      {
+        "frame": 133,
+        "emotion": "담담함",
+        "confidence": 0.5110573172569275,
+        "timestamp": "22:25:34"
+      },
+      {
+        "frame": 136,
+        "emotion": "담담함",
+        "confidence": 0.4947693347930908,
+        "timestamp": "22:25:35"
+      },
+      {
+        "frame": 139,
+        "emotion": "담담함",
+        "confidence": 0.474318265914917,
+        "timestamp": "22:25:35"
+      },
+      {
+        "frame": 142,
+        "emotion": "담담함",
+        "confidence": 0.3944593369960785,
+        "timestamp": "22:25:35"
+      },
+      {
+        "frame": 145,
+        "emotion": "담담함",
+        "confidence": 0.4194464087486267,
+        "timestamp": "22:25:35"
+      },
+      {
+        "frame": 148,
+        "emotion": "담담함",
+        "confidence": 0.6531063914299011,
+        "timestamp": "22:25:35"
+      },
+      {
+        "frame": 151,
+        "emotion": "담담함",
+        "confidence": 0.4618579149246216,
+        "timestamp": "22:25:35"
+      },
+      {
+        "frame": 154,
+        "emotion": "담담함",
+        "confidence": 0.4221077561378479,
+        "timestamp": "22:25:36"
+      },
+      {
+        "frame": 157,
+        "emotion": "담담함",
+        "confidence": 0.6103588938713074,
+        "timestamp": "22:25:36"
+      },
+      {
+        "frame": 160,
+        "emotion": "슬픔",
+        "confidence": 0.43806159496307373,
+        "timestamp": "22:25:36"
+      },
+      {
+        "frame": 163,
+        "emotion": "슬픔",
+        "confidence": 0.572477400302887,
+        "timestamp": "22:25:36"
+      },
+      {
+        "frame": 166,
+        "emotion": "담담함",
+        "confidence": 0.5813945531845093,
+        "timestamp": "22:25:36"
+      },
+      {
+        "frame": 169,
+        "emotion": "담담함",
+        "confidence": 0.555925190448761,
+        "timestamp": "22:25:36"
+      },
+      {
+        "frame": 172,
+        "emotion": "담담함",
+        "confidence": 0.674168050289154,
+        "timestamp": "22:25:37"
+      },
+      {
+        "frame": 175,
+        "emotion": "담담함",
+        "confidence": 0.7338771820068359,
+        "timestamp": "22:25:37"
+      },
+      {
+        "frame": 178,
+        "emotion": "담담함",
+        "confidence": 0.7585935592651367,
+        "timestamp": "22:25:37"
+      },
+      {
+        "frame": 181,
+        "emotion": "담담함",
+        "confidence": 0.5370104908943176,
+        "timestamp": "22:25:37"
+      },
+      {
+        "frame": 184,
+        "emotion": "담담함",
+        "confidence": 0.6266745924949646,
+        "timestamp": "22:25:37"
+      },
+      {
+        "frame": 187,
+        "emotion": "담담함",
+        "confidence": 0.6184508800506592,
+        "timestamp": "22:25:37"
+      },
+      {
+        "frame": 190,
+        "emotion": "담담함",
+        "confidence": 0.3571428954601288,
+        "timestamp": "22:25:38"
+      },
+      {
+        "frame": 193,
+        "emotion": "담담함",
+        "confidence": 0.3679007887840271,
+        "timestamp": "22:25:38"
+      },
+      {
+        "frame": 196,
+        "emotion": "담담함",
+        "confidence": 0.3524855673313141,
+        "timestamp": "22:25:38"
+      },
+      {
+        "frame": 199,
+        "emotion": "담담함",
+        "confidence": 0.5054991245269775,
+        "timestamp": "22:25:38"
+      },
+      {
+        "frame": 202,
+        "emotion": "담담함",
+        "confidence": 0.5134283900260925,
+        "timestamp": "22:25:38"
+      },
+      {
+        "frame": 205,
+        "emotion": "담담함",
+        "confidence": 0.43509364128112793,
+        "timestamp": "22:25:39"
+      },
+      {
+        "frame": 208,
+        "emotion": "담담함",
+        "confidence": 0.6490702629089355,
+        "timestamp": "22:25:39"
+      },
+      {
+        "frame": 211,
+        "emotion": "담담함",
+        "confidence": 0.6194226145744324,
+        "timestamp": "22:25:39"
+      },
+      {
+        "frame": 214,
+        "emotion": "슬픔",
+        "confidence": 0.6763999462127686,
+        "timestamp": "22:25:39"
+      },
+      {
+        "frame": 217,
+        "emotion": "담담함",
+        "confidence": 0.5737050771713257,
+        "timestamp": "22:25:39"
+      },
+      {
+        "frame": 220,
+        "emotion": "담담함",
+        "confidence": 0.5780936479568481,
+        "timestamp": "22:25:39"
+      },
+      {
+        "frame": 223,
+        "emotion": "담담함",
+        "confidence": 0.6666927933692932,
+        "timestamp": "22:25:40"
+      },
+      {
+        "frame": 226,
+        "emotion": "담담함",
+        "confidence": 0.5950626134872437,
+        "timestamp": "22:25:40"
+      },
+      {
+        "frame": 229,
+        "emotion": "담담함",
+        "confidence": 0.6049786806106567,
+        "timestamp": "22:25:40"
+      },
+      {
+        "frame": 232,
+        "emotion": "담담함",
+        "confidence": 0.5557189583778381,
+        "timestamp": "22:25:40"
+      },
+      {
+        "frame": 235,
+        "emotion": "담담함",
+        "confidence": 0.515346109867096,
+        "timestamp": "22:25:40"
+      },
+      {
+        "frame": 238,
+        "emotion": "담담함",
+        "confidence": 0.5523483753204346,
+        "timestamp": "22:25:40"
+      },
+      {
+        "frame": 241,
+        "emotion": "담담함",
+        "confidence": 0.40382125973701477,
+        "timestamp": "22:25:41"
+      },
+      {
+        "frame": 244,
+        "emotion": "담담함",
+        "confidence": 0.6234719157218933,
+        "timestamp": "22:25:41"
+      },
+      {
+        "frame": 247,
+        "emotion": "담담함",
+        "confidence": 0.6545436978340149,
+        "timestamp": "22:25:41"
+      },
+      {
+        "frame": 250,
+        "emotion": "담담함",
+        "confidence": 0.7138935327529907,
+        "timestamp": "22:25:41"
+      },
+      {
+        "frame": 253,
+        "emotion": "담담함",
+        "confidence": 0.7795749306678772,
+        "timestamp": "22:25:41"
+      },
+      {
+        "frame": 256,
+        "emotion": "담담함",
+        "confidence": 0.7046295404434204,
+        "timestamp": "22:25:41"
+      },
+      {
+        "frame": 259,
+        "emotion": "담담함",
+        "confidence": 0.6856836676597595,
+        "timestamp": "22:25:42"
+      },
+      {
+        "frame": 262,
+        "emotion": "담담함",
+        "confidence": 0.7158851623535156,
+        "timestamp": "22:25:42"
+      },
+      {
+        "frame": 265,
+        "emotion": "담담함",
+        "confidence": 0.6414246559143066,
+        "timestamp": "22:25:42"
+      },
+      {
+        "frame": 268,
+        "emotion": "슬픔",
+        "confidence": 0.6349889636039734,
+        "timestamp": "22:25:42"
+      },
+      {
+        "frame": 271,
+        "emotion": "슬픔",
+        "confidence": 0.3767642676830292,
+        "timestamp": "22:25:42"
+      },
+      {
+        "frame": 274,
+        "emotion": "담담함",
+        "confidence": 0.6708022356033325,
+        "timestamp": "22:25:43"
+      },
+      {
+        "frame": 277,
+        "emotion": "담담함",
+        "confidence": 0.7499060034751892,
+        "timestamp": "22:25:43"
+      },
+      {
+        "frame": 280,
+        "emotion": "담담함",
+        "confidence": 0.6918787360191345,
+        "timestamp": "22:25:43"
+      },
+      {
+        "frame": 283,
+        "emotion": "담담함",
+        "confidence": 0.47378796339035034,
+        "timestamp": "22:25:43"
+      },
+      {
+        "frame": 286,
+        "emotion": "담담함",
+        "confidence": 0.6505632400512695,
+        "timestamp": "22:25:43"
+      },
+      {
+        "frame": 289,
+        "emotion": "담담함",
+        "confidence": 0.6174560785293579,
+        "timestamp": "22:25:44"
+      },
+      {
+        "frame": 292,
+        "emotion": "담담함",
+        "confidence": 0.7041279673576355,
+        "timestamp": "22:25:44"
+      },
+      {
+        "frame": 295,
+        "emotion": "담담함",
+        "confidence": 0.4410991668701172,
+        "timestamp": "22:25:44"
+      },
+      {
+        "frame": 298,
+        "emotion": "담담함",
+        "confidence": 0.5071759223937988,
+        "timestamp": "22:25:44"
+      },
+      {
+        "frame": 301,
+        "emotion": "담담함",
+        "confidence": 0.7299517393112183,
+        "timestamp": "22:25:45"
+      },
+      {
+        "frame": 304,
+        "emotion": "담담함",
+        "confidence": 0.6068539023399353,
+        "timestamp": "22:25:45"
+      },
+      {
+        "frame": 307,
+        "emotion": "담담함",
+        "confidence": 0.5291690826416016,
+        "timestamp": "22:25:45"
+      },
+      {
+        "frame": 310,
+        "emotion": "담담함",
+        "confidence": 0.6963452696800232,
+        "timestamp": "22:25:45"
+      },
+      {
+        "frame": 313,
+        "emotion": "담담함",
+        "confidence": 0.5867665410041809,
+        "timestamp": "22:25:45"
+      },
+      {
+        "frame": 316,
+        "emotion": "담담함",
+        "confidence": 0.6228732466697693,
+        "timestamp": "22:25:45"
+      },
+      {
+        "frame": 319,
+        "emotion": "담담함",
+        "confidence": 0.669744074344635,
+        "timestamp": "22:25:46"
+      },
+      {
+        "frame": 322,
+        "emotion": "담담함",
+        "confidence": 0.5997782349586487,
+        "timestamp": "22:25:46"
+      },
+      {
+        "frame": 325,
+        "emotion": "담담함",
+        "confidence": 0.6053407192230225,
+        "timestamp": "22:25:46"
+      },
+      {
+        "frame": 328,
+        "emotion": "담담함",
+        "confidence": 0.5732398629188538,
+        "timestamp": "22:25:46"
+      },
+      {
+        "frame": 331,
+        "emotion": "슬픔",
+        "confidence": 0.56004798412323,
+        "timestamp": "22:25:46"
+      },
+      {
+        "frame": 334,
+        "emotion": "슬픔",
+        "confidence": 0.6433537006378174,
+        "timestamp": "22:25:47"
+      },
+      {
+        "frame": 337,
+        "emotion": "슬픔",
+        "confidence": 0.412464439868927,
+        "timestamp": "22:25:47"
+      },
+      {
+        "frame": 340,
+        "emotion": "슬픔",
+        "confidence": 0.3963288962841034,
+        "timestamp": "22:25:47"
+      },
+      {
+        "frame": 343,
+        "emotion": "슬픔",
+        "confidence": 0.39662352204322815,
+        "timestamp": "22:25:47"
+      },
+      {
+        "frame": 346,
+        "emotion": "담담함",
+        "confidence": 0.4808183014392853,
+        "timestamp": "22:25:47"
+      },
+      {
+        "frame": 349,
+        "emotion": "슬픔",
+        "confidence": 0.5848468542098999,
+        "timestamp": "22:25:47"
+      },
+      {
+        "frame": 352,
+        "emotion": "담담함",
+        "confidence": 0.45088180899620056,
+        "timestamp": "22:25:48"
+      },
+      {
+        "frame": 355,
+        "emotion": "담담함",
+        "confidence": 0.7198989987373352,
+        "timestamp": "22:25:48"
+      },
+      {
+        "frame": 358,
+        "emotion": "담담함",
+        "confidence": 0.8114787340164185,
+        "timestamp": "22:25:48"
+      },
+      {
+        "frame": 361,
+        "emotion": "담담함",
+        "confidence": 0.6849527955055237,
+        "timestamp": "22:25:48"
+      },
+      {
+        "frame": 364,
+        "emotion": "담담함",
+        "confidence": 0.4187556505203247,
+        "timestamp": "22:25:48"
+      },
+      {
+        "frame": 367,
+        "emotion": "담담함",
+        "confidence": 0.5520049929618835,
+        "timestamp": "22:25:49"
+      },
+      {
+        "frame": 370,
+        "emotion": "담담함",
+        "confidence": 0.797185480594635,
+        "timestamp": "22:25:49"
+      },
+      {
+        "frame": 373,
+        "emotion": "슬픔",
+        "confidence": 0.7851568460464478,
+        "timestamp": "22:25:49"
+      },
+      {
+        "frame": 376,
+        "emotion": "담담함",
+        "confidence": 0.45095765590667725,
+        "timestamp": "22:25:49"
+      },
+      {
+        "frame": 379,
+        "emotion": "담담함",
+        "confidence": 0.4793960452079773,
+        "timestamp": "22:25:49"
+      },
+      {
+        "frame": 382,
+        "emotion": "담담함",
+        "confidence": 0.6973122954368591,
+        "timestamp": "22:25:49"
+      },
+      {
+        "frame": 385,
+        "emotion": "슬픔",
+        "confidence": 0.41086772084236145,
+        "timestamp": "22:25:49"
+      },
+      {
+        "frame": 388,
+        "emotion": "슬픔",
+        "confidence": 0.5093159675598145,
+        "timestamp": "22:25:50"
+      },
+      {
+        "frame": 391,
+        "emotion": "슬픔",
+        "confidence": 0.5481032729148865,
+        "timestamp": "22:25:50"
+      },
+      {
+        "frame": 394,
+        "emotion": "슬픔",
+        "confidence": 0.5727689862251282,
+        "timestamp": "22:25:50"
+      },
+      {
+        "frame": 397,
+        "emotion": "담담함",
+        "confidence": 0.8376643061637878,
+        "timestamp": "22:25:50"
+      },
+      {
+        "frame": 400,
+        "emotion": "담담함",
+        "confidence": 0.7800334692001343,
+        "timestamp": "22:25:50"
+      },
+      {
+        "frame": 403,
+        "emotion": "담담함",
+        "confidence": 0.7939810156822205,
+        "timestamp": "22:25:50"
+      },
+      {
+        "frame": 406,
+        "emotion": "담담함",
+        "confidence": 0.791286289691925,
+        "timestamp": "22:25:50"
+      },
+      {
+        "frame": 409,
+        "emotion": "담담함",
+        "confidence": 0.8610888719558716,
+        "timestamp": "22:25:51"
+      },
+      {
+        "frame": 412,
+        "emotion": "담담함",
+        "confidence": 0.8404952883720398,
+        "timestamp": "22:25:51"
+      },
+      {
+        "frame": 415,
+        "emotion": "담담함",
+        "confidence": 0.7246765494346619,
+        "timestamp": "22:25:51"
+      },
+      {
+        "frame": 418,
+        "emotion": "담담함",
+        "confidence": 0.7525647878646851,
+        "timestamp": "22:25:51"
+      },
+      {
+        "frame": 421,
+        "emotion": "담담함",
+        "confidence": 0.788059413433075,
+        "timestamp": "22:25:51"
+      },
+      {
+        "frame": 424,
+        "emotion": "담담함",
+        "confidence": 0.7834280729293823,
+        "timestamp": "22:25:51"
+      },
+      {
+        "frame": 427,
+        "emotion": "담담함",
+        "confidence": 0.7786548137664795,
+        "timestamp": "22:25:52"
+      },
+      {
+        "frame": 430,
+        "emotion": "담담함",
+        "confidence": 0.6975299119949341,
+        "timestamp": "22:25:52"
+      },
+      {
+        "frame": 433,
+        "emotion": "담담함",
+        "confidence": 0.5804556608200073,
+        "timestamp": "22:25:52"
+      },
+      {
+        "frame": 436,
+        "emotion": "담담함",
+        "confidence": 0.7335038185119629,
+        "timestamp": "22:25:52"
+      },
+      {
+        "frame": 439,
+        "emotion": "담담함",
+        "confidence": 0.7000561356544495,
+        "timestamp": "22:25:52"
+      },
+      {
+        "frame": 442,
+        "emotion": "담담함",
+        "confidence": 0.5656865835189819,
+        "timestamp": "22:25:53"
+      },
+      {
+        "frame": 445,
+        "emotion": "담담함",
+        "confidence": 0.6047452092170715,
+        "timestamp": "22:25:53"
+      },
+      {
+        "frame": 448,
+        "emotion": "담담함",
+        "confidence": 0.7011726498603821,
+        "timestamp": "22:25:53"
+      },
+      {
+        "frame": 451,
+        "emotion": "담담함",
+        "confidence": 0.5791723132133484,
+        "timestamp": "22:25:53"
+      },
+      {
+        "frame": 454,
+        "emotion": "담담함",
+        "confidence": 0.6348692774772644,
+        "timestamp": "22:25:53"
+      },
+      {
+        "frame": 457,
+        "emotion": "담담함",
+        "confidence": 0.42695897817611694,
+        "timestamp": "22:25:54"
+      },
+      {
+        "frame": 460,
+        "emotion": "담담함",
+        "confidence": 0.6389250159263611,
+        "timestamp": "22:25:54"
+      },
+      {
+        "frame": 463,
+        "emotion": "담담함",
+        "confidence": 0.7304006814956665,
+        "timestamp": "22:25:54"
+      },
+      {
+        "frame": 466,
+        "emotion": "담담함",
+        "confidence": 0.49806666374206543,
+        "timestamp": "22:25:54"
+      },
+      {
+        "frame": 469,
+        "emotion": "담담함",
+        "confidence": 0.5360373854637146,
+        "timestamp": "22:25:54"
+      },
+      {
+        "frame": 472,
+        "emotion": "담담함",
+        "confidence": 0.6458083987236023,
+        "timestamp": "22:25:54"
+      },
+      {
+        "frame": 475,
+        "emotion": "담담함",
+        "confidence": 0.5260258913040161,
+        "timestamp": "22:25:55"
+      },
+      {
+        "frame": 478,
+        "emotion": "슬픔",
+        "confidence": 0.8008474707603455,
+        "timestamp": "22:25:55"
+      },
+      {
+        "frame": 481,
+        "emotion": "슬픔",
+        "confidence": 0.5773739218711853,
+        "timestamp": "22:25:55"
+      },
+      {
+        "frame": 484,
+        "emotion": "담담함",
+        "confidence": 0.5518822073936462,
+        "timestamp": "22:25:55"
+      },
+      {
+        "frame": 487,
+        "emotion": "담담함",
+        "confidence": 0.5862376093864441,
+        "timestamp": "22:25:56"
+      },
+      {
+        "frame": 490,
+        "emotion": "담담함",
+        "confidence": 0.7373365759849548,
+        "timestamp": "22:25:56"
+      },
+      {
+        "frame": 493,
+        "emotion": "담담함",
+        "confidence": 0.4565680921077728,
+        "timestamp": "22:25:56"
+      },
+      {
+        "frame": 496,
+        "emotion": "담담함",
+        "confidence": 0.46780338883399963,
+        "timestamp": "22:25:56"
+      },
+      {
+        "frame": 499,
+        "emotion": "담담함",
+        "confidence": 0.6696617603302002,
+        "timestamp": "22:25:56"
+      },
+      {
+        "frame": 502,
+        "emotion": "담담함",
+        "confidence": 0.7562479972839355,
+        "timestamp": "22:25:56"
+      },
+      {
+        "frame": 505,
+        "emotion": "담담함",
+        "confidence": 0.7439268231391907,
+        "timestamp": "22:25:57"
+      },
+      {
+        "frame": 508,
+        "emotion": "담담함",
+        "confidence": 0.7387514114379883,
+        "timestamp": "22:25:57"
+      },
+      {
+        "frame": 511,
+        "emotion": "담담함",
+        "confidence": 0.7352059483528137,
+        "timestamp": "22:25:57"
+      },
+      {
+        "frame": 514,
+        "emotion": "담담함",
+        "confidence": 0.7022316455841064,
+        "timestamp": "22:25:57"
+      },
+      {
+        "frame": 517,
+        "emotion": "담담함",
+        "confidence": 0.707844614982605,
+        "timestamp": "22:25:57"
+      },
+      {
+        "frame": 520,
+        "emotion": "담담함",
+        "confidence": 0.7451595664024353,
+        "timestamp": "22:25:58"
+      },
+      {
+        "frame": 523,
+        "emotion": "담담함",
+        "confidence": 0.7492024898529053,
+        "timestamp": "22:25:58"
+      },
+      {
+        "frame": 526,
+        "emotion": "슬픔",
+        "confidence": 0.6730768084526062,
+        "timestamp": "22:25:58"
+      },
+      {
+        "frame": 529,
+        "emotion": "담담함",
+        "confidence": 0.6222923398017883,
+        "timestamp": "22:25:58"
+      },
+      {
+        "frame": 532,
+        "emotion": "담담함",
+        "confidence": 0.5714930891990662,
+        "timestamp": "22:25:58"
+      },
+      {
+        "frame": 535,
+        "emotion": "담담함",
+        "confidence": 0.6467637419700623,
+        "timestamp": "22:25:58"
+      },
+      {
+        "frame": 538,
+        "emotion": "슬픔",
+        "confidence": 0.7609884738922119,
+        "timestamp": "22:25:59"
+      },
+      {
+        "frame": 541,
+        "emotion": "슬픔",
+        "confidence": 0.7632433772087097,
+        "timestamp": "22:25:59"
+      },
+      {
+        "frame": 544,
+        "emotion": "슬픔",
+        "confidence": 0.7820528745651245,
+        "timestamp": "22:25:59"
+      },
+      {
+        "frame": 547,
+        "emotion": "슬픔",
+        "confidence": 0.47658631205558777,
+        "timestamp": "22:25:59"
+      },
+      {
+        "frame": 550,
+        "emotion": "담담함",
+        "confidence": 0.8029389977455139,
+        "timestamp": "22:25:59"
+      },
+      {
+        "frame": 553,
+        "emotion": "담담함",
+        "confidence": 0.7697621583938599,
+        "timestamp": "22:25:59"
+      },
+      {
+        "frame": 556,
+        "emotion": "담담함",
+        "confidence": 0.8359315991401672,
+        "timestamp": "22:25:59"
+      },
+      {
+        "frame": 559,
+        "emotion": "담담함",
+        "confidence": 0.8317909240722656,
+        "timestamp": "22:26:00"
+      },
+      {
+        "frame": 562,
+        "emotion": "담담함",
+        "confidence": 0.635022759437561,
+        "timestamp": "22:26:00"
+      },
+      {
+        "frame": 565,
+        "emotion": "담담함",
+        "confidence": 0.7883952856063843,
+        "timestamp": "22:26:00"
+      },
+      {
+        "frame": 568,
+        "emotion": "담담함",
+        "confidence": 0.5803605914115906,
+        "timestamp": "22:26:00"
+      },
+      {
+        "frame": 571,
+        "emotion": "담담함",
+        "confidence": 0.4975537657737732,
+        "timestamp": "22:26:00"
+      },
+      {
+        "frame": 574,
+        "emotion": "담담함",
+        "confidence": 0.5786030888557434,
+        "timestamp": "22:26:00"
+      },
+      {
+        "frame": 577,
+        "emotion": "담담함",
+        "confidence": 0.6992182731628418,
+        "timestamp": "22:26:01"
+      },
+      {
+        "frame": 580,
+        "emotion": "담담함",
+        "confidence": 0.8273299932479858,
+        "timestamp": "22:26:01"
+      },
+      {
+        "frame": 583,
+        "emotion": "담담함",
+        "confidence": 0.8326500654220581,
+        "timestamp": "22:26:01"
+      },
+      {
+        "frame": 586,
+        "emotion": "담담함",
+        "confidence": 0.7493686676025391,
+        "timestamp": "22:26:01"
+      },
+      {
+        "frame": 589,
+        "emotion": "담담함",
+        "confidence": 0.788291871547699,
+        "timestamp": "22:26:01"
+      },
+      {
+        "frame": 592,
+        "emotion": "담담함",
+        "confidence": 0.7844108939170837,
+        "timestamp": "22:26:01"
+      },
+      {
+        "frame": 595,
+        "emotion": "담담함",
+        "confidence": 0.787726879119873,
+        "timestamp": "22:26:02"
+      },
+      {
+        "frame": 598,
+        "emotion": "담담함",
+        "confidence": 0.7669300436973572,
+        "timestamp": "22:26:02"
+      },
+      {
+        "frame": 601,
+        "emotion": "담담함",
+        "confidence": 0.5988116264343262,
+        "timestamp": "22:26:02"
+      },
+      {
+        "frame": 604,
+        "emotion": "담담함",
+        "confidence": 0.6770970225334167,
+        "timestamp": "22:26:02"
+      },
+      {
+        "frame": 607,
+        "emotion": "담담함",
+        "confidence": 0.6992592215538025,
+        "timestamp": "22:26:02"
+      }
+    ],
+    "anonymize_method": "곰 얼굴 🐻",
+    "voice_input_used": true,
+    "ai_recommended": "담담함",
+    "is_personalized": false,
+    "gemini_advice": "⚠️ AI 조언 서비스 오류\n\n하지만 오늘 '담담함' 감정을 기록하신 것은 매우 의미있는 행동입니다. 감정을 글로 표현하는 것만으로도 마음이 정리되고 치유될 수 있습니다. 💚\n\n💪 지금 이 순간 느끼는 감정을 있는 그대로 받아들여 주세요. 내일은 또 다른 하루가 시작됩니다!"
+  },
+  {
+    "timestamp": "20251216_223101",
+    "emotion": "담담함",
+    "diary_text": "토끼가 토끼 얼굴이 너무 웃기게 생긴 거 아니야",
+    "video_filename": "emotion_diary_20251216_223101.mp4",
+    "video_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_223101.mp4",
+    "text_filename": "emotion_diary_20251216_223101.txt",
+    "text_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_223101.txt",
+    "dominant_emotion": "행복함",
+    "avg_confidence": 0.6612808735747087,
+    "frame_count": 228,
+    "recording_duration": "00:17",
+    "emotion_timeline": [
+      {
+        "frame": 1,
+        "emotion": "담담함",
+        "confidence": 0.7469563484191895,
+        "timestamp": "22:30:49"
+      },
+      {
+        "frame": 4,
+        "emotion": "담담함",
+        "confidence": 0.6992604732513428,
+        "timestamp": "22:30:49"
+      },
+      {
+        "frame": 7,
+        "emotion": "담담함",
+        "confidence": 0.7227689027786255,
+        "timestamp": "22:30:49"
+      },
+      {
+        "frame": 10,
+        "emotion": "담담함",
+        "confidence": 0.6958516836166382,
+        "timestamp": "22:30:49"
+      },
+      {
+        "frame": 13,
+        "emotion": "담담함",
+        "confidence": 0.5833858251571655,
+        "timestamp": "22:30:49"
+      },
+      {
+        "frame": 16,
+        "emotion": "담담함",
+        "confidence": 0.6992795467376709,
+        "timestamp": "22:30:49"
+      },
+      {
+        "frame": 19,
+        "emotion": "담담함",
+        "confidence": 0.5798386335372925,
+        "timestamp": "22:30:50"
+      },
+      {
+        "frame": 22,
+        "emotion": "담담함",
+        "confidence": 0.5766028165817261,
+        "timestamp": "22:30:50"
+      },
+      {
+        "frame": 25,
+        "emotion": "담담함",
+        "confidence": 0.7552616000175476,
+        "timestamp": "22:30:50"
+      },
+      {
+        "frame": 28,
+        "emotion": "담담함",
+        "confidence": 0.5384140610694885,
+        "timestamp": "22:30:50"
+      },
+      {
+        "frame": 31,
+        "emotion": "담담함",
+        "confidence": 0.7477786540985107,
+        "timestamp": "22:30:50"
+      },
+      {
+        "frame": 34,
+        "emotion": "담담함",
+        "confidence": 0.7262597680091858,
+        "timestamp": "22:30:50"
+      },
+      {
+        "frame": 37,
+        "emotion": "담담함",
+        "confidence": 0.39476677775382996,
+        "timestamp": "22:30:50"
+      },
+      {
+        "frame": 40,
+        "emotion": "담담함",
+        "confidence": 0.5314632058143616,
+        "timestamp": "22:30:51"
+      },
+      {
+        "frame": 43,
+        "emotion": "슬픔",
+        "confidence": 0.5595242381095886,
+        "timestamp": "22:30:51"
+      },
+      {
+        "frame": 46,
+        "emotion": "슬픔",
+        "confidence": 0.6248291730880737,
+        "timestamp": "22:30:51"
+      },
+      {
+        "frame": 49,
+        "emotion": "슬픔",
+        "confidence": 0.5197548866271973,
+        "timestamp": "22:30:51"
+      },
+      {
+        "frame": 52,
+        "emotion": "행복함",
+        "confidence": 0.8873620629310608,
+        "timestamp": "22:30:51"
+      },
+      {
+        "frame": 55,
+        "emotion": "행복함",
+        "confidence": 0.9279798269271851,
+        "timestamp": "22:30:51"
+      },
+      {
+        "frame": 58,
+        "emotion": "행복함",
+        "confidence": 0.9045507311820984,
+        "timestamp": "22:30:51"
+      },
+      {
+        "frame": 61,
+        "emotion": "행복함",
+        "confidence": 0.9087091088294983,
+        "timestamp": "22:30:52"
+      },
+      {
+        "frame": 64,
+        "emotion": "행복함",
+        "confidence": 0.8186101913452148,
+        "timestamp": "22:30:52"
+      },
+      {
+        "frame": 67,
+        "emotion": "행복함",
+        "confidence": 0.9217762351036072,
+        "timestamp": "22:30:52"
+      },
+      {
+        "frame": 70,
+        "emotion": "행복함",
+        "confidence": 0.8969812393188477,
+        "timestamp": "22:30:52"
+      },
+      {
+        "frame": 73,
+        "emotion": "행복함",
+        "confidence": 0.9251624345779419,
+        "timestamp": "22:30:52"
+      },
+      {
+        "frame": 76,
+        "emotion": "행복함",
+        "confidence": 0.9089868664741516,
+        "timestamp": "22:30:52"
+      },
+      {
+        "frame": 79,
+        "emotion": "행복함",
+        "confidence": 0.9071434736251831,
+        "timestamp": "22:30:53"
+      },
+      {
+        "frame": 82,
+        "emotion": "행복함",
+        "confidence": 0.9275414347648621,
+        "timestamp": "22:30:53"
+      },
+      {
+        "frame": 85,
+        "emotion": "행복함",
+        "confidence": 0.9607558250427246,
+        "timestamp": "22:30:53"
+      },
+      {
+        "frame": 88,
+        "emotion": "행복함",
+        "confidence": 0.9676322340965271,
+        "timestamp": "22:30:53"
+      },
+      {
+        "frame": 91,
+        "emotion": "행복함",
+        "confidence": 0.948934018611908,
+        "timestamp": "22:30:53"
+      },
+      {
+        "frame": 94,
+        "emotion": "행복함",
+        "confidence": 0.8855792880058289,
+        "timestamp": "22:30:53"
+      },
+      {
+        "frame": 97,
+        "emotion": "행복함",
+        "confidence": 0.9457101821899414,
+        "timestamp": "22:30:53"
+      },
+      {
+        "frame": 100,
+        "emotion": "행복함",
+        "confidence": 0.7221000790596008,
+        "timestamp": "22:30:54"
+      },
+      {
+        "frame": 103,
+        "emotion": "화남",
+        "confidence": 0.24991050362586975,
+        "timestamp": "22:30:54"
+      },
+      {
+        "frame": 106,
+        "emotion": "슬픔",
+        "confidence": 0.30814358592033386,
+        "timestamp": "22:30:54"
+      },
+      {
+        "frame": 109,
+        "emotion": "행복함",
+        "confidence": 0.31981396675109863,
+        "timestamp": "22:30:54"
+      },
+      {
+        "frame": 112,
+        "emotion": "화남",
+        "confidence": 0.4003247022628784,
+        "timestamp": "22:30:54"
+      },
+      {
+        "frame": 115,
+        "emotion": "담담함",
+        "confidence": 0.39293715357780457,
+        "timestamp": "22:30:54"
+      },
+      {
+        "frame": 118,
+        "emotion": "슬픔",
+        "confidence": 0.44647833704948425,
+        "timestamp": "22:30:55"
+      },
+      {
+        "frame": 121,
+        "emotion": "슬픔",
+        "confidence": 0.5332501530647278,
+        "timestamp": "22:30:55"
+      },
+      {
+        "frame": 124,
+        "emotion": "슬픔",
+        "confidence": 0.4017411768436432,
+        "timestamp": "22:30:55"
+      },
+      {
+        "frame": 127,
+        "emotion": "담담함",
+        "confidence": 0.5039758086204529,
+        "timestamp": "22:30:55"
+      },
+      {
+        "frame": 130,
+        "emotion": "행복함",
+        "confidence": 0.5581762194633484,
+        "timestamp": "22:30:55"
+      },
+      {
+        "frame": 133,
+        "emotion": "행복함",
+        "confidence": 0.531128466129303,
+        "timestamp": "22:30:55"
+      },
+      {
+        "frame": 136,
+        "emotion": "행복함",
+        "confidence": 0.6723474860191345,
+        "timestamp": "22:30:56"
+      },
+      {
+        "frame": 139,
+        "emotion": "행복함",
+        "confidence": 0.7229258418083191,
+        "timestamp": "22:30:56"
+      },
+      {
+        "frame": 142,
+        "emotion": "행복함",
+        "confidence": 0.8877637982368469,
+        "timestamp": "22:30:56"
+      },
+      {
+        "frame": 145,
+        "emotion": "행복함",
+        "confidence": 0.9557899236679077,
+        "timestamp": "22:30:56"
+      },
+      {
+        "frame": 148,
+        "emotion": "행복함",
+        "confidence": 0.9430059790611267,
+        "timestamp": "22:30:56"
+      },
+      {
+        "frame": 151,
+        "emotion": "행복함",
+        "confidence": 0.5043914318084717,
+        "timestamp": "22:30:56"
+      },
+      {
+        "frame": 154,
+        "emotion": "행복함",
+        "confidence": 0.5716320872306824,
+        "timestamp": "22:30:57"
+      },
+      {
+        "frame": 157,
+        "emotion": "두려움",
+        "confidence": 0.3236727714538574,
+        "timestamp": "22:30:57"
+      },
+      {
+        "frame": 160,
+        "emotion": "행복함",
+        "confidence": 0.6875026822090149,
+        "timestamp": "22:30:57"
+      },
+      {
+        "frame": 163,
+        "emotion": "행복함",
+        "confidence": 0.7175097465515137,
+        "timestamp": "22:30:57"
+      },
+      {
+        "frame": 166,
+        "emotion": "행복함",
+        "confidence": 0.4699632525444031,
+        "timestamp": "22:30:57"
+      },
+      {
+        "frame": 169,
+        "emotion": "행복함",
+        "confidence": 0.8421431183815002,
+        "timestamp": "22:30:58"
+      },
+      {
+        "frame": 172,
+        "emotion": "담담함",
+        "confidence": 0.46002113819122314,
+        "timestamp": "22:30:58"
+      },
+      {
+        "frame": 175,
+        "emotion": "행복함",
+        "confidence": 0.6029748916625977,
+        "timestamp": "22:30:58"
+      },
+      {
+        "frame": 178,
+        "emotion": "행복함",
+        "confidence": 0.6457866430282593,
+        "timestamp": "22:30:58"
+      },
+      {
+        "frame": 181,
+        "emotion": "행복함",
+        "confidence": 0.727441668510437,
+        "timestamp": "22:30:58"
+      },
+      {
+        "frame": 184,
+        "emotion": "행복함",
+        "confidence": 0.5462130308151245,
+        "timestamp": "22:30:58"
+      },
+      {
+        "frame": 187,
+        "emotion": "담담함",
+        "confidence": 0.5603491067886353,
+        "timestamp": "22:30:58"
+      },
+      {
+        "frame": 190,
+        "emotion": "담담함",
+        "confidence": 0.6209214925765991,
+        "timestamp": "22:30:59"
+      },
+      {
+        "frame": 193,
+        "emotion": "담담함",
+        "confidence": 0.6032686829566956,
+        "timestamp": "22:30:59"
+      },
+      {
+        "frame": 196,
+        "emotion": "담담함",
+        "confidence": 0.5681342482566833,
+        "timestamp": "22:30:59"
+      },
+      {
+        "frame": 199,
+        "emotion": "담담함",
+        "confidence": 0.5494191646575928,
+        "timestamp": "22:30:59"
+      },
+      {
+        "frame": 202,
+        "emotion": "담담함",
+        "confidence": 0.5352867841720581,
+        "timestamp": "22:30:59"
+      },
+      {
+        "frame": 205,
+        "emotion": "담담함",
+        "confidence": 0.6216053366661072,
+        "timestamp": "22:30:59"
+      },
+      {
+        "frame": 208,
+        "emotion": "담담함",
+        "confidence": 0.5921521782875061,
+        "timestamp": "22:31:00"
+      },
+      {
+        "frame": 211,
+        "emotion": "담담함",
+        "confidence": 0.6058200001716614,
+        "timestamp": "22:31:00"
+      },
+      {
+        "frame": 214,
+        "emotion": "담담함",
+        "confidence": 0.5738992691040039,
+        "timestamp": "22:31:00"
+      },
+      {
+        "frame": 217,
+        "emotion": "담담함",
+        "confidence": 0.6091518998146057,
+        "timestamp": "22:31:00"
+      },
+      {
+        "frame": 220,
+        "emotion": "담담함",
+        "confidence": 0.6519099473953247,
+        "timestamp": "22:31:00"
+      },
+      {
+        "frame": 223,
+        "emotion": "담담함",
+        "confidence": 0.5805434584617615,
+        "timestamp": "22:31:01"
+      },
+      {
+        "frame": 226,
+        "emotion": "담담함",
+        "confidence": 0.5904074311256409,
+        "timestamp": "22:31:01"
+      }
+    ],
+    "anonymize_method": "토끼 얼굴 🐰",
+    "voice_input_used": true,
+    "ai_recommended": "담담함",
+    "is_personalized": true,
+    "gemini_advice": "⚠️ AI 조언 서비스 오류\n\n하지만 오늘 '담담함' 감정을 기록하신 것은 매우 의미있는 행동입니다. 감정을 글로 표현하는 것만으로도 마음이 정리되고 치유될 수 있습니다. 💚\n\n💪 지금 이 순간 느끼는 감정을 있는 그대로 받아들여 주세요. 내일은 또 다른 하루가 시작됩니다!"
+  },
+  {
+    "timestamp": "20251216_223135",
+    "emotion": "담담함",
+    "diary_text": "고양이는 너무 너무 귀엽다 마음에 든다",
+    "video_filename": "emotion_diary_20251216_223135.mp4",
+    "video_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_223135.mp4",
+    "text_filename": "emotion_diary_20251216_223135.txt",
+    "text_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_223135.txt",
+    "dominant_emotion": "담담함",
+    "avg_confidence": 0.6014799918834265,
+    "frame_count": 231,
+    "recording_duration": "00:17",
+    "emotion_timeline": [
+      {
+        "frame": 1,
+        "emotion": "담담함",
+        "confidence": 0.7323417067527771,
+        "timestamp": "22:31:22"
+      },
+      {
+        "frame": 4,
+        "emotion": "담담함",
+        "confidence": 0.7457723617553711,
+        "timestamp": "22:31:22"
+      },
+      {
+        "frame": 7,
+        "emotion": "담담함",
+        "confidence": 0.6755633354187012,
+        "timestamp": "22:31:22"
+      },
+      {
+        "frame": 10,
+        "emotion": "담담함",
+        "confidence": 0.7574907541275024,
+        "timestamp": "22:31:22"
+      },
+      {
+        "frame": 13,
+        "emotion": "담담함",
+        "confidence": 0.6774476766586304,
+        "timestamp": "22:31:22"
+      },
+      {
+        "frame": 16,
+        "emotion": "담담함",
+        "confidence": 0.7375543117523193,
+        "timestamp": "22:31:22"
+      },
+      {
+        "frame": 19,
+        "emotion": "담담함",
+        "confidence": 0.736882209777832,
+        "timestamp": "22:31:23"
+      },
+      {
+        "frame": 22,
+        "emotion": "담담함",
+        "confidence": 0.7048023343086243,
+        "timestamp": "22:31:23"
+      },
+      {
+        "frame": 25,
+        "emotion": "담담함",
+        "confidence": 0.7346256375312805,
+        "timestamp": "22:31:23"
+      },
+      {
+        "frame": 28,
+        "emotion": "슬픔",
+        "confidence": 0.5180349946022034,
+        "timestamp": "22:31:23"
+      },
+      {
+        "frame": 31,
+        "emotion": "담담함",
+        "confidence": 0.3577723801136017,
+        "timestamp": "22:31:23"
+      },
+      {
+        "frame": 34,
+        "emotion": "담담함",
+        "confidence": 0.46870896220207214,
+        "timestamp": "22:31:23"
+      },
+      {
+        "frame": 37,
+        "emotion": "담담함",
+        "confidence": 0.32444894313812256,
+        "timestamp": "22:31:23"
+      },
+      {
+        "frame": 40,
+        "emotion": "담담함",
+        "confidence": 0.376274436712265,
+        "timestamp": "22:31:24"
+      },
+      {
+        "frame": 43,
+        "emotion": "담담함",
+        "confidence": 0.44546061754226685,
+        "timestamp": "22:31:24"
+      },
+      {
+        "frame": 46,
+        "emotion": "담담함",
+        "confidence": 0.7751812934875488,
+        "timestamp": "22:31:24"
+      },
+      {
+        "frame": 49,
+        "emotion": "담담함",
+        "confidence": 0.3975476324558258,
+        "timestamp": "22:31:24"
+      },
+      {
+        "frame": 52,
+        "emotion": "담담함",
+        "confidence": 0.49141767621040344,
+        "timestamp": "22:31:24"
+      },
+      {
+        "frame": 55,
+        "emotion": "담담함",
+        "confidence": 0.3853417932987213,
+        "timestamp": "22:31:24"
+      },
+      {
+        "frame": 58,
+        "emotion": "담담함",
+        "confidence": 0.465217262506485,
+        "timestamp": "22:31:25"
+      },
+      {
+        "frame": 61,
+        "emotion": "담담함",
+        "confidence": 0.5413692593574524,
+        "timestamp": "22:31:25"
+      },
+      {
+        "frame": 64,
+        "emotion": "슬픔",
+        "confidence": 0.3275579512119293,
+        "timestamp": "22:31:25"
+      },
+      {
+        "frame": 67,
+        "emotion": "행복함",
+        "confidence": 0.239034965634346,
+        "timestamp": "22:31:25"
+      },
+      {
+        "frame": 70,
+        "emotion": "담담함",
+        "confidence": 0.5155126452445984,
+        "timestamp": "22:31:25"
+      },
+      {
+        "frame": 73,
+        "emotion": "행복함",
+        "confidence": 0.2956084907054901,
+        "timestamp": "22:31:25"
+      },
+      {
+        "frame": 76,
+        "emotion": "슬픔",
+        "confidence": 0.35348519682884216,
+        "timestamp": "22:31:25"
+      },
+      {
+        "frame": 79,
+        "emotion": "슬픔",
+        "confidence": 0.27326521277427673,
+        "timestamp": "22:31:26"
+      },
+      {
+        "frame": 82,
+        "emotion": "슬픔",
+        "confidence": 0.3480905592441559,
+        "timestamp": "22:31:26"
+      },
+      {
+        "frame": 85,
+        "emotion": "슬픔",
+        "confidence": 0.33971482515335083,
+        "timestamp": "22:31:26"
+      },
+      {
+        "frame": 88,
+        "emotion": "슬픔",
+        "confidence": 0.36403828859329224,
+        "timestamp": "22:31:26"
+      },
+      {
+        "frame": 91,
+        "emotion": "슬픔",
+        "confidence": 0.32490426301956177,
+        "timestamp": "22:31:26"
+      },
+      {
+        "frame": 94,
+        "emotion": "슬픔",
+        "confidence": 0.3796255886554718,
+        "timestamp": "22:31:26"
+      },
+      {
+        "frame": 97,
+        "emotion": "담담함",
+        "confidence": 0.2864026129245758,
+        "timestamp": "22:31:26"
+      },
+      {
+        "frame": 100,
+        "emotion": "슬픔",
+        "confidence": 0.5432191491127014,
+        "timestamp": "22:31:27"
+      },
+      {
+        "frame": 103,
+        "emotion": "슬픔",
+        "confidence": 0.3979576528072357,
+        "timestamp": "22:31:27"
+      },
+      {
+        "frame": 106,
+        "emotion": "담담함",
+        "confidence": 0.6408339142799377,
+        "timestamp": "22:31:27"
+      },
+      {
+        "frame": 109,
+        "emotion": "담담함",
+        "confidence": 0.5306088924407959,
+        "timestamp": "22:31:27"
+      },
+      {
+        "frame": 112,
+        "emotion": "담담함",
+        "confidence": 0.5935603380203247,
+        "timestamp": "22:31:27"
+      },
+      {
+        "frame": 115,
+        "emotion": "담담함",
+        "confidence": 0.7374906539916992,
+        "timestamp": "22:31:27"
+      },
+      {
+        "frame": 118,
+        "emotion": "담담함",
+        "confidence": 0.7457480430603027,
+        "timestamp": "22:31:28"
+      },
+      {
+        "frame": 121,
+        "emotion": "담담함",
+        "confidence": 0.7666025757789612,
+        "timestamp": "22:31:28"
+      },
+      {
+        "frame": 124,
+        "emotion": "담담함",
+        "confidence": 0.7382187247276306,
+        "timestamp": "22:31:28"
+      },
+      {
+        "frame": 127,
+        "emotion": "행복함",
+        "confidence": 0.3398815989494324,
+        "timestamp": "22:31:28"
+      },
+      {
+        "frame": 130,
+        "emotion": "행복함",
+        "confidence": 0.2526862919330597,
+        "timestamp": "22:31:28"
+      },
+      {
+        "frame": 133,
+        "emotion": "슬픔",
+        "confidence": 0.2833574414253235,
+        "timestamp": "22:31:28"
+      },
+      {
+        "frame": 136,
+        "emotion": "담담함",
+        "confidence": 0.456833153963089,
+        "timestamp": "22:31:29"
+      },
+      {
+        "frame": 139,
+        "emotion": "담담함",
+        "confidence": 0.43255624175071716,
+        "timestamp": "22:31:29"
+      },
+      {
+        "frame": 142,
+        "emotion": "담담함",
+        "confidence": 0.7605945467948914,
+        "timestamp": "22:31:29"
+      },
+      {
+        "frame": 145,
+        "emotion": "담담함",
+        "confidence": 0.7573171854019165,
+        "timestamp": "22:31:29"
+      },
+      {
+        "frame": 148,
+        "emotion": "담담함",
+        "confidence": 0.7797197103500366,
+        "timestamp": "22:31:29"
+      },
+      {
+        "frame": 151,
+        "emotion": "담담함",
+        "confidence": 0.7755908370018005,
+        "timestamp": "22:31:29"
+      },
+      {
+        "frame": 154,
+        "emotion": "담담함",
+        "confidence": 0.7683702111244202,
+        "timestamp": "22:31:30"
+      },
+      {
+        "frame": 157,
+        "emotion": "담담함",
+        "confidence": 0.8380566835403442,
+        "timestamp": "22:31:30"
+      },
+      {
+        "frame": 160,
+        "emotion": "담담함",
+        "confidence": 0.6930049061775208,
+        "timestamp": "22:31:30"
+      },
+      {
+        "frame": 163,
+        "emotion": "담담함",
+        "confidence": 0.6386781334877014,
+        "timestamp": "22:31:30"
+      },
+      {
+        "frame": 166,
+        "emotion": "담담함",
+        "confidence": 0.8164682388305664,
+        "timestamp": "22:31:30"
+      },
+      {
+        "frame": 169,
+        "emotion": "담담함",
+        "confidence": 0.7581794857978821,
+        "timestamp": "22:31:30"
+      },
+      {
+        "frame": 172,
+        "emotion": "담담함",
+        "confidence": 0.7667751908302307,
+        "timestamp": "22:31:31"
+      },
+      {
+        "frame": 175,
+        "emotion": "담담함",
+        "confidence": 0.6871235966682434,
+        "timestamp": "22:31:31"
+      },
+      {
+        "frame": 178,
+        "emotion": "담담함",
+        "confidence": 0.722451388835907,
+        "timestamp": "22:31:31"
+      },
+      {
+        "frame": 181,
+        "emotion": "담담함",
+        "confidence": 0.7136818766593933,
+        "timestamp": "22:31:31"
+      },
+      {
+        "frame": 184,
+        "emotion": "담담함",
+        "confidence": 0.7312363982200623,
+        "timestamp": "22:31:31"
+      },
+      {
+        "frame": 187,
+        "emotion": "담담함",
+        "confidence": 0.7379483580589294,
+        "timestamp": "22:31:32"
+      },
+      {
+        "frame": 190,
+        "emotion": "담담함",
+        "confidence": 0.7765702605247498,
+        "timestamp": "22:31:32"
+      },
+      {
+        "frame": 193,
+        "emotion": "담담함",
+        "confidence": 0.7596120238304138,
+        "timestamp": "22:31:32"
+      },
+      {
+        "frame": 196,
+        "emotion": "담담함",
+        "confidence": 0.7824859619140625,
+        "timestamp": "22:31:32"
+      },
+      {
+        "frame": 199,
+        "emotion": "담담함",
+        "confidence": 0.7894132733345032,
+        "timestamp": "22:31:32"
+      },
+      {
+        "frame": 202,
+        "emotion": "담담함",
+        "confidence": 0.8148729205131531,
+        "timestamp": "22:31:32"
+      },
+      {
+        "frame": 205,
+        "emotion": "담담함",
+        "confidence": 0.7575709819793701,
+        "timestamp": "22:31:33"
+      },
+      {
+        "frame": 208,
+        "emotion": "담담함",
+        "confidence": 0.7323920130729675,
+        "timestamp": "22:31:33"
+      },
+      {
+        "frame": 211,
+        "emotion": "담담함",
+        "confidence": 0.7575087547302246,
+        "timestamp": "22:31:33"
+      },
+      {
+        "frame": 214,
+        "emotion": "담담함",
+        "confidence": 0.7707011699676514,
+        "timestamp": "22:31:33"
+      },
+      {
+        "frame": 217,
+        "emotion": "담담함",
+        "confidence": 0.7965240478515625,
+        "timestamp": "22:31:33"
+      },
+      {
+        "frame": 220,
+        "emotion": "담담함",
+        "confidence": 0.7887150049209595,
+        "timestamp": "22:31:34"
+      },
+      {
+        "frame": 223,
+        "emotion": "담담함",
+        "confidence": 0.7620769739151001,
+        "timestamp": "22:31:34"
+      },
+      {
+        "frame": 226,
+        "emotion": "담담함",
+        "confidence": 0.7799195051193237,
+        "timestamp": "22:31:34"
+      },
+      {
+        "frame": 229,
+        "emotion": "담담함",
+        "confidence": 0.7443488836288452,
+        "timestamp": "22:31:34"
+      }
+    ],
+    "anonymize_method": "고양이 얼굴 🐱",
+    "voice_input_used": true,
+    "ai_recommended": "담담함",
+    "is_personalized": true,
+    "gemini_advice": "⚠️ AI 조언 서비스 오류\n\n하지만 오늘 '담담함' 감정을 기록하신 것은 매우 의미있는 행동입니다. 감정을 글로 표현하는 것만으로도 마음이 정리되고 치유될 수 있습니다. 💚\n\n💪 지금 이 순간 느끼는 감정을 있는 그대로 받아들여 주세요. 내일은 또 다른 하루가 시작됩니다!"
+  },
+  {
+    "timestamp": "20251216_223232",
+    "emotion": "담담함",
+    "diary_text": "(음성 입력 없음)",
+    "video_filename": "emotion_diary_20251216_223232.mp4",
+    "video_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_223232.mp4",
+    "text_filename": "emotion_diary_20251216_223232.txt",
+    "text_path": "C:\\Users\\jylee\\Desktop\\AI2-final_project\\emotion_diary_data\\videos\\emotion_diary_20251216_223232.txt",
+    "dominant_emotion": "담담함",
+    "avg_confidence": 0.7399291098117828,
+    "frame_count": 270,
+    "recording_duration": "00:19",
+    "emotion_timeline": [
+      {
+        "frame": 1,
+        "emotion": "담담함",
+        "confidence": 0.6978011727333069,
+        "timestamp": "22:32:17"
+      },
+      {
+        "frame": 4,
+        "emotion": "담담함",
+        "confidence": 0.8022451400756836,
+        "timestamp": "22:32:17"
+      },
+      {
+        "frame": 7,
+        "emotion": "담담함",
+        "confidence": 0.7379962205886841,
+        "timestamp": "22:32:17"
+      },
+      {
+        "frame": 10,
+        "emotion": "담담함",
+        "confidence": 0.77813321352005,
+        "timestamp": "22:32:17"
+      },
+      {
+        "frame": 13,
+        "emotion": "담담함",
+        "confidence": 0.7663832306861877,
+        "timestamp": "22:32:17"
+      },
+      {
+        "frame": 16,
+        "emotion": "담담함",
+        "confidence": 0.7470611333847046,
+        "timestamp": "22:32:18"
+      },
+      {
+        "frame": 19,
+        "emotion": "담담함",
+        "confidence": 0.7401348948478699,
+        "timestamp": "22:32:18"
+      },
+      {
+        "frame": 22,
+        "emotion": "담담함",
+        "confidence": 0.7977927923202515,
+        "timestamp": "22:32:18"
+      },
+      {
+        "frame": 25,
+        "emotion": "담담함",
+        "confidence": 0.7462998032569885,
+        "timestamp": "22:32:18"
+      },
+      {
+        "frame": 28,
+        "emotion": "담담함",
+        "confidence": 0.7069675326347351,
+        "timestamp": "22:32:18"
+      },
+      {
+        "frame": 31,
+        "emotion": "담담함",
+        "confidence": 0.6713008284568787,
+        "timestamp": "22:32:18"
+      },
+      {
+        "frame": 34,
+        "emotion": "담담함",
+        "confidence": 0.7652281522750854,
+        "timestamp": "22:32:18"
+      },
+      {
+        "frame": 37,
+        "emotion": "슬픔",
+        "confidence": 0.528670608997345,
+        "timestamp": "22:32:19"
+      },
+      {
+        "frame": 40,
+        "emotion": "담담함",
+        "confidence": 0.6793647408485413,
+        "timestamp": "22:32:19"
+      },
+      {
+        "frame": 43,
+        "emotion": "담담함",
+        "confidence": 0.62245774269104,
+        "timestamp": "22:32:19"
+      },
+      {
+        "frame": 46,
+        "emotion": "담담함",
+        "confidence": 0.7187808156013489,
+        "timestamp": "22:32:19"
+      },
+      {
+        "frame": 49,
+        "emotion": "담담함",
+        "confidence": 0.6839479207992554,
+        "timestamp": "22:32:19"
+      },
+      {
+        "frame": 52,
+        "emotion": "담담함",
+        "confidence": 0.7073268890380859,
+        "timestamp": "22:32:19"
+      },
+      {
+        "frame": 55,
+        "emotion": "담담함",
+        "confidence": 0.7535789012908936,
+        "timestamp": "22:32:19"
+      },
+      {
+        "frame": 58,
+        "emotion": "담담함",
+        "confidence": 0.673694908618927,
+        "timestamp": "22:32:20"
+      },
+      {
+        "frame": 61,
+        "emotion": "담담함",
+        "confidence": 0.7033183574676514,
+        "timestamp": "22:32:20"
+      },
+      {
+        "frame": 64,
+        "emotion": "담담함",
+        "confidence": 0.7388902902603149,
+        "timestamp": "22:32:20"
+      },
+      {
+        "frame": 67,
+        "emotion": "담담함",
+        "confidence": 0.7140739560127258,
+        "timestamp": "22:32:20"
+      },
+      {
+        "frame": 70,
+        "emotion": "담담함",
+        "confidence": 0.6636054515838623,
+        "timestamp": "22:32:20"
+      },
+      {
+        "frame": 73,
+        "emotion": "담담함",
+        "confidence": 0.7146037220954895,
+        "timestamp": "22:32:20"
+      },
+      {
+        "frame": 76,
+        "emotion": "담담함",
+        "confidence": 0.7387374639511108,
+        "timestamp": "22:32:21"
+      },
+      {
+        "frame": 79,
+        "emotion": "담담함",
+        "confidence": 0.7197455167770386,
+        "timestamp": "22:32:21"
+      },
+      {
+        "frame": 82,
+        "emotion": "담담함",
+        "confidence": 0.7584664225578308,
+        "timestamp": "22:32:21"
+      },
+      {
+        "frame": 85,
+        "emotion": "담담함",
+        "confidence": 0.7440409064292908,
+        "timestamp": "22:32:21"
+      },
+      {
+        "frame": 88,
+        "emotion": "담담함",
+        "confidence": 0.7287260890007019,
+        "timestamp": "22:32:21"
+      },
+      {
+        "frame": 91,
+        "emotion": "담담함",
+        "confidence": 0.7367856502532959,
+        "timestamp": "22:32:21"
+      },
+      {
+        "frame": 94,
+        "emotion": "담담함",
+        "confidence": 0.7953993678092957,
+        "timestamp": "22:32:21"
+      },
+      {
+        "frame": 97,
+        "emotion": "담담함",
+        "confidence": 0.74785977602005,
+        "timestamp": "22:32:22"
+      },
+      {
+        "frame": 100,
+        "emotion": "담담함",
+        "confidence": 0.7176070213317871,
+        "timestamp": "22:32:22"
+      },
+      {
+        "frame": 103,
+        "emotion": "담담함",
+        "confidence": 0.7627683877944946,
+        "timestamp": "22:32:22"
+      },
+      {
+        "frame": 106,
+        "emotion": "담담함",
+        "confidence": 0.7579777240753174,
+        "timestamp": "22:32:22"
+      },
+      {
+        "frame": 109,
+        "emotion": "담담함",
+        "confidence": 0.6922178864479065,
+        "timestamp": "22:32:22"
+      },
+      {
+        "frame": 112,
+        "emotion": "담담함",
+        "confidence": 0.738935112953186,
+        "timestamp": "22:32:22"
+      },
+      {
+        "frame": 115,
+        "emotion": "담담함",
+        "confidence": 0.6700260043144226,
+        "timestamp": "22:32:22"
+      },
+      {
+        "frame": 118,
+        "emotion": "담담함",
+        "confidence": 0.7336142063140869,
+        "timestamp": "22:32:23"
+      },
+      {
+        "frame": 121,
+        "emotion": "담담함",
+        "confidence": 0.7689869999885559,
+        "timestamp": "22:32:23"
+      },
+      {
+        "frame": 124,
+        "emotion": "담담함",
+        "confidence": 0.7622285485267639,
+        "timestamp": "22:32:23"
+      },
+      {
+        "frame": 127,
+        "emotion": "담담함",
+        "confidence": 0.5175617337226868,
+        "timestamp": "22:32:23"
+      },
+      {
+        "frame": 130,
+        "emotion": "슬픔",
+        "confidence": 0.5199418663978577,
+        "timestamp": "22:32:23"
+      },
+      {
+        "frame": 133,
+        "emotion": "담담함",
+        "confidence": 0.7977477312088013,
+        "timestamp": "22:32:24"
+      },
+      {
+        "frame": 136,
+        "emotion": "담담함",
+        "confidence": 0.71823650598526,
+        "timestamp": "22:32:24"
+      },
+      {
+        "frame": 139,
+        "emotion": "담담함",
+        "confidence": 0.736325740814209,
+        "timestamp": "22:32:24"
+      },
+      {
+        "frame": 142,
+        "emotion": "담담함",
+        "confidence": 0.7509241700172424,
+        "timestamp": "22:32:24"
+      },
+      {
+        "frame": 145,
+        "emotion": "담담함",
+        "confidence": 0.7806752920150757,
+        "timestamp": "22:32:24"
+      },
+      {
+        "frame": 148,
+        "emotion": "담담함",
+        "confidence": 0.7702596187591553,
+        "timestamp": "22:32:24"
+      },
+      {
+        "frame": 151,
+        "emotion": "담담함",
+        "confidence": 0.7708671689033508,
+        "timestamp": "22:32:25"
+      },
+      {
+        "frame": 154,
+        "emotion": "담담함",
+        "confidence": 0.7848253846168518,
+        "timestamp": "22:32:25"
+      },
+      {
+        "frame": 157,
+        "emotion": "담담함",
+        "confidence": 0.7655805945396423,
+        "timestamp": "22:32:25"
+      },
+      {
+        "frame": 160,
+        "emotion": "담담함",
+        "confidence": 0.7884572744369507,
+        "timestamp": "22:32:25"
+      },
+      {
+        "frame": 163,
+        "emotion": "담담함",
+        "confidence": 0.7584225535392761,
+        "timestamp": "22:32:25"
+      },
+      {
+        "frame": 166,
+        "emotion": "담담함",
+        "confidence": 0.8038182854652405,
+        "timestamp": "22:32:25"
+      },
+      {
+        "frame": 169,
+        "emotion": "담담함",
+        "confidence": 0.7072886228561401,
+        "timestamp": "22:32:26"
+      },
+      {
+        "frame": 172,
+        "emotion": "담담함",
+        "confidence": 0.7169449329376221,
+        "timestamp": "22:32:26"
+      },
+      {
+        "frame": 175,
+        "emotion": "담담함",
+        "confidence": 0.7892151474952698,
+        "timestamp": "22:32:26"
+      },
+      {
+        "frame": 178,
+        "emotion": "담담함",
+        "confidence": 0.60794997215271,
+        "timestamp": "22:32:26"
+      },
+      {
+        "frame": 181,
+        "emotion": "담담함",
+        "confidence": 0.8009516596794128,
+        "timestamp": "22:32:26"
+      },
+      {
+        "frame": 184,
+        "emotion": "담담함",
+        "confidence": 0.7853901982307434,
+        "timestamp": "22:32:26"
+      },
+      {
+        "frame": 187,
+        "emotion": "담담함",
+        "confidence": 0.7694406509399414,
+        "timestamp": "22:32:27"
+      },
+      {
+        "frame": 190,
+        "emotion": "담담함",
+        "confidence": 0.7986183166503906,
+        "timestamp": "22:32:27"
+      },
+      {
+        "frame": 193,
+        "emotion": "담담함",
+        "confidence": 0.7814287543296814,
+        "timestamp": "22:32:27"
+      },
+      {
+        "frame": 196,
+        "emotion": "담담함",
+        "confidence": 0.665448009967804,
+        "timestamp": "22:32:27"
+      },
+      {
+        "frame": 199,
+        "emotion": "담담함",
+        "confidence": 0.744993269443512,
+        "timestamp": "22:32:27"
+      },
+      {
+        "frame": 202,
+        "emotion": "담담함",
+        "confidence": 0.7773101925849915,
+        "timestamp": "22:32:28"
+      },
+      {
+        "frame": 205,
+        "emotion": "담담함",
+        "confidence": 0.7580316066741943,
+        "timestamp": "22:32:28"
+      },
+      {
+        "frame": 208,
+        "emotion": "담담함",
+        "confidence": 0.718373715877533,
+        "timestamp": "22:32:28"
+      },
+      {
+        "frame": 211,
+        "emotion": "담담함",
+        "confidence": 0.7479430437088013,
+        "timestamp": "22:32:28"
+      },
+      {
+        "frame": 214,
+        "emotion": "담담함",
+        "confidence": 0.751863420009613,
+        "timestamp": "22:32:28"
+      },
+      {
+        "frame": 217,
+        "emotion": "담담함",
+        "confidence": 0.7620548605918884,
+        "timestamp": "22:32:29"
+      },
+      {
+        "frame": 220,
+        "emotion": "담담함",
+        "confidence": 0.7897720336914062,
+        "timestamp": "22:32:29"
+      },
+      {
+        "frame": 223,
+        "emotion": "담담함",
+        "confidence": 0.7820274829864502,
+        "timestamp": "22:32:29"
+      },
+      {
+        "frame": 226,
+        "emotion": "담담함",
+        "confidence": 0.7687534689903259,
+        "timestamp": "22:32:29"
+      },
+      {
+        "frame": 229,
+        "emotion": "담담함",
+        "confidence": 0.7877699136734009,
+        "timestamp": "22:32:29"
+      },
+      {
+        "frame": 232,
+        "emotion": "담담함",
+        "confidence": 0.7297120094299316,
+        "timestamp": "22:32:30"
+      },
+      {
+        "frame": 235,
+        "emotion": "담담함",
+        "confidence": 0.8132264614105225,
+        "timestamp": "22:32:30"
+      },
+      {
+        "frame": 238,
+        "emotion": "담담함",
+        "confidence": 0.8235108256340027,
+        "timestamp": "22:32:30"
+      },
+      {
+        "frame": 241,
+        "emotion": "슬픔",
+        "confidence": 0.8261939287185669,
+        "timestamp": "22:32:30"
+      },
+      {
+        "frame": 244,
+        "emotion": "담담함",
+        "confidence": 0.7506251931190491,
+        "timestamp": "22:32:30"
+      },
+      {
+        "frame": 247,
+        "emotion": "담담함",
+        "confidence": 0.7210100889205933,
+        "timestamp": "22:32:31"
+      },
+      {
+        "frame": 250,
+        "emotion": "담담함",
+        "confidence": 0.7555842399597168,
+        "timestamp": "22:32:31"
+      },
+      {
+        "frame": 253,
+        "emotion": "담담함",
+        "confidence": 0.7927181720733643,
+        "timestamp": "22:32:31"
+      },
+      {
+        "frame": 256,
+        "emotion": "담담함",
+        "confidence": 0.8075289726257324,
+        "timestamp": "22:32:31"
+      },
+      {
+        "frame": 259,
+        "emotion": "담담함",
+        "confidence": 0.808498740196228,
+        "timestamp": "22:32:31"
+      },
+      {
+        "frame": 262,
+        "emotion": "담담함",
+        "confidence": 0.7962310910224915,
+        "timestamp": "22:32:31"
+      },
+      {
+        "frame": 265,
+        "emotion": "담담함",
+        "confidence": 0.757818877696991,
+        "timestamp": "22:32:32"
+      },
+      {
+        "frame": 268,
+        "emotion": "담담함",
+        "confidence": 0.7019665837287903,
+        "timestamp": "22:32:32"
+      }
+    ],
+    "anonymize_method": "고양이 얼굴 🐱",
+    "voice_input_used": true,
+    "ai_recommended": "담담함",
+    "is_personalized": true,
+    "gemini_advice": "⚠️ AI 조언 서비스 오류\n\n하지만 오늘 '담담함' 감정을 기록하신 것은 매우 의미있는 행동입니다. 감정을 글로 표현하는 것만으로도 마음이 정리되고 치유될 수 있습니다. 💚\n\n💪 지금 이 순간 느끼는 감정을 있는 그대로 받아들여 주세요. 내일은 또 다른 하루가 시작됩니다!"
+  }
+]

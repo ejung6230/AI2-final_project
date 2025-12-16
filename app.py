@@ -28,7 +28,7 @@ except ImportError:
     print("설치 방법: pip install google-genai")
 
 # 제미나이 API 설정
-GEMINI_API_KEY = "AIzaSyC7WNyW9veEd8rWAGcXxOlK6ZGQ_SnxPp8"
+GEMINI_API_KEY = "AIzaSyDdOJZsmnmTjuC0Uc--j1ZKhXsXtUxvR2I"
 
 # 로컬 데이터 저장 경로 설정 (현재 폴더에 저장)
 DATA_DIR = Path("emotion_diary_data")
@@ -129,7 +129,7 @@ def get_gemini_advice(emotion: str, diary_text: str, emotion_timeline: list) -> 
         
         # API 호출 - gemini-2.5-flash 사용
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-2.5-flash-lite",
             contents=prompt
         )
         
@@ -399,7 +399,7 @@ with st.sidebar:
     
     anonymize_option = st.selectbox(
         "전체 화면 익명화 방식",
-        ["원본", "블러", "픽셀화", "카툰"],
+        ["원본", "블러", "곰 얼굴 🐻", "토끼 얼굴 🐰", "고양이 얼굴 🐱"],
         key="anonymize",
         disabled=st.session_state.recording
     )
@@ -640,41 +640,692 @@ def cartoonize_frame(image: np.ndarray) -> np.ndarray:
         print(f"카툰 변환 오류: {e}")
         return image
 
+def bear_face_mask(image: np.ndarray, face_detector) -> np.ndarray:
+    """얼굴을 귀여운 곰 얼굴로 대체"""
+    try:
+        if image.size == 0 or image.shape[0] < 10 or image.shape[1] < 10:
+            return image
+        
+        result = image.copy()
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = face_detector.process(image_rgb)
+        
+        if results.detections:
+            for detection in results.detections:
+                bboxC = detection.location_data.relative_bounding_box
+                h, w, _ = image.shape
+                x = int(bboxC.xmin * w)
+                y = int(bboxC.ymin * h)
+                width = int(bboxC.width * w)
+                height = int(bboxC.height * h)
+                
+                # 경계 확인
+                x = max(0, x)
+                y = max(0, y)
+                width = min(width, w - x)
+                height = min(height, h - y)
+                
+                if width <= 0 or height <= 0:
+                    continue
+                
+                # 얼굴 영역을 약간 확장 (귀 포함)
+                margin = int(width * 0.3)
+                bear_x = max(0, x - margin)
+                bear_y = max(0, y - margin)
+                bear_w = min(w - bear_x, width + margin * 2)
+                bear_h = min(h - bear_y, height + margin * 2)
+                
+                # 곰 얼굴 그리기
+                center_x = bear_x + bear_w // 2
+                center_y = bear_y + bear_h // 2
+                
+                # 얼굴 (원) - 연한 갈색
+                face_radius = min(bear_w, bear_h) // 2
+                cv2.circle(result, (center_x, center_y), face_radius, (150, 120, 80), -1)  # 연한 갈색
+                cv2.circle(result, (center_x, center_y), face_radius, (100, 70, 40), 3)  # 진한 갈색 테두리
+                
+                # 귀 (2개) - 갈색
+                ear_radius = face_radius // 3
+                left_ear_x = center_x - int(face_radius * 0.7)
+                right_ear_x = center_x + int(face_radius * 0.7)
+                ear_y = center_y - int(face_radius * 0.7)
+                
+                # 귀 본체
+                cv2.circle(result, (left_ear_x, ear_y), ear_radius, (150, 120, 80), -1)
+                cv2.circle(result, (left_ear_x, ear_y), ear_radius, (100, 70, 40), 2)
+                cv2.circle(result, (right_ear_x, ear_y), ear_radius, (150, 120, 80), -1)
+                cv2.circle(result, (right_ear_x, ear_y), ear_radius, (100, 70, 40), 2)
+                
+                # 귀 안쪽 - 밝은 노란색
+                inner_ear_radius = ear_radius // 2
+                cv2.circle(result, (left_ear_x, ear_y), inner_ear_radius, (100, 200, 255), -1)  # 노란색
+                cv2.circle(result, (right_ear_x, ear_y), inner_ear_radius, (100, 200, 255), -1)
+                
+                # 🎀 리본 추가 (오른쪽 귀 옆)
+                ribbon_center_x = right_ear_x + int(ear_radius * 1.2)
+                ribbon_center_y = ear_y - int(ear_radius * 0.3)
+                ribbon_size = ear_radius // 2
+                
+                # 리본 왼쪽 나비
+                ribbon_left = (ribbon_center_x - ribbon_size, ribbon_center_y)
+                cv2.circle(result, ribbon_left, ribbon_size, (100, 100, 255), -1)  # 분홍색
+                
+                # 리본 오른쪽 나비
+                ribbon_right = (ribbon_center_x + ribbon_size, ribbon_center_y)
+                cv2.circle(result, ribbon_right, ribbon_size, (100, 100, 255), -1)
+                
+                # 리본 중앙 매듭
+                cv2.circle(result, (ribbon_center_x, ribbon_center_y), ribbon_size // 2, (80, 80, 200), -1)
+                
+                # 얼굴 중앙 부분 - 밝은 노란색
+                snout_radius = face_radius // 2
+                snout_y = center_y + face_radius // 4
+                cv2.circle(result, (center_x, snout_y), snout_radius, (120, 220, 255), -1)  # 밝은 노란색
+                cv2.circle(result, (center_x, snout_y), snout_radius, (100, 180, 230), 2)  # 테두리
+                
+                # 눈 (2개) - 크고 반짝이는 눈
+                eye_radius = face_radius // 5
+                left_eye_x = center_x - face_radius // 3
+                right_eye_x = center_x + face_radius // 3
+                eye_y = center_y - face_radius // 5
+                
+                # 눈 흰자
+                cv2.circle(result, (left_eye_x, eye_y), eye_radius, (255, 255, 255), -1)
+                cv2.circle(result, (right_eye_x, eye_y), eye_radius, (255, 255, 255), -1)
+                
+                # 눈동자
+                pupil_radius = eye_radius * 2 // 3
+                cv2.circle(result, (left_eye_x, eye_y), pupil_radius, (50, 30, 20), -1)
+                cv2.circle(result, (right_eye_x, eye_y), pupil_radius, (50, 30, 20), -1)
+                
+                # 눈 하이라이트 (반짝임)
+                highlight_radius = eye_radius // 3
+                cv2.circle(result, (left_eye_x - 3, eye_y - 3), highlight_radius, (255, 255, 255), -1)
+                cv2.circle(result, (right_eye_x - 3, eye_y - 3), highlight_radius, (255, 255, 255), -1)
+                
+                # 코 (하트 모양 시도 - 타원)
+                nose_w = snout_radius // 2
+                nose_h = snout_radius // 3
+                nose_y = snout_y - snout_radius // 4
+                cv2.ellipse(result, (center_x, nose_y), (nose_w, nose_h), 0, 0, 360, (50, 30, 20), -1)
+                
+                # 입 (귀여운 미소)
+                mouth_y = snout_y + snout_radius // 3
+                # 아래 곡선
+                cv2.ellipse(result, (center_x, mouth_y), (snout_radius // 2, snout_radius // 4), 
+                           0, 0, 180, (50, 30, 20), 2)
+                # 코에서 입으로 선
+                cv2.line(result, (center_x, nose_y + nose_h), (center_x, mouth_y - snout_radius // 4), 
+                        (50, 30, 20), 2)
+                
+                # 볼 (분홍색 블러시)
+                blush_radius = face_radius // 6
+                left_blush_x = center_x - int(face_radius * 0.5)
+                right_blush_x = center_x + int(face_radius * 0.5)
+                blush_y = center_y + face_radius // 6
+                
+                # 반투명 블러시 효과
+                overlay = result.copy()
+                cv2.circle(overlay, (left_blush_x, blush_y), blush_radius, (128, 128, 255), -1)
+                cv2.circle(overlay, (right_blush_x, blush_y), blush_radius, (128, 128, 255), -1)
+                cv2.addWeighted(overlay, 0.3, result, 0.7, 0, result)
+        
+        return result
+    except Exception as e:
+        print(f"곰 얼굴 마스크 오류: {e}")
+        return image
+
+def rabbit_face_mask(image: np.ndarray, face_detector) -> np.ndarray:
+    """얼굴을 귀여운 토끼 얼굴로 대체"""
+    try:
+        if image.size == 0 or image.shape[0] < 10 or image.shape[1] < 10:
+            return image
+        
+        result = image.copy()
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = face_detector.process(image_rgb)
+        
+        if results.detections:
+            for detection in results.detections:
+                bboxC = detection.location_data.relative_bounding_box
+                h, w, _ = image.shape
+                x = int(bboxC.xmin * w)
+                y = int(bboxC.ymin * h)
+                width = int(bboxC.width * w)
+                height = int(bboxC.height * h)
+                
+                x = max(0, x)
+                y = max(0, y)
+                width = min(width, w - x)
+                height = min(height, h - y)
+                
+                if width <= 0 or height <= 0:
+                    continue
+                
+                margin = int(width * 0.4)  # 토끼 귀가 길어서 여유 공간 더 필요
+                rabbit_x = max(0, x - margin)
+                rabbit_y = max(0, y - margin)
+                rabbit_w = min(w - rabbit_x, width + margin * 2)
+                rabbit_h = min(h - rabbit_y, height + margin * 2)
+                
+                center_x = rabbit_x + rabbit_w // 2
+                center_y = rabbit_y + rabbit_h // 2
+                
+                # 얼굴 (원) - 흰색
+                face_radius = min(rabbit_w, rabbit_h) // 2
+                cv2.circle(result, (center_x, center_y), face_radius, (240, 240, 250), -1)
+                cv2.circle(result, (center_x, center_y), face_radius, (200, 200, 210), 3)
+                
+                # 긴 귀 (2개) - 타원
+                ear_width = face_radius // 4
+                ear_height = int(face_radius * 0.8)
+                left_ear_x = center_x - int(face_radius * 0.5)
+                right_ear_x = center_x + int(face_radius * 0.5)
+                ear_y = center_y - int(face_radius * 1.1)
+                
+                # 왼쪽 귀
+                cv2.ellipse(result, (left_ear_x, ear_y), (ear_width, ear_height), -15, 0, 360, (240, 240, 250), -1)
+                cv2.ellipse(result, (left_ear_x, ear_y), (ear_width, ear_height), -15, 0, 360, (200, 200, 210), 2)
+                # 귀 안쪽 (분홍)
+                cv2.ellipse(result, (left_ear_x, ear_y), (ear_width//2, ear_height-10), -15, 0, 360, (200, 150, 255), -1)
+                
+                # 오른쪽 귀
+                cv2.ellipse(result, (right_ear_x, ear_y), (ear_width, ear_height), 15, 0, 360, (240, 240, 250), -1)
+                cv2.ellipse(result, (right_ear_x, ear_y), (ear_width, ear_height), 15, 0, 360, (200, 200, 210), 2)
+                # 귀 안쪽 (분홍)
+                cv2.ellipse(result, (right_ear_x, ear_y), (ear_width//2, ear_height-10), 15, 0, 360, (200, 150, 255), -1)
+                
+                # 눈 (2개) - 큰 눈
+                eye_radius = face_radius // 5
+                left_eye_x = center_x - face_radius // 3
+                right_eye_x = center_x + face_radius // 3
+                eye_y = center_y - face_radius // 5
+                
+                cv2.circle(result, (left_eye_x, eye_y), eye_radius, (255, 255, 255), -1)
+                cv2.circle(result, (right_eye_x, eye_y), eye_radius, (255, 255, 255), -1)
+                
+                pupil_radius = eye_radius * 2 // 3
+                cv2.circle(result, (left_eye_x, eye_y), pupil_radius, (80, 50, 50), -1)
+                cv2.circle(result, (right_eye_x, eye_y), pupil_radius, (80, 50, 50), -1)
+                
+                highlight_radius = eye_radius // 3
+                cv2.circle(result, (left_eye_x - 3, eye_y - 3), highlight_radius, (255, 255, 255), -1)
+                cv2.circle(result, (right_eye_x - 3, eye_y - 3), highlight_radius, (255, 255, 255), -1)
+                
+                # 코 (작은 삼각형 - 분홍)
+                nose_y = center_y + face_radius // 8
+                nose_size = face_radius // 8
+                nose_pts = np.array([
+                    [center_x, nose_y - nose_size//2],
+                    [center_x - nose_size//2, nose_y + nose_size//2],
+                    [center_x + nose_size//2, nose_y + nose_size//2]
+                ], np.int32)
+                cv2.fillPoly(result, [nose_pts], (180, 120, 255))
+                
+                # 입 (토끼 특유의 Y자 모양)
+                mouth_y = nose_y + nose_size
+                # 중앙 세로선
+                cv2.line(result, (center_x, nose_y + nose_size//2), (center_x, mouth_y), (100, 70, 70), 2)
+                # 왼쪽 곡선
+                cv2.ellipse(result, (center_x - face_radius//6, mouth_y + face_radius//8), 
+                           (face_radius//6, face_radius//8), 0, 180, 270, (100, 70, 70), 2)
+                # 오른쪽 곡선
+                cv2.ellipse(result, (center_x + face_radius//6, mouth_y + face_radius//8), 
+                           (face_radius//6, face_radius//8), 0, 270, 360, (100, 70, 70), 2)
+                
+                # 볼 (분홍 블러시)
+                blush_radius = face_radius // 7
+                left_blush_x = center_x - int(face_radius * 0.5)
+                right_blush_x = center_x + int(face_radius * 0.5)
+                blush_y = center_y + face_radius // 6
+                
+                overlay = result.copy()
+                cv2.circle(overlay, (left_blush_x, blush_y), blush_radius, (180, 150, 255), -1)
+                cv2.circle(overlay, (right_blush_x, blush_y), blush_radius, (180, 150, 255), -1)
+                cv2.addWeighted(overlay, 0.4, result, 0.6, 0, result)
+                
+                # 앞니 (2개)
+                tooth_width = face_radius // 8
+                tooth_height = face_radius // 6
+                left_tooth_x = center_x - tooth_width // 2
+                right_tooth_x = center_x + tooth_width // 2
+                tooth_y = mouth_y + face_radius // 6
+                
+                cv2.rectangle(result, (left_tooth_x - tooth_width, tooth_y), 
+                            (left_tooth_x, tooth_y + tooth_height), (255, 255, 255), -1)
+                cv2.rectangle(result, (right_tooth_x, tooth_y), 
+                            (right_tooth_x + tooth_width, tooth_y + tooth_height), (255, 255, 255), -1)
+        
+        return result
+    except Exception as e:
+        print(f"토끼 얼굴 마스크 오류: {e}")
+        return image
+
+def cat_face_mask(image: np.ndarray, face_detector) -> np.ndarray:
+    """얼굴을 귀여운 고양이 얼굴로 대체"""
+    try:
+        if image.size == 0 or image.shape[0] < 10 or image.shape[1] < 10:
+            return image
+        
+        result = image.copy()
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = face_detector.process(image_rgb)
+        
+        if results.detections:
+            for detection in results.detections:
+                bboxC = detection.location_data.relative_bounding_box
+                h, w, _ = image.shape
+                x = int(bboxC.xmin * w)
+                y = int(bboxC.ymin * h)
+                width = int(bboxC.width * w)
+                height = int(bboxC.height * h)
+                
+                x = max(0, x)
+                y = max(0, y)
+                width = min(width, w - x)
+                height = min(height, h - y)
+                
+                if width <= 0 or height <= 0:
+                    continue
+                
+                margin = int(width * 0.3)
+                cat_x = max(0, x - margin)
+                cat_y = max(0, y - margin)
+                cat_w = min(w - cat_x, width + margin * 2)
+                cat_h = min(h - cat_y, height + margin * 2)
+                
+                center_x = cat_x + cat_w // 2
+                center_y = cat_y + cat_h // 2
+                
+                # 얼굴 (원) - 주황색 (고양이)
+                face_radius = min(cat_w, cat_h) // 2
+                cv2.circle(result, (center_x, center_y), face_radius, (100, 160, 255), -1)  # 주황색
+                cv2.circle(result, (center_x, center_y), face_radius, (70, 130, 220), 3)
+                
+                # 삼각형 귀 (2개)
+                ear_size = face_radius // 2
+                left_ear_x = center_x - int(face_radius * 0.6)
+                right_ear_x = center_x + int(face_radius * 0.6)
+                ear_y = center_y - int(face_radius * 0.8)
+                
+                # 왼쪽 귀
+                left_ear_pts = np.array([
+                    [left_ear_x, ear_y],
+                    [left_ear_x - ear_size//2, ear_y - ear_size],
+                    [left_ear_x + ear_size//2, ear_y - ear_size//3]
+                ], np.int32)
+                cv2.fillPoly(result, [left_ear_pts], (100, 160, 255))
+                cv2.polylines(result, [left_ear_pts], True, (70, 130, 220), 2)
+                
+                # 왼쪽 귀 안쪽 (분홍)
+                left_inner_ear = np.array([
+                    [left_ear_x, ear_y - ear_size//4],
+                    [left_ear_x - ear_size//4, ear_y - ear_size//2],
+                    [left_ear_x + ear_size//4, ear_y - ear_size//4]
+                ], np.int32)
+                cv2.fillPoly(result, [left_inner_ear], (150, 150, 255))
+                
+                # 오른쪽 귀
+                right_ear_pts = np.array([
+                    [right_ear_x, ear_y],
+                    [right_ear_x + ear_size//2, ear_y - ear_size],
+                    [right_ear_x - ear_size//2, ear_y - ear_size//3]
+                ], np.int32)
+                cv2.fillPoly(result, [right_ear_pts], (100, 160, 255))
+                cv2.polylines(result, [right_ear_pts], True, (70, 130, 220), 2)
+                
+                # 오른쪽 귀 안쪽 (분홍)
+                right_inner_ear = np.array([
+                    [right_ear_x, ear_y - ear_size//4],
+                    [right_ear_x + ear_size//4, ear_y - ear_size//2],
+                    [right_ear_x - ear_size//4, ear_y - ear_size//4]
+                ], np.int32)
+                cv2.fillPoly(result, [right_inner_ear], (150, 150, 255))
+                
+                # 눈 (고양이 눈 - 타원)
+                eye_width = face_radius // 5
+                eye_height = face_radius // 3
+                left_eye_x = center_x - face_radius // 3
+                right_eye_x = center_x + face_radius // 3
+                eye_y = center_y - face_radius // 5
+                
+                # 녹색 고양이 눈
+                cv2.ellipse(result, (left_eye_x, eye_y), (eye_width, eye_height), 0, 0, 360, (100, 255, 100), -1)
+                cv2.ellipse(result, (right_eye_x, eye_y), (eye_width, eye_height), 0, 0, 360, (100, 255, 100), -1)
+                
+                # 세로 동공
+                pupil_width = eye_width // 3
+                pupil_height = int(eye_height * 0.8)
+                cv2.ellipse(result, (left_eye_x, eye_y), (pupil_width, pupil_height), 0, 0, 360, (20, 20, 20), -1)
+                cv2.ellipse(result, (right_eye_x, eye_y), (pupil_width, pupil_height), 0, 0, 360, (20, 20, 20), -1)
+                
+                # 하이라이트
+                highlight_radius = eye_width // 4
+                cv2.circle(result, (left_eye_x - pupil_width//2, eye_y - pupil_height//3), highlight_radius, (255, 255, 255), -1)
+                cv2.circle(result, (right_eye_x - pupil_width//2, eye_y - pupil_height//3), highlight_radius, (255, 255, 255), -1)
+                
+                # 코 (작은 삼각형 - 분홍)
+                nose_y = center_y + face_radius // 8
+                nose_size = face_radius // 7
+                nose_pts = np.array([
+                    [center_x, nose_y + nose_size//2],
+                    [center_x - nose_size//2, nose_y - nose_size//2],
+                    [center_x + nose_size//2, nose_y - nose_size//2]
+                ], np.int32)
+                cv2.fillPoly(result, [nose_pts], (150, 120, 255))
+                
+                # 입 (W 모양)
+                mouth_y = nose_y + nose_size
+                # 왼쪽 곡선
+                cv2.ellipse(result, (center_x - face_radius//6, mouth_y), 
+                           (face_radius//6, face_radius//8), 0, 0, 180, (80, 60, 60), 2)
+                # 오른쪽 곡선
+                cv2.ellipse(result, (center_x + face_radius//6, mouth_y), 
+                           (face_radius//6, face_radius//8), 0, 0, 180, (80, 60, 60), 2)
+                
+                # 수염 (3개씩 양쪽)
+                whisker_length = face_radius // 2
+                whisker_y_offset = face_radius // 8
+                
+                # 왼쪽 수염
+                for i in range(3):
+                    y_offset = whisker_y_offset * (i - 1)
+                    cv2.line(result, (center_x - face_radius//2, center_y + y_offset), 
+                            (center_x - face_radius - whisker_length//2, center_y + y_offset - i*5), 
+                            (80, 60, 60), 2)
+                
+                # 오른쪽 수염
+                for i in range(3):
+                    y_offset = whisker_y_offset * (i - 1)
+                    cv2.line(result, (center_x + face_radius//2, center_y + y_offset), 
+                            (center_x + face_radius + whisker_length//2, center_y + y_offset - i*5), 
+                            (80, 60, 60), 2)
+        
+        return result
+    except Exception as e:
+        print(f"고양이 얼굴 마스크 오류: {e}")
+        return image
+    """얼굴을 귀여운 곰 얼굴로 대체"""
+    try:
+        if image.size == 0 or image.shape[0] < 10 or image.shape[1] < 10:
+            return image
+        
+        result = image.copy()
+        image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        results = face_detector.process(image_rgb)
+        
+        if results.detections:
+            for detection in results.detections:
+                bboxC = detection.location_data.relative_bounding_box
+                h, w, _ = image.shape
+                x = int(bboxC.xmin * w)
+                y = int(bboxC.ymin * h)
+                width = int(bboxC.width * w)
+                height = int(bboxC.height * h)
+                
+                # 경계 확인
+                x = max(0, x)
+                y = max(0, y)
+                width = min(width, w - x)
+                height = min(height, h - y)
+                
+                if width <= 0 or height <= 0:
+                    continue
+                
+                # 얼굴 영역을 약간 확장 (귀 포함)
+                margin = int(width * 0.3)
+                bear_x = max(0, x - margin)
+                bear_y = max(0, y - margin)
+                bear_w = min(w - bear_x, width + margin * 2)
+                bear_h = min(h - bear_y, height + margin * 2)
+                
+                # 곰 얼굴 그리기
+                center_x = bear_x + bear_w // 2
+                center_y = bear_y + bear_h // 2
+                
+                # 얼굴 (원) - 연한 갈색
+                face_radius = min(bear_w, bear_h) // 2
+                cv2.circle(result, (center_x, center_y), face_radius, (150, 120, 80), -1)  # 연한 갈색
+                cv2.circle(result, (center_x, center_y), face_radius, (100, 70, 40), 3)  # 진한 갈색 테두리
+                
+                # 귀 (2개) - 갈색
+                ear_radius = face_radius // 3
+                left_ear_x = center_x - int(face_radius * 0.7)
+                right_ear_x = center_x + int(face_radius * 0.7)
+                ear_y = center_y - int(face_radius * 0.7)
+                
+                # 귀 본체
+                cv2.circle(result, (left_ear_x, ear_y), ear_radius, (150, 120, 80), -1)
+                cv2.circle(result, (left_ear_x, ear_y), ear_radius, (100, 70, 40), 2)
+                cv2.circle(result, (right_ear_x, ear_y), ear_radius, (150, 120, 80), -1)
+                cv2.circle(result, (right_ear_x, ear_y), ear_radius, (100, 70, 40), 2)
+                
+                # 귀 안쪽 - 밝은 노란색
+                inner_ear_radius = ear_radius // 2
+                cv2.circle(result, (left_ear_x, ear_y), inner_ear_radius, (100, 200, 255), -1)  # 노란색
+                cv2.circle(result, (right_ear_x, ear_y), inner_ear_radius, (100, 200, 255), -1)
+                
+                # 🎀 리본 추가 (오른쪽 귀 옆)
+                ribbon_center_x = right_ear_x + int(ear_radius * 1.2)
+                ribbon_center_y = ear_y - int(ear_radius * 0.3)
+                ribbon_size = ear_radius // 2
+                
+                # 리본 왼쪽 나비
+                ribbon_left = (ribbon_center_x - ribbon_size, ribbon_center_y)
+                cv2.circle(result, ribbon_left, ribbon_size, (100, 100, 255), -1)  # 분홍색
+                
+                # 리본 오른쪽 나비
+                ribbon_right = (ribbon_center_x + ribbon_size, ribbon_center_y)
+                cv2.circle(result, ribbon_right, ribbon_size, (100, 100, 255), -1)
+                
+                # 리본 중앙 매듭
+                cv2.circle(result, (ribbon_center_x, ribbon_center_y), ribbon_size // 2, (80, 80, 200), -1)
+                
+                # 얼굴 중앙 부분 - 밝은 노란색
+                snout_radius = face_radius // 2
+                snout_y = center_y + face_radius // 4
+                cv2.circle(result, (center_x, snout_y), snout_radius, (120, 220, 255), -1)  # 밝은 노란색
+                cv2.circle(result, (center_x, snout_y), snout_radius, (100, 180, 230), 2)  # 테두리
+                
+                # 눈 (2개) - 크고 반짝이는 눈
+                eye_radius = face_radius // 5
+                left_eye_x = center_x - face_radius // 3
+                right_eye_x = center_x + face_radius // 3
+                eye_y = center_y - face_radius // 5
+                
+                # 눈 흰자
+                cv2.circle(result, (left_eye_x, eye_y), eye_radius, (255, 255, 255), -1)
+                cv2.circle(result, (right_eye_x, eye_y), eye_radius, (255, 255, 255), -1)
+                
+                # 눈동자
+                pupil_radius = eye_radius * 2 // 3
+                cv2.circle(result, (left_eye_x, eye_y), pupil_radius, (50, 30, 20), -1)
+                cv2.circle(result, (right_eye_x, eye_y), pupil_radius, (50, 30, 20), -1)
+                
+                # 눈 하이라이트 (반짝임)
+                highlight_radius = eye_radius // 3
+                cv2.circle(result, (left_eye_x - 3, eye_y - 3), highlight_radius, (255, 255, 255), -1)
+                cv2.circle(result, (right_eye_x - 3, eye_y - 3), highlight_radius, (255, 255, 255), -1)
+                
+                # 코 (하트 모양 시도 - 타원)
+                nose_w = snout_radius // 2
+                nose_h = snout_radius // 3
+                nose_y = snout_y - snout_radius // 4
+                cv2.ellipse(result, (center_x, nose_y), (nose_w, nose_h), 0, 0, 360, (50, 30, 20), -1)
+                
+                # 입 (귀여운 미소)
+                mouth_y = snout_y + snout_radius // 3
+                # 아래 곡선
+                cv2.ellipse(result, (center_x, mouth_y), (snout_radius // 2, snout_radius // 4), 
+                           0, 0, 180, (50, 30, 20), 2)
+                # 코에서 입으로 선
+                cv2.line(result, (center_x, nose_y + nose_h), (center_x, mouth_y - snout_radius // 4), 
+                        (50, 30, 20), 2)
+                
+                # 볼 (분홍색 블러시)
+                blush_radius = face_radius // 6
+                left_blush_x = center_x - int(face_radius * 0.5)
+                right_blush_x = center_x + int(face_radius * 0.5)
+                blush_y = center_y + face_radius // 6
+                
+                # 반투명 블러시 효과
+                overlay = result.copy()
+                cv2.circle(overlay, (left_blush_x, blush_y), blush_radius, (128, 128, 255), -1)
+                cv2.circle(overlay, (right_blush_x, blush_y), blush_radius, (128, 128, 255), -1)
+                cv2.addWeighted(overlay, 0.3, result, 0.7, 0, result)
+        
+        return result
+    except Exception as e:
+        print(f"곰 얼굴 마스크 오류: {e}")
+        return image
+
 # 음성 인식 함수
-def record_audio_continuous(audio_queue, stop_event, audio_frames_queue=None):
-    """연속적으로 음성을 인식하고 오디오를 저장하는 함수"""
+def record_audio_continuous(audio_queue, stop_event, audio_frames_queue=None, start_time=None):
+    """연속적으로 음성을 인식하고 오디오를 실시간으로 저장하는 함수"""
+    import pyaudio
+    
     recognizer = sr.Recognizer()
     recognizer.energy_threshold = 4000
     recognizer.dynamic_energy_threshold = True
     
-    with sr.Microphone(sample_rate=16000) as source:
-        print("마이크 조정 중...")
-        recognizer.adjust_for_ambient_noise(source, duration=1)
-        print("음성 인식 시작!")
-        
+    # PyAudio 설정
+    CHUNK = 2048  # 버퍼 크기
+    FORMAT = pyaudio.paInt16  # 16-bit
+    CHANNELS = 1  # 모노
+    RATE = 16000  # 샘플레이트
+    
+    p = pyaudio.PyAudio()
+    
+    # 오디오 스트림 열기 - 버퍼 크기 증가
+    stream = p.open(
+        format=FORMAT,
+        channels=CHANNELS,
+        rate=RATE,
+        input=True,
+        frames_per_buffer=CHUNK,
+        stream_callback=None  # 콜백 사용 안 함 (블로킹 모드)
+    )
+    
+    print("🎤 오디오 스트림 준비 완료!")
+    
+    # 첫 청크 읽기 시작 시간 기록
+    first_chunk_time = None
+    audio_start_recorded = False
+    chunk_count = 0
+    
+    # 음성 인식을 위한 버퍼 (별도 처리)
+    speech_recognition_queue = queue.Queue()
+    
+    # 음성 인식 스레드 시작 (녹음과 독립적으로 실행)
+    def speech_recognition_worker():
+        """음성 인식을 별도로 처리하는 워커"""
         while not stop_event.is_set():
             try:
-                audio = recognizer.listen(source, timeout=1, phrase_time_limit=10)
-                
-                # 오디오 프레임 저장 (WAV 파일 생성용)
-                if audio_frames_queue is not None:
-                    audio_frames_queue.put(audio.get_wav_data())
+                # 인식할 오디오 데이터 대기
+                audio_data = speech_recognition_queue.get(timeout=1)
+                if audio_data is None:
+                    break
                 
                 try:
-                    text = recognizer.recognize_google(audio, language='ko-KR')
+                    audio_data_obj = sr.AudioData(audio_data, RATE, 2)
+                    text = recognizer.recognize_google(audio_data_obj, language='ko-KR')
                     if text:
                         audio_queue.put(text)
-                        print(f"인식된 텍스트: {text}")
+                        print(f"✅ 인식된 텍스트: {text}")
                 except sr.UnknownValueError:
-                    pass
+                    pass  # 인식 실패는 무시
                 except sr.RequestError as e:
-                    print(f"음성 인식 서비스 오류: {e}")
-                    time.sleep(1)
-            except sr.WaitTimeoutError:
+                    print(f"⚠️ 음성 인식 서비스 오류: {e}")
+            except queue.Empty:
                 continue
             except Exception as e:
-                print(f"음성 인식 오류: {e}")
-                time.sleep(1)
+                print(f"⚠️ 음성 인식 오류: {e}")
+    
+    # 음성 인식 스레드 시작
+    recognition_thread = threading.Thread(target=speech_recognition_worker, daemon=True)
+    recognition_thread.start()
+    
+    # 음성 인식용 버퍼
+    speech_buffer = []
+    silence_duration = 0
+    SILENCE_THRESHOLD = 500
+    MAX_SILENCE_CHUNKS = 15
+    
+    try:
+        while not stop_event.is_set():
+            try:
+                # 청크를 읽기 직전 시간 기록
+                chunk_read_time = time.time()
+                
+                # 실시간으로 오디오 청크 읽기 (블로킹)
+                # 이 부분이 최대한 빠르게 실행되어야 함!
+                audio_chunk = stream.read(CHUNK, exception_on_overflow=False)
+                chunk_count += 1
+                
+                # 첫 청크의 정확한 시간 기록
+                if first_chunk_time is None:
+                    first_chunk_time = chunk_read_time
+                    buffer_delay = CHUNK / RATE
+                    first_chunk_time -= buffer_delay
+                    print(f"🎤 오디오 녹음 시작 시간: {first_chunk_time} (버퍼 지연 {buffer_delay:.3f}초 보정)")
+                
+                # 오디오 프레임 저장 (최우선 작업!)
+                if audio_frames_queue is not None:
+                    relative_time = chunk_read_time - first_chunk_time
+                    audio_frames_queue.put((first_chunk_time, relative_time, audio_chunk))
+                    
+                    if not audio_start_recorded:
+                        audio_start_recorded = True
+                
+                # 진행 상황 출력
+                if chunk_count % 100 == 0:
+                    print(f"🎤 오디오 녹음 중: {chunk_count}개 청크 수집됨")
+                
+                # 음성 인식용 버퍼에 추가 (비블로킹)
+                speech_buffer.append(audio_chunk)
+                
+                # 음량 체크
+                try:
+                    audio_data = np.frombuffer(audio_chunk, dtype=np.int16)
+                    volume = np.abs(audio_data).mean()
+                    
+                    if volume < SILENCE_THRESHOLD:
+                        silence_duration += 1
+                    else:
+                        silence_duration = 0
+                    
+                    # 침묵 감지 시 음성 인식 큐에 추가 (블로킹하지 않음)
+                    if len(speech_buffer) > 10 and silence_duration >= MAX_SILENCE_CHUNKS:
+                        combined_audio = b''.join(speech_buffer)
+                        # 큐가 가득 차지 않았으면 추가
+                        if speech_recognition_queue.qsize() < 5:
+                            speech_recognition_queue.put(combined_audio)
+                        speech_buffer = []
+                        silence_duration = 0
+                    
+                    # 버퍼가 너무 커지면 초기화
+                    if len(speech_buffer) > 300:
+                        speech_buffer = speech_buffer[-150:]
+                except:
+                    pass  # 음량 체크 실패는 무시
+                    
+            except IOError as e:
+                print(f"⚠️ 오디오 IO 에러 (무시): {e}")
+                continue
+            except Exception as e:
+                print(f"⚠️ 오디오 읽기 오류: {e}")
+                time.sleep(0.001)
+                
+    finally:
+        # 음성 인식 스레드 종료
+        speech_recognition_queue.put(None)
+        recognition_thread.join(timeout=1)
+        
+        print(f"🎤 총 {chunk_count}개 오디오 청크 수집됨")
+        stream.stop_stream()
+        stream.close()
+        p.terminate()
+        print("🎤 오디오 녹음 종료")
 
 # 감정 분석 함수
 def analyze_emotion_quick(image: np.ndarray, model, face_detector) -> tuple[str, float, tuple]:
@@ -768,72 +1419,159 @@ def save_video(frames: list, filename: str, fps: int = 20):
     print(f"✅ 비디오 저장 완료: {filename}")
     return filename
 
-def save_audio_frames(audio_frames: list, filename: str):
-    """오디오 프레임을 WAV 파일로 저장"""
+def save_audio_frames(audio_frames: list, filename: str, trim_start_seconds: float = 0.0):
+    """오디오 프레임을 WAV 파일로 저장 (실시간 청크를 하나로 결합, 시작 부분 제거 옵션)"""
     if not audio_frames or len(audio_frames) == 0:
         print("⚠️ 저장할 오디오 데이터가 없습니다")
         return None
     
     try:
         import wave
+        
+        # 모든 오디오 청크를 하나로 병합
+        combined_audio = b''.join(audio_frames)
+        
+        print(f"📊 오디오 정보: {len(audio_frames)}개 청크, 총 {len(combined_audio)} bytes")
+        
+        # 시작 부분 제거가 필요한 경우
+        if trim_start_seconds > 0:
+            SAMPLE_RATE = 16000
+            SAMPLE_WIDTH = 2  # 16-bit = 2 bytes
+            
+            # 제거할 바이트 수 계산
+            bytes_to_trim = int(trim_start_seconds * SAMPLE_RATE * SAMPLE_WIDTH)
+            
+            # 2의 배수로 조정 (16-bit 샘플이므로)
+            bytes_to_trim = (bytes_to_trim // 2) * 2
+            
+            if bytes_to_trim < len(combined_audio):
+                combined_audio = combined_audio[bytes_to_trim:]
+                print(f"✂️ 시작 부분 {trim_start_seconds:.3f}초 ({bytes_to_trim} bytes) 제거")
+            else:
+                print(f"⚠️ 제거할 시간이 전체 오디오보다 김")
+        
+        # WAV 파일로 저장
         with wave.open(filename, 'wb') as wf:
             wf.setnchannels(1)  # 모노
-            wf.setsampwidth(2)  # 16-bit
+            wf.setsampwidth(2)  # 16-bit (pyaudio.paInt16)
             wf.setframerate(16000)  # 16kHz
-            for frame in audio_frames:
-                wf.writeframes(frame)
-        print(f"✅ 오디오 저장 완료: {filename}")
+            wf.writeframes(combined_audio)  # 전체 오디오를 한 번에 저장
+        
+        # 오디오 길이 계산
+        duration = len(combined_audio) / (2 * 16000)  # 2 bytes per sample, 16000 samples/sec
+        print(f"✅ 오디오 저장 완료: {filename} (길이: {duration:.2f}초)")
         return filename
     except Exception as e:
         print(f"❌ 오디오 저장 실패: {e}")
+        import traceback
+        traceback.print_exc()
         return None
 
-def merge_video_audio(video_path: str, audio_path: str, output_path: str):
-    """moviepy를 사용하여 비디오와 오디오를 병합"""
+def merge_video_audio(video_path: str, audio_path: str, output_path: str, video_fps: float = None):
+    """비디오와 오디오를 병합 (imageio-ffmpeg 사용, 정확한 싱크)"""
     try:
-        from moviepy.editor import VideoFileClip, AudioFileClip
+        import imageio_ffmpeg as ffmpeg
+        import subprocess
+        import wave
+        import cv2
         
         print("🎬 비디오-오디오 병합 시작...")
         
-        # 비디오 로드
-        video_clip = VideoFileClip(video_path)
+        # 비디오 정보 확인
+        cap = cv2.VideoCapture(video_path)
+        video_frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        video_fps_original = cap.get(cv2.CAP_PROP_FPS)
+        cap.release()
         
-        # 오디오 로드
-        audio_clip = AudioFileClip(audio_path)
+        # 실제 FPS가 전달되지 않았으면 원본 FPS 사용
+        if video_fps is None:
+            video_fps = video_fps_original
         
-        # 비디오에 오디오 추가
-        final_clip = video_clip.set_audio(audio_clip)
+        video_duration = video_frame_count / video_fps if video_fps > 0 else 1
         
-        # 최종 비디오 저장
-        final_clip.write_videofile(
-            output_path,
-            codec='libx264',
-            audio_codec='aac',
-            temp_audiofile='temp-audio.m4a',
-            remove_temp=True,
-            logger=None  # 로그 출력 최소화
+        print(f"📊 비디오 정보: {video_frame_count}프레임, FPS={video_fps:.2f}, 길이={video_duration:.2f}초")
+        
+        # 오디오 길이 확인
+        with wave.open(audio_path, 'rb') as wf:
+            audio_frames = wf.getnframes()
+            audio_rate = wf.getframerate()
+            audio_duration = audio_frames / float(audio_rate)
+        
+        print(f"📊 오디오 정보: 길이={audio_duration:.2f}초, 샘플레이트={audio_rate}Hz")
+        
+        # 길이 차이 확인
+        duration_diff = abs(video_duration - audio_duration)
+        print(f"📊 길이 차이: {duration_diff:.2f}초")
+        
+        # imageio-ffmpeg를 사용한 병합
+        ffmpeg_exe = ffmpeg.get_ffmpeg_exe()
+        
+        # ffmpeg 명령어로 병합
+        # -r: 입력 비디오의 프레임레이트 명시적 설정
+        # -itsoffset: 오디오 시작 시간 조정 (필요시)
+        cmd = [
+            ffmpeg_exe,
+            '-y',  # 덮어쓰기
+            '-r', str(video_fps),  # 입력 비디오 FPS 명시
+            '-i', video_path,
+            '-i', audio_path,
+            '-c:v', 'libx264',  # 비디오 H.264 인코딩
+            '-preset', 'ultrafast',  # 빠른 인코딩
+            '-r', str(video_fps),  # 출력 비디오 FPS 명시
+            '-c:a', 'aac',  # 오디오 AAC 인코딩
+            '-b:a', '128k',  # 오디오 비트레이트
+            '-strict', 'experimental',
+            '-map', '0:v:0',  # 첫 번째 입력의 비디오 스트림
+            '-map', '1:a:0',  # 두 번째 입력의 오디오 스트림
+            '-shortest',  # 짧은 쪽에 맞춤
+            '-async', '1',  # 오디오 동기화
+            '-vsync', 'cfr',  # 일정한 프레임레이트 유지
+            '-max_muxing_queue_size', '1024',  # 큐 크기 증가
+            output_path
+        ]
+        
+        print(f"🔧 ffmpeg 명령 실행 중...")
+        
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True
         )
         
-        # 리소스 정리
-        video_clip.close()
-        audio_clip.close()
-        final_clip.close()
-        
-        print(f"✅ 비디오-오디오 병합 완료: {output_path}")
-        
-        # 임시 파일 삭제
-        try:
-            os.remove(video_path)
-            os.remove(audio_path)
-        except:
-            pass
+        if result.returncode == 0:
+            print(f"✅ 비디오-오디오 병합 완료: {output_path}")
             
-        return output_path
+            # 결과 파일 검증
+            cap_result = cv2.VideoCapture(output_path)
+            result_fps = cap_result.get(cv2.CAP_PROP_FPS)
+            result_frame_count = int(cap_result.get(cv2.CAP_PROP_FRAME_COUNT))
+            cap_result.release()
             
-    except ImportError:
-        print("⚠️ moviepy가 설치되어 있지 않습니다. 비디오만 저장됩니다.")
-        print("설치 방법: pip install moviepy")
-        # 임시 비디오를 최종 경로로 이동
+            result_duration = result_frame_count / result_fps if result_fps > 0 else 0
+            print(f"✅ 최종 결과: FPS={result_fps:.2f}, 길이={result_duration:.2f}초")
+            
+            # 임시 파일 삭제
+            try:
+                os.remove(video_path)
+                os.remove(audio_path)
+            except:
+                pass
+            
+            return output_path
+        else:
+            print(f"❌ 병합 오류:")
+            print(result.stderr)
+            # 오류 시 비디오만 사용
+            try:
+                os.rename(video_path, output_path)
+            except:
+                pass
+            return output_path
+        
+    except ImportError as ie:
+        print(f"⚠️ imageio-ffmpeg가 설치되어 있지 않습니다: {ie}")
+        print("설치 방법: pip install imageio-ffmpeg")
+        # 비디오를 최종 경로로 이동
         try:
             os.rename(video_path, output_path)
         except:
@@ -865,6 +1603,15 @@ status_placeholder = st.empty()
 if not st.session_state.webcam_active and not st.session_state.pending_save:
     status_placeholder.info("아래 녹화 시작 버튼을 눌러주세요")
 
+# 모델 로드
+with st.spinner("AI 모델 로딩 중..."):
+    emotion_model = load_emotion_model()
+    face_detector = load_face_detector()
+
+if emotion_model is None or face_detector is None:
+    st.error("⚠️ AI 모델 로드에 실패했습니다. 페이지를 새로고침해주세요.")
+    st.stop()
+
 # 레이아웃 구성
 if st.session_state.pending_save:
     webcam_placeholder = st.empty()
@@ -881,8 +1628,10 @@ else:
 
     with col_text:
         voice_text_placeholder = st.empty()
+        st.session_state.voice_text_placeholder = voice_text_placeholder  # session_state에 저장
         
         if st.session_state.recording and st.session_state.voice_recording:
+            # 녹화 중일 때만 실시간 텍스트 표시
             current_text = st.session_state.transcribed_text if st.session_state.transcribed_text else "(음성 인식 중... 말씀해주세요)"
             voice_text_placeholder.text_area(
                 f"일기 내용 (음성 입력)",
@@ -891,15 +1640,8 @@ else:
                 disabled=True,
                 key=f"voice_display_{time.time()}"
             )
-        elif st.session_state.transcribed_text:
-            voice_text_placeholder.text_area(
-                f"일기 내용 (음성 입력)",
-                value=st.session_state.transcribed_text,
-                height=480,
-                disabled=True,
-                key="voice_display_saved"
-            )
         else:
+            # 녹화 중이 아니면 기본 메시지만 표시
             voice_text_placeholder.text_area(
                 "일기 내용 (음성 입력)",
                 value="(음성 입력 대기 중...)",
@@ -916,59 +1658,122 @@ if not st.session_state.pending_save:
         start_recording = False
         stop_recording = st.button("⏹️ 녹화 중지 & 저장", type="secondary", use_container_width=True)
 
-# 모델 로드
-with st.spinner("AI 모델 로딩 중..."):
-    emotion_model = load_emotion_model()
-    face_detector = load_face_detector()
-
-if emotion_model is None or face_detector is None:
-    st.error("⚠️ AI 모델 로드에 실패했습니다. 페이지를 새로고침해주세요.")
-    st.stop()
 
 # 녹화 시작 처리
 if 'start_recording' in locals() and start_recording:
     if not st.session_state.recording:
+        print(f"🎬 녹화 시작 - 이전 transcribed_text: '{st.session_state.get('transcribed_text', '')}'")
+        
+        # 먼저 비디오와 오디오 상태를 동시에 초기화
         st.session_state.recording = True
         st.session_state.webcam_active = True
         st.session_state.video_frames = []
+        st.session_state.video_frame_times = []
         st.session_state.emotion_timeline = []
-        st.session_state.recording_start_time = datetime.now()
-        st.session_state.transcribed_text = ""
+        st.session_state.recording_start_datetime = datetime.now()
+        st.session_state.transcribed_text = ""  # 명시적 초기화
         st.session_state.gemini_advice = None
         
+        print(f"✅ transcribed_text 초기화 완료: '{st.session_state.transcribed_text}'")
+        
+        # 오디오 초기화
         st.session_state.voice_recording = True
         st.session_state.audio_queue = queue.Queue()
         st.session_state.audio_frames_queue = queue.Queue()
         st.session_state.audio_frames = []
         st.session_state.stop_event = threading.Event()
+        
+        # 동기화 기준 시간은 오디오 스레드 내부에서 설정
+        st.session_state.recording_start_time = None  # 나중에 설정됨
+        
+        # 오디오 스레드 시작 (내부에서 첫 프레임과 동시에 시작)
         st.session_state.audio_thread = threading.Thread(
             target=record_audio_continuous,
-            args=(st.session_state.audio_queue, st.session_state.stop_event, st.session_state.audio_frames_queue)
+            args=(st.session_state.audio_queue, st.session_state.stop_event, st.session_state.audio_frames_queue, None)
         )
         st.session_state.audio_thread.daemon = True
         st.session_state.audio_thread.start()
+        
+        print(f"🎬 녹화 시작: 비디오와 오디오 동시 시작")
         
         st.rerun()
 
 # 녹화 중지 처리
 if st.session_state.recording and 'stop_recording' in locals() and stop_recording:
+    # 녹화 종료 시간 기록
+    recording_end_time = time.time()
+    
     st.session_state.recording = False
     st.session_state.webcam_active = False
     
     if st.session_state.voice_recording:
         st.session_state.stop_event.set()
         st.session_state.voice_recording = False
-        time.sleep(0.5)
+        time.sleep(0.3)  # 오디오 스레드가 마지막 프레임을 처리할 시간
         
-        # 오디오 프레임 수집
+        # 오디오 프레임 수집 (타임스탬프와 함께)
+        audio_frames_with_time = []
         while not st.session_state.audio_frames_queue.empty():
             try:
-                audio_frame = st.session_state.audio_frames_queue.get_nowait()
-                st.session_state.audio_frames.append(audio_frame)
+                audio_data = st.session_state.audio_frames_queue.get_nowait()
+                audio_frames_with_time.append(audio_data)
             except queue.Empty:
                 break
+        
+        print(f"📊 수집된 오디오 청크: {len(audio_frames_with_time)}개")
+        
+        # 비디오-오디오 동기화를 위한 trim 시간 계산
+        trim_start_seconds = 0.0
+        
+        # 비디오 시작 시간과 오디오 시작 시간을 비교하여 동기화
+        if st.session_state.recording_start_time and audio_frames_with_time:
+            video_start_time = st.session_state.recording_start_time
+            
+            # 새로운 형식: (audio_start_time, relative_time, chunk)
+            if len(audio_frames_with_time) > 0 and isinstance(audio_frames_with_time[0], tuple) and len(audio_frames_with_time[0]) == 3:
+                audio_start_time = audio_frames_with_time[0][0]  # 오디오의 실제 시작 시간
+                
+                print(f"⏰ 비디오 시작: {video_start_time:.6f}")
+                print(f"⏰ 오디오 시작: {audio_start_time:.6f}")
+                
+                time_diff = video_start_time - audio_start_time
+                print(f"⏰ 시간 차이: {time_diff:.6f}초 (양수=오디오가 먼저, 음수=비디오가 먼저)")
+                
+                # 오디오가 비디오보다 먼저 시작한 경우 (일반적인 경우)
+                if time_diff > 0:
+                    print(f"✂️ 오디오 시작 부분 제거 필요: {time_diff:.3f}초")
+                    
+                    # 모든 청크 사용하되, save_audio_frames에서 정밀하게 제거
+                    st.session_state.audio_frames = [chunk for _, _, chunk in audio_frames_with_time]
+                    trim_start_seconds = time_diff
+                    
+                    print(f"✅ 전체 {len(st.session_state.audio_frames)}개 청크 사용, 저장 시 {trim_start_seconds:.3f}초 제거 예정")
+                
+                # 비디오가 오디오보다 먼저 시작한 경우 (이상한 경우)
+                else:
+                    print(f"⚠️ 비정상: 비디오가 오디오보다 먼저 시작됨 - 전체 오디오 사용")
+                    st.session_state.audio_frames = [chunk for _, _, chunk in audio_frames_with_time]
+                
+        # trim 시간 저장 (나중에 save_audio_frames에서 사용)
+        st.session_state.audio_trim_start = trim_start_seconds
+        
+        # 이전 형식 처리
+        if not hasattr(st.session_state, 'audio_frames') or not st.session_state.audio_frames:
+            # 타입 변환 (tuple에서 chunk만 추출)
+            st.session_state.audio_frames = []
+            for item in audio_frames_with_time:
+                if isinstance(item, tuple):
+                    if len(item) == 3:
+                        st.session_state.audio_frames.append(item[2])  # chunk
+                    elif len(item) == 2:
+                        st.session_state.audio_frames.append(item[1])  # chunk
+                else:
+                    st.session_state.audio_frames.append(item)
+            st.session_state.audio_trim_start = 0.0
     
     final_text = st.session_state.transcribed_text if st.session_state.transcribed_text else "(음성 입력 없음)"
+    print(f"📝 저장할 텍스트: '{final_text}'")
+    print(f"📝 transcribed_text 상태: '{st.session_state.transcribed_text}'")
     
     if st.session_state.video_frames and len(st.session_state.video_frames) > 0:
         status_placeholder.info("💾 영상 일기 저장 중...")
@@ -984,15 +1789,47 @@ if st.session_state.recording and 'stop_recording' in locals() and stop_recordin
             video_path = str(VIDEOS_DIR.absolute() / video_filename)
             text_path = str(VIDEOS_DIR.absolute() / text_filename)
             
-            # 비디오 저장
-            save_video(st.session_state.video_frames, video_temp_path, fps=20)
+            # 실제 녹화 시간 계산 (초 단위)
+            recording_end_time = time.time()
+            actual_video_duration = recording_end_time - st.session_state.recording_start_time
             
-            # 오디오 저장 및 병합
+            print(f"📊 녹화 정보 (시간 기반): 프레임={len(st.session_state.video_frames)}, 비디오 시간={actual_video_duration:.2f}초")
+            
+            # ⭐ 먼저 오디오를 저장하여 정확한 길이 파악
+            actual_fps = len(st.session_state.video_frames) / actual_video_duration if actual_video_duration > 0 else 20
+            
             if st.session_state.audio_frames and len(st.session_state.audio_frames) > 0:
-                audio_saved = save_audio_frames(st.session_state.audio_frames, audio_temp_path)
+                # trim 시간 가져오기
+                trim_start = getattr(st.session_state, 'audio_trim_start', 0.0)
+                audio_saved = save_audio_frames(st.session_state.audio_frames, audio_temp_path, trim_start_seconds=trim_start)
+                
                 if audio_saved:
-                    # 비디오와 오디오 병합
-                    video_path = merge_video_audio(video_temp_path, audio_temp_path, video_path)
+                    # 오디오 길이 확인
+                    import wave
+                    with wave.open(audio_temp_path, 'rb') as wf:
+                        audio_frames_count = wf.getnframes()
+                        audio_rate = wf.getframerate()
+                        audio_duration = audio_frames_count / float(audio_rate)
+                    
+                    print(f"🎤 오디오 길이: {audio_duration:.2f}초")
+                    
+                    # ⭐ 핵심: 비디오 FPS를 오디오 길이에 정확히 맞춤
+                    actual_fps = len(st.session_state.video_frames) / audio_duration if audio_duration > 0 else actual_fps
+                    
+                    print(f"🎬 오디오 기준 정확한 FPS: {actual_fps:.2f}")
+                    print(f"📊 비디오 길이 (오디오 맞춤): {len(st.session_state.video_frames) / actual_fps:.2f}초")
+                    print(f"✅ 예상 길이 차이: 0.00초 (완벽한 동기화!)")
+            
+            # 정확한 FPS로 비디오 저장
+            print(f"🎬 비디오 저장 중 (FPS={actual_fps:.2f})...")
+            save_video(st.session_state.video_frames, video_temp_path, fps=actual_fps)
+            
+            # 비디오와 오디오 병합
+            if st.session_state.audio_frames and len(st.session_state.audio_frames) > 0:
+                if audio_saved:
+                    
+                    # 비디오와 오디오 병합 (오디오 길이 기준 FPS 사용)
+                    video_path = merge_video_audio(video_temp_path, audio_temp_path, video_path, video_fps=actual_fps)
                 else:
                     # 오디오 저장 실패 시 비디오만 사용
                     os.rename(video_temp_path, video_path)
@@ -1018,8 +1855,8 @@ if st.session_state.recording and 'stop_recording' in locals() and stop_recordin
                     dominant_emotion
                 )
             
-            if st.session_state.recording_start_time:
-                elapsed = datetime.now() - st.session_state.recording_start_time
+            if st.session_state.recording_start_datetime:
+                elapsed = datetime.now() - st.session_state.recording_start_datetime
                 elapsed_seconds = int(elapsed.total_seconds())
                 recording_duration = f"{elapsed_seconds // 60:02d}:{elapsed_seconds % 60:02d}"
             else:
@@ -1040,7 +1877,8 @@ if st.session_state.recording and 'stop_recording' in locals() and stop_recordin
                 'anonymize_method': anonymize_option,
                 'personalized_emotion': personalized_emotion,
                 'personalized_confidence': personalized_confidence,
-                'is_personalized': is_personalized
+                'is_personalized': is_personalized,
+                'actual_fps': actual_fps  # 실제 FPS 저장
             }
             
             st.session_state.pending_save = True
@@ -1052,6 +1890,8 @@ if st.session_state.recording and 'stop_recording' in locals() and stop_recordin
             st.session_state.video_frames = []
             st.session_state.audio_frames = []
             st.session_state.recording_start_time = None
+            st.session_state.recording_start_datetime = None
+            # transcribed_text는 유지 (감정 선택 화면에서 표시용)
             
             st.rerun()
             
@@ -1063,6 +1903,7 @@ if st.session_state.recording and 'stop_recording' in locals() and stop_recordin
         st.warning("⚠️ 녹화된 프레임이 없습니다!")
         st.session_state.video_frames = []
         st.session_state.recording_start_time = None
+        st.session_state.recording_start_datetime = None
 
 # 기분 선택 UI
 if st.session_state.pending_save and st.session_state.save_data:
@@ -1071,7 +1912,7 @@ if st.session_state.pending_save and st.session_state.save_data:
     if not st.session_state.emotion_confirmed:
         # 로딩 중일 때 메시지 표시
         if st.session_state.get('advice_loading', False):
-            status_placeholder.info("🤖 제미나이 AI가 일기를 분석하고 조언을 작성하고 있습니다...")
+            status_placeholder.info("제미나이 AI가 일기를 분석하고 조언을 작성하고 있습니다...")
         # AI 추천 표시 (로딩 중이 아닐 때)
         elif save_data['is_personalized']:
             status_placeholder.success(
@@ -1338,6 +2179,9 @@ if st.session_state.pending_save and st.session_state.save_data:
             st.session_state.emotion_confirmed = False
             st.session_state.confirmed_emotion = None
             st.session_state.gemini_advice = None
+            st.session_state.transcribed_text = ""  # 음성 텍스트 초기화 추가
+            st.session_state.audio_frames = []  # 오디오 프레임도 초기화
+            st.session_state.video_frames = []  # 비디오 프레임도 초기화
             
             st.rerun()
 
@@ -1345,8 +2189,9 @@ if st.session_state.pending_save and st.session_state.save_data:
 anonymize_map = {
     "원본": None,
     "블러": "blur",
-    "픽셀화": "pixelate",
-    "카툰": "cartoon"
+    "곰 얼굴 🐻": "bear",
+    "토끼 얼굴 🐰": "rabbit",
+    "고양이 얼굴 🐱": "cat"
 }
 
 # 웹캠 실행
@@ -1405,16 +2250,30 @@ if st.session_state.webcam_active:
                         else:
                             st.session_state.transcribed_text = new_text
                         text_updated = True
+                        print(f"📝 음성 텍스트 업데이트: '{st.session_state.transcribed_text}'")
                 except queue.Empty:
                     pass
+            
+            # 텍스트가 업데이트되었으면 화면에 반영
+            if text_updated and hasattr(st.session_state, 'voice_text_placeholder'):
+                current_text = st.session_state.transcribed_text if st.session_state.transcribed_text else "(음성 인식 중... 말씀해주세요)"
+                st.session_state.voice_text_placeholder.text_area(
+                    f"일기 내용 (음성 입력)",
+                    value=current_text,
+                    height=480,
+                    disabled=True,
+                    key=f"voice_update_{time.time()}"
+                )
             
             anonymized_frame = frame.copy()
             if anonymize_map[anonymize_option] == "blur":
                 anonymized_frame = blur_frame(anonymized_frame)
-            elif anonymize_map[anonymize_option] == "pixelate":
-                anonymized_frame = pixelate_frame(anonymized_frame)
-            elif anonymize_map[anonymize_option] == "cartoon":
-                anonymized_frame = cartoonize_frame(anonymized_frame)
+            elif anonymize_map[anonymize_option] == "bear":
+                anonymized_frame = bear_face_mask(anonymized_frame, face_detector)
+            elif anonymize_map[anonymize_option] == "rabbit":
+                anonymized_frame = rabbit_face_mask(anonymized_frame, face_detector)
+            elif anonymize_map[anonymize_option] == "cat":
+                anonymized_frame = cat_face_mask(anonymized_frame, face_detector)
             
             face_bbox = None
             if frame_count % 3 == 0:
@@ -1453,7 +2312,15 @@ if st.session_state.webcam_active:
                 )
             
             if st.session_state.recording:
+                # 첫 프레임 저장 시 정확한 시작 시간 기록
+                if len(st.session_state.video_frames) == 0:
+                    st.session_state.recording_start_time = time.time()
+                    print(f"🎬 첫 프레임 캡처: 시작 시간 = {st.session_state.recording_start_time}")
+                
                 st.session_state.video_frames.append(display_frame)
+                # 각 프레임의 타임스탬프 기록 (동기화를 위해)
+                if hasattr(st.session_state, 'video_frame_times'):
+                    st.session_state.video_frame_times.append(time.time() - st.session_state.recording_start_time)
             
             frame_rgb = cv2.cvtColor(display_frame, cv2.COLOR_BGR2RGB)
             webcam_placeholder.image(frame_rgb, channels="RGB", width=640)
@@ -1462,8 +2329,8 @@ if st.session_state.webcam_active:
             emoji = emotion_emoji_map.get(st.session_state.current_emotion, '😐')
             
             if st.session_state.recording:
-                if st.session_state.recording_start_time:
-                    elapsed = datetime.now() - st.session_state.recording_start_time
+                if st.session_state.recording_start_datetime:
+                    elapsed = datetime.now() - st.session_state.recording_start_datetime
                     elapsed_seconds = int(elapsed.total_seconds())
                     minutes = elapsed_seconds // 60
                     seconds = elapsed_seconds % 60
@@ -1485,6 +2352,10 @@ if st.session_state.webcam_active:
                     status_placeholder.info("⚪ 대기 중")
             
             frame_count += 1
+            
+            # 프레임 간 대기 시간 추가 (일정한 FPS 유지)
+            # 목표: 약 20 FPS (0.05초 간격)
+            time.sleep(0.001)  # 최소 대기로 CPU 부하 감소, 실제 FPS는 자동 계산됨
         
         cap.release()
 
@@ -1549,11 +2420,60 @@ if st.session_state.diary_entries:
             with col_text:
                 st.write("**🎤 음성 입력:** 사용됨 ✅")
                 
+                # diary_text가 없으면 텍스트 파일에서 읽어오기
+                diary_text = entry.get('diary_text', '')
+                
+                print(f"📝 일기 #{len(st.session_state.diary_entries)-i} ({entry.get('timestamp', 'unknown')}) 텍스트 로드 시도")
+                print(f"  - diary_text from entry: '{diary_text[:50] if diary_text else '(empty)'}...' (길이: {len(diary_text)})")
+                print(f"  - text_path: {entry.get('text_path', 'None')}")
+                
+                if not diary_text and entry.get('text_path'):
+                    text_path = entry.get('text_path')
+                    print(f"  - 텍스트 파일 존재 여부: {os.path.exists(text_path)}")
+                    
+                    if os.path.exists(text_path):
+                        try:
+                            with open(text_path, 'r', encoding='utf-8') as f:
+                                content = f.read()
+                                print(f"  - 파일 내용 길이: {len(content)}")
+                                
+                                # "=== 일기 내용 (음성 입력) ===" 부분 추출
+                                if "=== 일기 내용 (음성 입력) ===" in content:
+                                    parts = content.split("=== 일기 내용 (음성 입력) ===")
+                                    if len(parts) > 1:
+                                        # 다음 === 까지 추출
+                                        text_section = parts[1]
+                                        if "===" in text_section:
+                                            diary_text = text_section.split("===")[0].strip()
+                                        else:
+                                            diary_text = text_section.strip()
+                                        
+                                        print(f"  - 추출된 텍스트: '{diary_text[:50]}...'")
+                                        
+                                        if not diary_text:
+                                            diary_text = "(음성 입력 없음)"
+                                else:
+                                    print(f"  - 구분자를 찾을 수 없음")
+                                    diary_text = "(텍스트 파일 형식 오류)"
+                        except Exception as e:
+                            print(f"  - 텍스트 파일 읽기 오류: {e}")
+                            import traceback
+                            traceback.print_exc()
+                            diary_text = f"(텍스트 파일 읽기 실패: {e})"
+                
+                if not diary_text:
+                    diary_text = "(음성 입력 없음)"
+                
+                print(f"  - 최종 표시 텍스트: '{diary_text[:50] if len(diary_text) > 50 else diary_text}...' (길이: {len(diary_text)})")
+                
+                # timestamp를 사용한 고유 키로 Streamlit 캐싱 문제 방지
+                unique_key = f"voice_display_{entry.get('timestamp', i)}"
+                
                 st.text_area(
                     f"일기 내용 (음성 입력)",
-                    value=entry['diary_text'],
+                    value=diary_text,
                     disabled=True,
-                    key=f"voice_display_entry_{i}"
+                    key=unique_key
                 )
             
             # 감정 정보
