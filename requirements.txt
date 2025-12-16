@@ -8,7 +8,9 @@ transformers>=4.37.0
 torch>=2.2.0
 mediapipe>=0.10.9
 protobuf>=3.20.0,<5.0.0
-SpeechRecognition
-pyaudio
-torchvision
+SpeechRecognition>=3.10.0
+pyaudio>=0.2.14
+torchvision>=0.17.0
 scikit-learn>=1.4.0
+google-genai>=0.1.0
+moviepy>=1.0.3

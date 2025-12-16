@@ -5,7 +5,6 @@ from PIL import Image, ImageDraw, ImageFont
 import pandas as pd
 import plotly.express as px
 from datetime import datetime
-import tempfile
 import os
 from transformers import pipeline
 import mediapipe as mp
@@ -19,6 +18,18 @@ from pathlib import Path
 from sklearn.ensemble import RandomForestClassifier
 from collections import Counter
 
+# 제미나이 SDK 임포트
+try:
+    from google import genai
+    GEMINI_AVAILABLE = True
+except ImportError:
+    GEMINI_AVAILABLE = False
+    print("⚠️ google-genai 패키지가 설치되지 않았습니다.")
+    print("설치 방법: pip install google-genai")
+
+# 제미나이 API 설정
+GEMINI_API_KEY = "AIzaSyC7WNyW9veEd8rWAGcXxOlK6ZGQ_SnxPp8"
+
 # 로컬 데이터 저장 경로 설정 (현재 폴더에 저장)
 DATA_DIR = Path("emotion_diary_data")
 DATA_DIR.mkdir(exist_ok=True)
@@ -31,14 +42,25 @@ VIDEOS_DIR.mkdir(exist_ok=True)
 
 # 영어-한글 감정 매핑
 EMOTION_TRANSLATION = {
-    'happy': '행복',
+    'happy': '행복함',
     'sad': '슬픔',
     'angry': '화남',
     'surprise': '놀람',
-    'neutral': '중립',
+    'neutral': '담담함',
     'fear': '두려움',
     'disgust': '혐오',
-    'joy': '행복'  # joy는 happy와 동일하게 처리
+    'joy': '행복함'  # joy는 happy와 동일하게 처리
+}
+
+# 감정 이모지 매핑
+emotion_emoji_map = {
+    '행복함': '😊',
+    '슬픔': '😢',
+    '화남': '😠',
+    '놀람': '😲',
+    '담담함': '😐',
+    '두려움': '😨',
+    '혐오': '🤢'
 }
 
 # 한글-영어 감정 역매핑
@@ -51,6 +73,90 @@ st.set_page_config(
     layout="wide"
 )
 
+# 제미나이 API 호출 함수
+def get_gemini_advice(emotion: str, diary_text: str, emotion_timeline: list) -> str:
+    """제미나이 API를 호출하여 감정 일기에 대한 조언을 받습니다"""
+    
+    # SDK가 설치되지 않은 경우
+    if not GEMINI_AVAILABLE:
+        return f"⚠️ 제미나이 SDK가 설치되지 않았습니다\n\n설치 방법: pip install google-genai\n\n하지만 걱정하지 마세요! 오늘 '{emotion}' 감정을 솔직하게 기록하신 것만으로도 훌륭합니다. 감정 일기는 자기 성찰의 소중한 도구입니다. 🌈"
+    
+    try:
+        # 감정 분포 계산
+        emotions_list = [e['emotion'] for e in emotion_timeline] if emotion_timeline else []
+        emotion_counts = Counter(emotions_list)
+        
+        # 주요 감정만 추출 (횟수 제외, 상위 3개)
+        top_emotions = [k for k, v in emotion_counts.most_common(3)]
+        emotion_summary = ", ".join(top_emotions) if top_emotions else "분석 데이터 없음"
+        
+        # 주요 감정 설명
+        if len(top_emotions) > 1:
+            main_emotion_desc = f"주로 {top_emotions[0]} 감정이 많았고, {', '.join(top_emotions[1:])}도 느끼셨네요"
+        elif len(top_emotions) == 1:
+            main_emotion_desc = f"대부분 {top_emotions[0]} 감정이었네요"
+        else:
+            main_emotion_desc = "감정 분석 데이터가 없습니다"
+        
+        # 프롬프트 구성
+        prompt = f"""당신은 공감 능력이 뛰어나고 따뜻한 심리 상담사입니다. 
+사용자가 오늘 작성한 감정 일기를 보고 진심어린 조언과 위로를 해주세요.
+
+**사용자의 오늘 감정**: {emotion}
+**일기 내용**: {diary_text}
+**감정 분석**: {main_emotion_desc}
+
+다음 가이드라인을 따라주세요:
+1. 친근하고 따뜻한 톤으로 작성해주세요 (존댓말 사용)
+2. 사용자의 감정을 공감하고 인정해주세요
+3. 감정 분석 결과의 구체적인 횟수나 숫자는 절대 언급하지 마세요
+4. "대부분", "주로", "많이" 같은 표현만 사용하세요
+5. 긍정적이고 건설적인 조언을 제공해주세요
+6. 필요하다면 구체적인 실천 방법을 제안해주세요
+7. 200-300자 내외로 간결하게 작성해주세요
+8. 이모지를 적절히 사용하여 친근감을 더해주세요
+
+응답 형식:
+[공감과 인정] → [조언 또는 격려] → [마무리 응원]
+
+주의사항: "28회", "10번" 같은 구체적인 숫자나 횟수는 절대 언급하지 마세요!
+"""
+
+        # 제미나이 클라이언트 생성
+        client = genai.Client(api_key=GEMINI_API_KEY)
+        
+        print("제미나이 API 호출 시작...")
+        
+        # API 호출 - gemini-2.5-flash 사용
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+        
+        print("✅ 제미나이 응답 받음!")
+        
+        # 응답 텍스트 추출
+        advice = response.text.strip()
+        
+        if advice:
+            return advice
+        else:
+            return f"⚠️ AI 조언을 생성할 수 없습니다.\n\n오늘 '{emotion}' 감정을 느끼셨군요. 감정을 기록하고 표현하는 것만으로도 큰 의미가 있습니다. 💙"
+            
+    except Exception as e:
+        error_msg = str(e)
+        print(f"❌ 제미나이 API 오류: {error_msg}")
+        import traceback
+        traceback.print_exc()
+        
+        # 사용자 친화적인 오류 메시지
+        if "API_KEY" in error_msg.upper() or "authentication" in error_msg.lower():
+            return f"⚠️ API 키 인증 오류\n\n하지만 오늘 '{emotion}' 감정을 기록하신 것은 매우 의미있는 행동입니다. 💚"
+        elif "quota" in error_msg.lower() or "limit" in error_msg.lower():
+            return f"⚠️ API 사용 한도 초과\n\n그래도 오늘 '{emotion}' 감정을 표현하신 것만으로 충분합니다. 💪"
+        else:
+            return f"⚠️ AI 조언 서비스 오류\n\n하지만 오늘 '{emotion}' 감정을 기록하신 것은 매우 의미있는 행동입니다. 감정을 글로 표현하는 것만으로도 마음이 정리되고 치유될 수 있습니다. 💚\n\n💪 지금 이 순간 느끼는 감정을 있는 그대로 받아들여 주세요. 내일은 또 다른 하루가 시작됩니다!"
+
 # 로컬 데이터 로드 함수
 def load_local_data():
     """로컬에 저장된 일기 데이터 로드"""
@@ -61,7 +167,14 @@ def load_local_data():
                 # 경로가 존재하는 항목만 필터링
                 valid_entries = []
                 for entry in data:
-                    if os.path.exists(entry.get('video_path', '')):
+                    video_path = entry.get('video_path', '')
+                    # 상대 경로와 절대 경로 모두 확인
+                    if os.path.exists(video_path):
+                        valid_entries.append(entry)
+                    elif os.path.exists(os.path.join(os.getcwd(), video_path)):
+                        # 상대 경로를 절대 경로로 업데이트
+                        entry['video_path'] = os.path.join(os.getcwd(), video_path)
+                        entry['text_path'] = os.path.join(os.getcwd(), entry.get('text_path', ''))
                         valid_entries.append(entry)
                 return valid_entries
         except Exception as e:
@@ -107,8 +220,8 @@ class PersonalizedEmotionModel:
     def __init__(self):
         self.model = None
         self.emotion_mapping = {
-            '행복': 0, '슬픔': 1, '화남': 2, '놀람': 3,
-            '중립': 4, '두려움': 5, '혐오': 6
+            '행복함': 0, '슬픔': 1, '화남': 2, '놀람': 3,
+            '담담함': 4, '두려움': 5, '혐오': 6
         }
         self.reverse_mapping = {v: k for k, v in self.emotion_mapping.items()}
         self.training_data = []
@@ -157,7 +270,7 @@ class PersonalizedEmotionModel:
         features = []
         
         # 각 감정의 비율
-        for emotion in ['행복', '슬픔', '화남', '놀람', '중립', '두려움', '혐오']:
+        for emotion in ['행복함', '슬픔', '화남', '놀람', '담담함', '두려움', '혐오']:
             features.append(emotion_counts.get(emotion, 0) / len(emotions))
         
         # 평균 확신도
@@ -230,7 +343,7 @@ class PersonalizedEmotionModel:
             probabilities = self.model.predict_proba([features])[0]
             confidence = max(probabilities)
             
-            predicted_emotion = self.reverse_mapping.get(prediction, '중립')
+            predicted_emotion = self.reverse_mapping.get(prediction, '담담함')
             return predicted_emotion, confidence, True
         except Exception as e:
             print(f"예측 오류: {e}")
@@ -244,7 +357,7 @@ if 'recording' not in st.session_state:
 if 'video_frames' not in st.session_state:
     st.session_state.video_frames = []
 if 'current_emotion' not in st.session_state:
-    st.session_state.current_emotion = '중립'
+    st.session_state.current_emotion = '담담함'
 if 'emotion_timeline' not in st.session_state:
     st.session_state.emotion_timeline = []
 if 'recording_start_time' not in st.session_state:
@@ -257,6 +370,10 @@ if 'transcribed_text' not in st.session_state:
     st.session_state.transcribed_text = ""
 if 'audio_queue' not in st.session_state:
     st.session_state.audio_queue = queue.Queue()
+if 'audio_frames_queue' not in st.session_state:
+    st.session_state.audio_frames_queue = queue.Queue()
+if 'audio_frames' not in st.session_state:
+    st.session_state.audio_frames = []
 if 'pending_save' not in st.session_state:
     st.session_state.pending_save = False
 if 'save_data' not in st.session_state:
@@ -269,6 +386,12 @@ if 'personalized_model' not in st.session_state:
     st.session_state.personalized_model = PersonalizedEmotionModel()
 if 'user_stats' not in st.session_state:
     st.session_state.user_stats = load_user_stats()
+if 'gemini_advice' not in st.session_state:
+    st.session_state.gemini_advice = None
+if 'advice_loading' not in st.session_state:
+    st.session_state.advice_loading = False
+if 'processing_emotion' not in st.session_state:
+    st.session_state.processing_emotion = None
 
 # 사이드바
 with st.sidebar:
@@ -281,18 +404,12 @@ with st.sidebar:
         disabled=st.session_state.recording
     )
     
-    show_emotion_overlay = st.checkbox(
-        "감정 정보 오버레이 표시", 
-        value=True,
-        disabled=st.session_state.recording
-    )
-    
     if st.session_state.recording:
         st.warning("⚠️ 녹화 중에는 설정을 변경할 수 없습니다.")
     
     st.markdown("---")
     
-    st.header("🤖 AI 개인화 상태")
+    st.header("AI 개인화 상태")
     
     model_trained = st.session_state.personalized_model.model is not None
     training_count = len(st.session_state.personalized_model.training_data)
@@ -322,19 +439,25 @@ with st.sidebar:
     3. 🎤 **말하며 감정 표현**
     4. ⏹️ **녹화 중지 & 저장**
     5. ✨ **오늘의 기분 선택**
-    6. 📥 **영상 & 텍스트 다운로드**
+    6. 🎭 **제미나이 AI 조언 받기**
+    7. 📥 **영상 & 텍스트 다운로드**
     
-    ### 🤖 AI 개인화 기능
+    ### 🌟 제미나이 AI 조언
+    - **개인화된 조언**: 일기 내용과 감정을 분석하여 맞춤 조언 제공
+    - **따뜻한 위로**: 공감과 격려의 메시지
+    - **실천 가능한 팁**: 구체적인 개선 방법 제안
+    
+    ### ✨ AI 개인화 기능
     - **자동 학습**: 일기를 3개 이상 작성하면 자동으로 맞춤 모델이 활성화됩니다
     - **맞춤 추천**: 사용자의 과거 선택 패턴을 학습하여 더 정확한 감정을 추천합니다
     - **지속 개선**: 일기를 작성할수록 AI가 사용자를 더 잘 이해합니다
     
     ### 🎭 지원 감정
-    - 😊 행복
+    - 😊 행복함
     - 😢 슬픔
     - 😠 화남
     - 😲 놀람
-    - 😐 중립
+    - 😐 담담함
     - 😨 두려움
     - 🤢 혐오
     
@@ -420,6 +543,8 @@ with st.sidebar:
             'ai_vs_user_agreement': 0,
             'last_updated': None
         }
+        st.session_state.gemini_advice = None
+        st.session_state.advice_loading = False
         st.success("✅ 초기화 완료!")
         st.rerun()
 
@@ -516,13 +641,13 @@ def cartoonize_frame(image: np.ndarray) -> np.ndarray:
         return image
 
 # 음성 인식 함수
-def record_audio_continuous(audio_queue, stop_event):
-    """연속적으로 음성을 인식하는 함수"""
+def record_audio_continuous(audio_queue, stop_event, audio_frames_queue=None):
+    """연속적으로 음성을 인식하고 오디오를 저장하는 함수"""
     recognizer = sr.Recognizer()
     recognizer.energy_threshold = 4000
     recognizer.dynamic_energy_threshold = True
     
-    with sr.Microphone() as source:
+    with sr.Microphone(sample_rate=16000) as source:
         print("마이크 조정 중...")
         recognizer.adjust_for_ambient_noise(source, duration=1)
         print("음성 인식 시작!")
@@ -530,6 +655,10 @@ def record_audio_continuous(audio_queue, stop_event):
         while not stop_event.is_set():
             try:
                 audio = recognizer.listen(source, timeout=1, phrase_time_limit=10)
+                
+                # 오디오 프레임 저장 (WAV 파일 생성용)
+                if audio_frames_queue is not None:
+                    audio_frames_queue.put(audio.get_wav_data())
                 
                 try:
                     text = recognizer.recognize_google(audio, language='ko-KR')
@@ -550,7 +679,7 @@ def record_audio_continuous(audio_queue, stop_event):
 # 감정 분석 함수
 def analyze_emotion_quick(image: np.ndarray, model, face_detector) -> tuple[str, float, tuple]:
     """빠른 감정 분석 (실시간용) - 얼굴 위치만 반환"""
-    emotion = '중립'
+    emotion = '담담함'
     confidence = 0.0
     face_bbox = None
     
@@ -586,7 +715,7 @@ def analyze_emotion_quick(image: np.ndarray, model, face_detector) -> tuple[str,
                 if emotion_results:
                     # 영어 감정을 한글로 변환
                     emotion_eng = emotion_results[0]['label'].lower()
-                    emotion = EMOTION_TRANSLATION.get(emotion_eng, '중립')
+                    emotion = EMOTION_TRANSLATION.get(emotion_eng, '담담함')
                     confidence = emotion_results[0]['score']
     
     except Exception as e:
@@ -601,23 +730,133 @@ def save_video(frames: list, filename: str, fps: int = 20):
         return None
     
     height, width, _ = frames[0].shape
-    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
     
-    out = cv2.VideoWriter(filename, fourcc, fps, (width, height))
+    # H.264 코덱 사용 (브라우저 호환성 우수)
+    # 여러 코덱 시도
+    codecs_to_try = [
+        ('avc1', cv2.VideoWriter_fourcc(*'avc1')),  # H.264
+        ('H264', cv2.VideoWriter_fourcc(*'H264')),  # H.264 alternative
+        ('X264', cv2.VideoWriter_fourcc(*'X264')),  # H.264 alternative
+        ('mp4v', cv2.VideoWriter_fourcc(*'mp4v')),  # MPEG-4 (fallback)
+    ]
+    
+    out = None
+    for codec_name, fourcc in codecs_to_try:
+        try:
+            out = cv2.VideoWriter(filename, fourcc, fps, (width, height))
+            if out.isOpened():
+                print(f"✅ 비디오 코덱 '{codec_name}' 사용")
+                break
+            else:
+                out.release()
+                out = None
+        except Exception as e:
+            print(f"⚠️ 코덱 '{codec_name}' 실패: {e}")
+            if out:
+                out.release()
+            out = None
+    
+    if out is None or not out.isOpened():
+        print("❌ 모든 코덱 실패, 기본 코덱 사용")
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+        out = cv2.VideoWriter(filename, fourcc, fps, (width, height))
     
     for frame in frames:
         out.write(frame)
     
     out.release()
+    print(f"✅ 비디오 저장 완료: {filename}")
     return filename
+
+def save_audio_frames(audio_frames: list, filename: str):
+    """오디오 프레임을 WAV 파일로 저장"""
+    if not audio_frames or len(audio_frames) == 0:
+        print("⚠️ 저장할 오디오 데이터가 없습니다")
+        return None
+    
+    try:
+        import wave
+        with wave.open(filename, 'wb') as wf:
+            wf.setnchannels(1)  # 모노
+            wf.setsampwidth(2)  # 16-bit
+            wf.setframerate(16000)  # 16kHz
+            for frame in audio_frames:
+                wf.writeframes(frame)
+        print(f"✅ 오디오 저장 완료: {filename}")
+        return filename
+    except Exception as e:
+        print(f"❌ 오디오 저장 실패: {e}")
+        return None
+
+def merge_video_audio(video_path: str, audio_path: str, output_path: str):
+    """moviepy를 사용하여 비디오와 오디오를 병합"""
+    try:
+        from moviepy.editor import VideoFileClip, AudioFileClip
+        
+        print("🎬 비디오-오디오 병합 시작...")
+        
+        # 비디오 로드
+        video_clip = VideoFileClip(video_path)
+        
+        # 오디오 로드
+        audio_clip = AudioFileClip(audio_path)
+        
+        # 비디오에 오디오 추가
+        final_clip = video_clip.set_audio(audio_clip)
+        
+        # 최종 비디오 저장
+        final_clip.write_videofile(
+            output_path,
+            codec='libx264',
+            audio_codec='aac',
+            temp_audiofile='temp-audio.m4a',
+            remove_temp=True,
+            logger=None  # 로그 출력 최소화
+        )
+        
+        # 리소스 정리
+        video_clip.close()
+        audio_clip.close()
+        final_clip.close()
+        
+        print(f"✅ 비디오-오디오 병합 완료: {output_path}")
+        
+        # 임시 파일 삭제
+        try:
+            os.remove(video_path)
+            os.remove(audio_path)
+        except:
+            pass
+            
+        return output_path
+            
+    except ImportError:
+        print("⚠️ moviepy가 설치되어 있지 않습니다. 비디오만 저장됩니다.")
+        print("설치 방법: pip install moviepy")
+        # 임시 비디오를 최종 경로로 이동
+        try:
+            os.rename(video_path, output_path)
+        except:
+            pass
+        return output_path
+    except Exception as e:
+        print(f"❌ 병합 중 오류: {e}")
+        import traceback
+        traceback.print_exc()
+        # 오류 시 비디오를 최종 경로로 이동
+        try:
+            os.rename(video_path, output_path)
+        except:
+            pass
+        return output_path
 
 # 메인 UI
 st.title("📔 감정 영상 일기 - Emotion Video Diary")
-st.markdown("*웹캠으로 실시간 감정을 분석하며 음성으로 영상 일기를 작성하세요*")
+st.markdown("*웹캠으로 영상 일기를 기록하고, 제미나이 AI에게 따뜻한 피드백을 받아보세요.*")
 
 st.markdown("---")
 
-st.subheader("📹 웹캠 화면")
+st.subheader("📹 영상 일기 기록하기")
 
 # 1. 녹화 상태 표시
 status_placeholder = st.empty()
@@ -646,7 +885,7 @@ else:
         if st.session_state.recording and st.session_state.voice_recording:
             current_text = st.session_state.transcribed_text if st.session_state.transcribed_text else "(음성 인식 중... 말씀해주세요)"
             voice_text_placeholder.text_area(
-                f"음성 텍스트",
+                f"일기 내용 (음성 입력)",
                 value=current_text,
                 height=480,
                 disabled=True,
@@ -654,7 +893,7 @@ else:
             )
         elif st.session_state.transcribed_text:
             voice_text_placeholder.text_area(
-                f"음성 텍스트",
+                f"일기 내용 (음성 입력)",
                 value=st.session_state.transcribed_text,
                 height=480,
                 disabled=True,
@@ -662,7 +901,7 @@ else:
             )
         else:
             voice_text_placeholder.text_area(
-                "음성 텍스트",
+                "일기 내용 (음성 입력)",
                 value="(음성 입력 대기 중...)",
                 height=480,
                 disabled=True,
@@ -695,13 +934,16 @@ if 'start_recording' in locals() and start_recording:
         st.session_state.emotion_timeline = []
         st.session_state.recording_start_time = datetime.now()
         st.session_state.transcribed_text = ""
+        st.session_state.gemini_advice = None
         
         st.session_state.voice_recording = True
         st.session_state.audio_queue = queue.Queue()
+        st.session_state.audio_frames_queue = queue.Queue()
+        st.session_state.audio_frames = []
         st.session_state.stop_event = threading.Event()
         st.session_state.audio_thread = threading.Thread(
             target=record_audio_continuous,
-            args=(st.session_state.audio_queue, st.session_state.stop_event)
+            args=(st.session_state.audio_queue, st.session_state.stop_event, st.session_state.audio_frames_queue)
         )
         st.session_state.audio_thread.daemon = True
         st.session_state.audio_thread.start()
@@ -717,6 +959,14 @@ if st.session_state.recording and 'stop_recording' in locals() and stop_recordin
         st.session_state.stop_event.set()
         st.session_state.voice_recording = False
         time.sleep(0.5)
+        
+        # 오디오 프레임 수집
+        while not st.session_state.audio_frames_queue.empty():
+            try:
+                audio_frame = st.session_state.audio_frames_queue.get_nowait()
+                st.session_state.audio_frames.append(audio_frame)
+            except queue.Empty:
+                break
     
     final_text = st.session_state.transcribed_text if st.session_state.transcribed_text else "(음성 입력 없음)"
     
@@ -728,19 +978,36 @@ if st.session_state.recording and 'stop_recording' in locals() and stop_recordin
             video_filename = f"emotion_diary_{timestamp}.mp4"
             text_filename = f"emotion_diary_{timestamp}.txt"
             
-            # 로컬 폴더에 저장
-            video_path = str(VIDEOS_DIR / video_filename)
-            text_path = str(VIDEOS_DIR / text_filename)
+            # 절대 경로로 저장 (중요!)
+            video_temp_path = str(VIDEOS_DIR.absolute() / f"temp_video_{timestamp}.mp4")
+            audio_temp_path = str(VIDEOS_DIR.absolute() / f"temp_audio_{timestamp}.wav")
+            video_path = str(VIDEOS_DIR.absolute() / video_filename)
+            text_path = str(VIDEOS_DIR.absolute() / text_filename)
             
-            save_video(st.session_state.video_frames, video_path, fps=20)
+            # 비디오 저장
+            save_video(st.session_state.video_frames, video_temp_path, fps=20)
+            
+            # 오디오 저장 및 병합
+            if st.session_state.audio_frames and len(st.session_state.audio_frames) > 0:
+                audio_saved = save_audio_frames(st.session_state.audio_frames, audio_temp_path)
+                if audio_saved:
+                    # 비디오와 오디오 병합
+                    video_path = merge_video_audio(video_temp_path, audio_temp_path, video_path)
+                else:
+                    # 오디오 저장 실패 시 비디오만 사용
+                    os.rename(video_temp_path, video_path)
+            else:
+                # 오디오가 없으면 비디오만 저장
+                os.rename(video_temp_path, video_path)
+                print("⚠️ 녹음된 오디오가 없습니다. 비디오만 저장됩니다.")
             
             if st.session_state.emotion_timeline:
                 emotions_list = [e['emotion'] for e in st.session_state.emotion_timeline]
                 emotion_counts = pd.Series(emotions_list).value_counts()
-                dominant_emotion = emotion_counts.index[0] if len(emotion_counts) > 0 else "중립"
+                dominant_emotion = emotion_counts.index[0] if len(emotion_counts) > 0 else "담담함"
                 avg_confidence = np.mean([e['confidence'] for e in st.session_state.emotion_timeline])
             else:
-                dominant_emotion = "중립"
+                dominant_emotion = "담담함"
                 avg_confidence = 0.0
             
             # 맞춤형 AI 예측
@@ -777,7 +1044,13 @@ if st.session_state.recording and 'stop_recording' in locals() and stop_recordin
             }
             
             st.session_state.pending_save = True
+            st.session_state.emotion_confirmed = False
+            st.session_state.confirmed_emotion = None
+            st.session_state.advice_loading = False
+            st.session_state.gemini_advice = None
+            st.session_state.processing_emotion = None
             st.session_state.video_frames = []
+            st.session_state.audio_frames = []
             st.session_state.recording_start_time = None
             
             st.rerun()
@@ -796,13 +1069,16 @@ if st.session_state.pending_save and st.session_state.save_data:
     save_data = st.session_state.save_data
     
     if not st.session_state.emotion_confirmed:
-        # AI 추천 표시
-        if save_data['is_personalized']:
+        # 로딩 중일 때 메시지 표시
+        if st.session_state.get('advice_loading', False):
+            status_placeholder.info("🤖 제미나이 AI가 일기를 분석하고 조언을 작성하고 있습니다...")
+        # AI 추천 표시 (로딩 중이 아닐 때)
+        elif save_data['is_personalized']:
             status_placeholder.success(
                 f"✨ 맞춤형 AI 추천: **{save_data['personalized_emotion']}** "
                 f"(확신도: {save_data['personalized_confidence']*100:.1f}%)"
             )
-            st.info("🤖 사용자님의 과거 감정 패턴을 분석한 맞춤 추천입니다!")
+            st.info("사용자님의 과거 감정 패턴을 분석한 맞춤 추천입니다!")
         else:
             status_placeholder.info(
                 f"✨ AI 추천: **{save_data['dominant_emotion']}** "
@@ -810,11 +1086,11 @@ if st.session_state.pending_save and st.session_state.save_data:
             )
         
         emotion_options = [
-            "😊 행복",
+            "😊 행복함",
             "😢 슬픔",
             "😠 화남",
             "😲 놀람",
-            "😐 중립",
+            "😐 담담함",
             "😨 두려움",
             "🤢 혐오"
         ]
@@ -822,8 +1098,8 @@ if st.session_state.pending_save and st.session_state.save_data:
         # 추천 감정을 기본 선택으로
         recommended_emotion = save_data['personalized_emotion'] if save_data['is_personalized'] else save_data['dominant_emotion']
         emotion_map = {
-            '행복': 0, '슬픔': 1, '화남': 2, '놀람': 3,
-            '중립': 4, '두려움': 5, '혐오': 6
+            '행복함': 0, '슬픔': 1, '화남': 2, '놀람': 3,
+            '담담함': 4, '두려움': 5, '혐오': 6
         }
         
         default_index = emotion_map.get(recommended_emotion, 4)
@@ -832,10 +1108,17 @@ if st.session_state.pending_save and st.session_state.save_data:
             "🎭 오늘의 감정을 선택해주세요:",
             emotion_options,
             index=default_index,
-            key="emotion_radio"
+            key="emotion_radio",
+            disabled=st.session_state.get('advice_loading', False)
         )
         
-        confirm_emotion = st.button("✅ 감정 확정하기", type="primary", use_container_width=True, key="confirm_bottom_btn")
+        confirm_emotion = st.button(
+            "✅ 감정 확정하기", 
+            type="primary", 
+            use_container_width=True, 
+            key="confirm_bottom_btn",
+            disabled=st.session_state.get('advice_loading', False)
+        )
         
         if confirm_emotion:
             # 선택된 감정에서 한글 부분만 추출
@@ -851,82 +1134,110 @@ if st.session_state.pending_save and st.session_state.save_data:
             
             # 모델 학습 (3개 이상일 때)
             if len(st.session_state.personalized_model.training_data) >= 3:
-                with st.spinner("🤖 맞춤형 AI 학습 중..."):
-                    if st.session_state.personalized_model.train():
-                        st.success("✅ AI 학습 완료! 다음 일기부터 더 정확한 추천을 받을 수 있습니다.")
+                if st.session_state.personalized_model.train():
+                    pass  # 조용히 학습만 진행
             
-            # 텍스트 파일 저장
-            with open(save_data['text_path'], 'w', encoding='utf-8') as f:
-                f.write(f"=== 감정 영상 일기 ===\n")
-                f.write(f"날짜: {datetime.now().strftime('%Y년 %m월 %d일 %H:%M:%S')}\n")
-                f.write(f"오늘의 감정: {final_mood}\n")
-                f.write(f"익명화 방식: {save_data['anonymize_method']}\n")
-                f.write(f"\n=== 일기 내용 (음성 입력) ===\n\n")
-                f.write(save_data['final_text'])
-                f.write(f"\n\n=== 감정 분석 결과 ===\n")
-                if save_data['emotion_timeline']:
-                    emotions_list = [e['emotion'] for e in save_data['emotion_timeline']]
-                    emotion_counts = pd.Series(emotions_list).value_counts()
-                    f.write(f"주요 감정: {save_data['dominant_emotion']}\n")
-                    f.write(f"평균 확신도: {save_data['avg_confidence']*100:.1f}%\n")
-                    f.write(f"\n감정 분포:\n")
-                    for emotion, count in emotion_counts.items():
-                        percentage = (count / len(emotions_list)) * 100
-                        f.write(f"  - {emotion}: {count}회 ({percentage:.1f}%)\n")
-                f.write(f"\n=== AI 추천 ===\n")
-                if save_data['is_personalized']:
-                    f.write(f"맞춤형 AI 추천: {save_data['personalized_emotion']} (확신도: {save_data['personalized_confidence']*100:.1f}%)\n")
-                else:
-                    f.write(f"기본 AI 분석: {save_data['dominant_emotion']}\n")
-                f.write(f"최종 선택: {final_mood}\n")
-            
-            # 일기 항목 저장
-            entry = {
-                'timestamp': save_data['timestamp'],
-                'emotion': final_mood,
-                'diary_text': save_data['final_text'],
-                'video_filename': save_data['video_filename'],
-                'video_path': save_data['video_path'],
-                'text_filename': save_data['text_filename'],
-                'text_path': save_data['text_path'],
-                'dominant_emotion': save_data['dominant_emotion'],
-                'avg_confidence': save_data['avg_confidence'],
-                'frame_count': save_data['frame_count'],
-                'recording_duration': save_data['recording_duration'],
-                'emotion_timeline': save_data['emotion_timeline'],
-                'anonymize_method': save_data['anonymize_method'],
-                'voice_input_used': True,
-                'ai_recommended': save_data['personalized_emotion'] if save_data['is_personalized'] else save_data['dominant_emotion'],
-                'is_personalized': save_data['is_personalized']
-            }
-            
-            st.session_state.diary_entries.append(entry)
-            
-            # 로컬에 저장
-            save_local_data(st.session_state.diary_entries)
-            
-            # 통계 업데이트
-            stats = st.session_state.user_stats
-            stats['total_entries'] += 1
-            stats['emotion_distribution'][final_mood] = stats['emotion_distribution'].get(final_mood, 0) + 1
-            
-            # AI-사용자 일치율 계산
-            recommended = save_data['personalized_emotion'] if save_data['is_personalized'] else save_data['dominant_emotion']
-            matches = sum(1 for e in st.session_state.diary_entries 
-                         if e['emotion'] == e['ai_recommended'])
-            stats['ai_vs_user_agreement'] = (matches / stats['total_entries']) * 100
-            stats['last_updated'] = datetime.now().isoformat()
-            
-            save_user_stats(stats)
-            st.session_state.user_stats = stats
-            
-            st.session_state.confirmed_emotion = final_mood
-            st.session_state.emotion_confirmed = True
-            
-            st.rerun()
+            # 제미나이 AI 조언 생성 플래그 설정
+            st.session_state.advice_loading = True
+            st.session_state.processing_emotion = final_mood
+            st.rerun()  # 즉시 rerun하여 버튼 비활성화
     
-    else:
+    # advice_loading이 True인 경우 조언 생성 (독립적으로 처리)
+    if st.session_state.get('advice_loading', False) and not st.session_state.emotion_confirmed:
+        # 이미 위에서 status_placeholder.info()를 호출했으므로 여기서는 생략
+        
+        final_mood = st.session_state.processing_emotion
+        
+        gemini_advice = get_gemini_advice(
+            final_mood,
+            save_data['final_text'],
+            save_data['emotion_timeline']
+        )
+        st.session_state.gemini_advice = gemini_advice
+        st.session_state.advice_loading = False
+        
+        # 텍스트 파일 저장 (제미나이 조언 포함)
+        with open(save_data['text_path'], 'w', encoding='utf-8') as f:
+            f.write(f"=== 감정 영상 일기 ===\n")
+            f.write(f"날짜: {datetime.now().strftime('%Y년 %m월 %d일 %H:%M:%S')}\n")
+            f.write(f"오늘의 감정: {final_mood}\n")
+            f.write(f"익명화 방식: {save_data['anonymize_method']}\n")
+            f.write(f"\n=== 일기 내용 (음성 입력) ===\n\n")
+            f.write(save_data['final_text'])
+            f.write(f"\n\n=== 감정 분석 결과 ===\n")
+            if save_data['emotion_timeline']:
+                emotions_list = [e['emotion'] for e in save_data['emotion_timeline']]
+                emotion_counts = pd.Series(emotions_list).value_counts()
+                f.write(f"주요 감정: {save_data['dominant_emotion']}\n")
+                f.write(f"평균 확신도: {save_data['avg_confidence']*100:.1f}%\n")
+                f.write(f"\n감정 분포:\n")
+                for emotion, count in emotion_counts.items():
+                    percentage = (count / len(emotions_list)) * 100
+                    f.write(f"  - {emotion}: {count}회 ({percentage:.1f}%)\n")
+            f.write(f"\n=== AI 추천 ===\n")
+            if save_data['is_personalized']:
+                f.write(f"맞춤형 AI 추천: {save_data['personalized_emotion']} (확신도: {save_data['personalized_confidence']*100:.1f}%)\n")
+            else:
+                f.write(f"기본 AI 분석: {save_data['dominant_emotion']}\n")
+            f.write(f"최종 선택: {final_mood}\n")
+            
+            # 제미나이 조언 추가
+            f.write(f"\n=== 제미나이 AI의 조언 ===\n\n")
+            f.write(gemini_advice)
+        
+        # 일기 항목 저장
+        entry = {
+            'timestamp': save_data['timestamp'],
+            'emotion': final_mood,
+            'diary_text': save_data['final_text'],
+            'video_filename': save_data['video_filename'],
+            'video_path': save_data['video_path'],
+            'text_filename': save_data['text_filename'],
+            'text_path': save_data['text_path'],
+            'dominant_emotion': save_data['dominant_emotion'],
+            'avg_confidence': save_data['avg_confidence'],
+            'frame_count': save_data['frame_count'],
+            'recording_duration': save_data['recording_duration'],
+            'emotion_timeline': save_data['emotion_timeline'],
+            'anonymize_method': save_data['anonymize_method'],
+            'voice_input_used': True,
+            'ai_recommended': save_data['personalized_emotion'] if save_data['is_personalized'] else save_data['dominant_emotion'],
+            'is_personalized': save_data['is_personalized'],
+            'gemini_advice': gemini_advice
+        }
+        
+        st.session_state.diary_entries.append(entry)
+        
+        # 로컬에 저장
+        save_local_data(st.session_state.diary_entries)
+        
+        # 통계 업데이트
+        stats = st.session_state.user_stats
+        stats['total_entries'] += 1
+        stats['emotion_distribution'][final_mood] = stats['emotion_distribution'].get(final_mood, 0) + 1
+        
+        # AI-사용자 일치율 계산
+        recommended = save_data['personalized_emotion'] if save_data['is_personalized'] else save_data['dominant_emotion']
+        matches = sum(1 for e in st.session_state.diary_entries 
+                     if e['emotion'] == e['ai_recommended'])
+        stats['ai_vs_user_agreement'] = (matches / stats['total_entries']) * 100
+        stats['last_updated'] = datetime.now().isoformat()
+        
+        save_user_stats(stats)
+        st.session_state.user_stats = stats
+        
+        st.session_state.confirmed_emotion = final_mood
+        st.session_state.emotion_confirmed = True
+        
+        st.rerun()
+    
+    # 감정이 확정되고 조언도 생성된 후 최종 결과 표시
+    elif st.session_state.emotion_confirmed and st.session_state.confirmed_emotion:
         status_placeholder.success(f"✅ 영상 일기가 저장되었습니다! (감정: {st.session_state.confirmed_emotion})")
+        
+        # 제미나이 조언 표시
+        if st.session_state.gemini_advice:
+            st.info(st.session_state.gemini_advice)
         
         if save_data['emotion_timeline'] and len(save_data['emotion_timeline']) > 0:
             timeline_df = pd.DataFrame(save_data['emotion_timeline'])
@@ -937,7 +1248,7 @@ if st.session_state.pending_save and st.session_state.save_data:
                 fig_pie = px.pie(
                     values=emotion_counts.values,
                     names=emotion_counts.index,
-                    title="감정 분포",
+                    title="오늘의 감정 분포",
                     color_discrete_sequence=px.colors.qualitative.Set3
                 )
                 st.plotly_chart(fig_pie, use_container_width=True)
@@ -953,7 +1264,7 @@ if st.session_state.pending_save and st.session_state.save_data:
                     x='time_seconds',
                     y='confidence_percent',
                     color='emotion',
-                    title="프레임별 감정 변화 (시간축)",
+                    title="오늘의 감정 변화",
                     markers=True,
                     labels={
                         'time_seconds': '영상 시간 (초)',
@@ -971,8 +1282,18 @@ if st.session_state.pending_save and st.session_state.save_data:
                 st.plotly_chart(fig_line, use_container_width=True)
             
             st.markdown("**📋 감정 타임라인**")
+            dominant_emoji = emotion_emoji_map.get(save_data.get('dominant_emotion', '담담함'), '📝')
+            st.markdown(
+                f"<small>주요 감정: {dominant_emoji} {save_data.get('dominant_emotion', '담담함')}</small>",
+                unsafe_allow_html=True
+            )
+            st.markdown(
+                f"<small>평균 확신도: {save_data.get('avg_confidence', 0)*100:.1f}%</small>",
+                unsafe_allow_html=True
+            )
             display_timeline = timeline_df[['frame', 'timestamp', 'emotion', 'confidence']].copy()
             display_timeline['confidence'] = display_timeline['confidence'].apply(lambda x: f"{x*100:.1f}%")
+            display_timeline.columns = ['프레임', '시간', '감정', '확신도']
             st.dataframe(display_timeline, use_container_width=True, height=200)
         
         col_dl1, col_dl2 = st.columns(2)
@@ -982,7 +1303,7 @@ if st.session_state.pending_save and st.session_state.save_data:
                 with open(save_data['video_path'], 'rb') as f:
                     video_bytes = f.read()
                     st.download_button(
-                        label="📥 영상 일기 (MP4) 파일 다운로드",
+                        label="📥 영상 다운로드",
                         data=video_bytes,
                         file_name=save_data['video_filename'],
                         mime="video/mp4",
@@ -998,7 +1319,7 @@ if st.session_state.pending_save and st.session_state.save_data:
                 with open(save_data['text_path'], 'r', encoding='utf-8') as f:
                     text_content = f.read()
                     st.download_button(
-                        label="📄 일기 텍스트 (TXT) 파일 다운로드",
+                        label="📄 텍스트 다운로드",
                         data=text_content,
                         file_name=save_data['text_filename'],
                         mime="text/plain",
@@ -1016,6 +1337,7 @@ if st.session_state.pending_save and st.session_state.save_data:
             st.session_state.save_data = None
             st.session_state.emotion_confirmed = False
             st.session_state.confirmed_emotion = None
+            st.session_state.gemini_advice = None
             
             st.rerun()
 
@@ -1111,7 +1433,7 @@ if st.session_state.webcam_active:
             
             display_frame = anonymized_frame.copy()
             
-            if show_emotion_overlay and face_bbox:
+            if face_bbox:
                 x, y, w, h = face_bbox
                 emotion = st.session_state.current_emotion
                 
@@ -1136,12 +1458,8 @@ if st.session_state.webcam_active:
             frame_rgb = cv2.cvtColor(display_frame, cv2.COLOR_BGR2RGB)
             webcam_placeholder.image(frame_rgb, channels="RGB", width=640)
             
-            emotion_emoji = {
-                '행복': '😊', '슬픔': '😢', '화남': '😠', 
-                '놀람': '😲', '중립': '😐', '두려움': '😨',
-                '혐오': '🤢'
-            }
-            emoji = emotion_emoji.get(st.session_state.current_emotion, '😐')
+            # 전역 emotion_emoji_map 사용
+            emoji = emotion_emoji_map.get(st.session_state.current_emotion, '😐')
             
             if st.session_state.recording:
                 if st.session_state.recording_start_time:
@@ -1173,73 +1491,99 @@ if st.session_state.webcam_active:
 # 저장된 일기 목록
 st.markdown("---")
 st.subheader("📚 저장된 영상 일기")
+
 if st.session_state.diary_entries:
+
+    
     # 개별 일기
     for i, entry in enumerate(reversed(st.session_state.diary_entries)):
-        emotion_display = f" - 감정: {entry.get('emotion', '미기록')}" if 'emotion' in entry else ""
+        emotion = entry.get('emotion', '미기록')
+        emotion_emoji = emotion_emoji_map.get(emotion, '📝')
+        emotion_display = f" - {emotion_emoji} {emotion}" if 'emotion' in entry else ""
         ai_rec = entry.get('ai_recommended', '없음')
         is_personalized = "AI 맞춤 추천" if entry.get('is_personalized', False) else "AI 기본 추천"
         
-        with st.expander(f"📔 일기 #{len(st.session_state.diary_entries)-i} - {entry['timestamp']}{emotion_display} ({is_personalized}: {ai_rec})"):
-            col_info1, col_info2 = st.columns(2)
+        with st.expander(f"📔 일기 #{len(st.session_state.diary_entries)-i} - {entry['timestamp']}{emotion_display}"):
+            # 영상 재생 (상단, 왼쪽)
+            col_video, col_text = st.columns([2, 1])
             
+            with col_video:
+                st.markdown("**🎬 영상 재생**")
+                
+                video_path = entry.get('video_path', '')
+                video_filename = entry.get('video_filename', '')
+                
+                if video_path and os.path.exists(video_path):
+                    try:
+                        # 둥근 모서리 스타일 적용
+                        st.markdown("""
+                        <style>
+                        video {
+                            border-radius: 10px;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            max-width: 640px;
+                            width: 100%;
+                            height: auto;
+                        }
+                        /* 텍스트 영역과 부모 div 높이를 영상(480px)과 동일하게 */
+                        [data-baseweb="base-input"] {
+                            height: 270px !important;
+                        }
+                        textarea {
+                            height: 270px !important;
+                            max-height: 480px !important;
+                            overflow-y: auto !important;
+                        }
+                        </style>
+                        """, unsafe_allow_html=True)
+                        
+
+                        # 상대 경로로 영상 재생
+                        st.video(f"emotion_diary_data/videos/{video_filename}")
+                        
+                    except Exception as e:
+                        st.error(f"❌ 영상 재생 오류: {e}")
+                else:
+                    st.warning(f"⚠️ 영상 파일을 찾을 수 없습니다.")
+            
+            with col_text:
+                st.write("**🎤 음성 입력:** 사용됨 ✅")
+                
+                st.text_area(
+                    f"일기 내용 (음성 입력)",
+                    value=entry['diary_text'],
+                    disabled=True,
+                    key=f"voice_display_entry_{i}"
+                )
+            
+            # 감정 정보
+            st.markdown("---")
+            col_info1, col_info2 = st.columns(2)
             with col_info1:
                 if 'emotion' in entry:
-                    st.write(f"**✨ 오늘의 감정:** {entry['emotion']}")
-                st.write(f"**🤖 {is_personalized}:** {ai_rec}")
+                    user_emotion_emoji = emotion_emoji_map.get(entry['emotion'], '📝')
+                    st.write(f"**✨ 그날의 감정:** {user_emotion_emoji} {entry['emotion']}")
+                
+                ai_rec_emoji = emotion_emoji_map.get(ai_rec, '📝')
                 if entry['emotion'] == ai_rec:
                     st.success("✅ AI 추천과 일치")
                 else:
-                    st.info("ℹ️ 사용자가 다른 감정 선택")
+                    st.info(f"ℹ️ 사용자가 다른 감정 선택 (AI제안: {ai_rec_emoji} {ai_rec})")
+
+        
                 
-                st.write("**📝 일기 내용 (음성 입력):**")
-                st.write(entry['diary_text'])
-                st.write(f"**🎭 주요 감정:** {entry['dominant_emotion']}")
-                st.write(f"**📊 평균 확신도:** {entry['avg_confidence']*100:.1f}%")
-                st.write("**🎤 음성 입력:** 사용됨 ✓")
-            
             with col_info2:
                 st.write(f"**🎬 프레임 수:** {entry['frame_count']}")
                 st.write(f"**🔒 익명화:** {entry['anonymize_method']}")
                 st.write(f"**⏱️ 녹화 시간:** {entry.get('recording_duration', '00:00')}")
                 st.write(f"**📏 영상 길이:** 약 {entry['frame_count'] / 20:.1f}초")
-                
-                col_dl1, col_dl2 = st.columns(2)
-                
-                with col_dl1:
-                    if os.path.exists(entry['video_path']):
-                        with open(entry['video_path'], 'rb') as f:
-                            video_bytes = f.read()
-                            st.download_button(
-                                label="📥 영상",
-                                data=video_bytes,
-                                file_name=entry['video_filename'],
-                                mime="video/mp4",
-                                key=f"download_video_{i}",
-                                use_container_width=True
-                            )
-                    else:
-                        st.warning("⚠️ 영상 파일 없음")
-                
-                with col_dl2:
-                    if os.path.exists(entry['text_path']):
-                        with open(entry['text_path'], 'r', encoding='utf-8') as f:
-                            text_content = f.read()
-                            st.download_button(
-                                label="📄 텍스트",
-                                data=text_content,
-                                file_name=entry['text_filename'],
-                                mime="text/plain",
-                                key=f"download_text_{i}",
-                                use_container_width=True
-                            )
-                    else:
-                        st.warning("⚠️ 텍스트 파일 없음")
             
-            if entry.get('emotion_timeline') and len(entry['emotion_timeline']) > 0:
+            # 제미나이 조언 표시
+            if entry.get('gemini_advice'):
                 st.markdown("---")
-                st.write("**📊 AI 감정 분석**")
-                
+                st.info(entry['gemini_advice'])
+
+            if entry.get('emotion_timeline') and len(entry['emotion_timeline']) > 0:
                 timeline_df = pd.DataFrame(entry['emotion_timeline'])
                 
                 col_chart1, col_chart2 = st.columns(2)
@@ -1266,7 +1610,7 @@ if st.session_state.diary_entries:
                         x='time_seconds',
                         y='confidence_percent',
                         color='emotion',
-                        title="프레임별 감정 변화 (시간축)",
+                        title="감정 변화",
                         markers=True,
                         height=300,
                         labels={
@@ -1283,18 +1627,74 @@ if st.session_state.diary_entries:
                     fig_line.update_xaxes(range=[0, x_max], dtick=10, title="영상 시간 (초)")
                     
                     st.plotly_chart(fig_line, use_container_width=True)
+
+            # 감정 타임라인 표시
+            if entry.get('emotion_timeline') and len(entry['emotion_timeline']) > 0:
+                st.markdown("**📋 감정 타임라인 (Emotion Timeline)**")
+                dominant_emoji = emotion_emoji_map.get(entry.get('dominant_emotion', '담담함'), '📝')
+                st.markdown(
+                    f"<small>주요 감정: {dominant_emoji} {entry.get('dominant_emotion', '담담함')}</small>",
+                    unsafe_allow_html=True
+                )
+                st.markdown(
+                    f"<small>평균 확신도: {entry.get('avg_confidence', 0)*100:.1f}%</small>",
+                    unsafe_allow_html=True
+                )
+
+                timeline_df = pd.DataFrame(entry['emotion_timeline'])
+                
+                # 타임라인 테이블 표시
+                display_timeline = timeline_df[['frame', 'timestamp', 'emotion', 'confidence']].copy()
+                display_timeline['confidence'] = display_timeline['confidence'].apply(lambda x: f"{x*100:.1f}%")
+                display_timeline.columns = ['프레임', '시간', '감정', '확신도']
+                st.dataframe(display_timeline, use_container_width=True, height=200)
     
+    
+            # 다운로드 버튼
+            st.markdown("---")
+            col_dl1, col_dl2 = st.columns(2)
+            
+            with col_dl1:
+                if os.path.exists(entry['video_path']):
+                    with open(entry['video_path'], 'rb') as f:
+                        video_bytes = f.read()
+                        st.download_button(
+                            label="📥 영상 다운로드",
+                            data=video_bytes,
+                            file_name=entry['video_filename'],
+                            mime="video/mp4",
+                            key=f"download_video_{i}",
+                            use_container_width=True
+                        )
+                else:
+                    st.warning("⚠️ 영상 파일 없음")
+            
+            with col_dl2:
+                if os.path.exists(entry['text_path']):
+                    with open(entry['text_path'], 'r', encoding='utf-8') as f:
+                        text_content = f.read()
+                        st.download_button(
+                            label="📄 텍스트 다운로드",
+                            data=text_content,
+                            file_name=entry['text_filename'],
+                            mime="text/plain",
+                            key=f"download_text_{i}",
+                            use_container_width=True
+                        )
+                else:
+                    st.warning("⚠️ 텍스트 파일 없음")
     # 전체 통계
     st.markdown("---")
     st.markdown("### 📊 전체 감정 분석")
     
-    all_emotions = [e['emotion'] for e in st.session_state.diary_entries]
-    emotion_df = pd.DataFrame({'감정': all_emotions})
+    col_left, col_middle, col_right = st.columns([1, 1, 2])
     
-    col_stat1, col_stat2 = st.columns(2)
-    
-    with col_stat1:
+    with col_left:
+        # 원형 그래프
+        all_emotions = [e['emotion'] for e in st.session_state.diary_entries]
+        emotion_df = pd.DataFrame({'감정': all_emotions})
         emotion_counts = emotion_df['감정'].value_counts()
+        
         fig_overall = px.pie(
             values=emotion_counts.values,
             names=emotion_counts.index,
@@ -1303,17 +1703,123 @@ if st.session_state.diary_entries:
         )
         st.plotly_chart(fig_overall, use_container_width=True)
     
-    with col_stat2:
+    with col_middle:
+        # 통계 정보 - 반응형 여백
+        st.markdown("""
+        <style>
+        @media (min-width: 768px) {
+            .stats-spacing {
+                margin-top: 80px;
+            }
+        }
+        </style>
+        <div class="stats-spacing"></div>
+        """, unsafe_allow_html=True)
+        
         # AI 추천 vs 사용자 선택 비교
         ai_matches = sum(1 for e in st.session_state.diary_entries 
                         if e['emotion'] == e.get('ai_recommended', ''))
         match_rate = (ai_matches / len(st.session_state.diary_entries)) * 100
         
-        st.metric("AI-사용자 일치율", f"{match_rate:.1f}%")
-        
         personalized_count = sum(1 for e in st.session_state.diary_entries 
                                 if e.get('is_personalized', False))
-        st.metric("맞춤형 추천 사용", f"{personalized_count}회")
-        st.metric("학습 데이터", f"{len(st.session_state.personalized_model.training_data)}개")
+        
+        # 작은 글씨로 통계 표시
+        st.markdown(f"""
+        <div style="font-size: 14px;">
+        <p><strong>AI-사용자 일치율:</strong> {match_rate:.1f}%</p>
+        <p><strong>맞춤형 추천 사용:</strong> {personalized_count}회</p>
+        <p><strong>학습 데이터:</strong> {len(st.session_state.personalized_model.training_data)}개</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_right:
+        # 시계열 감정 변화 그래프
+        st.markdown("**📅 감정 타임라인 (Emotion Timeline)**")
+        
+        # 타임스탬프를 datetime 객체로 변환
+        timeline_data = []
+        for entry in st.session_state.diary_entries:
+            try:
+                # timestamp 형식: YYYYMMDD_HHMMSS
+                timestamp_str = entry['timestamp']
+                dt = datetime.strptime(timestamp_str, '%Y%m%d_%H%M%S')
+                
+                timeline_data.append({
+                    '날짜': dt.date(),  # 날짜만 추출
+                    '날짜시간': dt,
+                    '감정': entry['emotion'],
+                    '이모지': emotion_emoji_map.get(entry['emotion'], '😐')
+                })
+            except Exception as e:
+                print(f"날짜 변환 오류: {e}")
+                continue
+        
+        if timeline_data:
+            timeline_df = pd.DataFrame(timeline_data)
+            timeline_df = timeline_df.sort_values('날짜시간')
+            
+            # 감정별 색상 매핑
+            emotion_colors = {
+                '행복함': '#FFD700',  # 금색
+                '슬픔': '#4169E1',    # 파란색
+                '화남': '#FF4500',    # 빨간색
+                '놀람': '#FF69B4',    # 분홍색
+                '담담함': '#A9A9A9',  # 회색
+                '두려움': '#800080',  # 보라색
+                '혐오': '#228B22'     # 초록색
+            }
+            
+            # 산점도 스타일 그래프 (각 감정을 색상으로 구분)
+            fig_scatter = px.scatter(
+                timeline_df,
+                x='날짜',
+                y='감정',
+                color='감정',
+                text='이모지',  # 이모지를 텍스트로 표시
+                title='',
+                labels={'날짜': '날짜', '감정': '감정'},
+                color_discrete_map=emotion_colors
+            )
+            
+            # 마커를 투명하게 하고 이모지만 표시
+            fig_scatter.update_traces(
+                marker=dict(size=1, opacity=0),  # 마커를 거의 보이지 않게
+                textfont=dict(size=30),  # 이모지 크기
+                textposition='middle center'
+            )
+            
+            # 모든 감정 레이블을 Y축에 표시
+            all_emotions = ['행복함', '슬픔', '화남', '놀람', '담담함', '두려움', '혐오']
+            
+            fig_scatter.update_layout(
+                height=500,
+                hovermode='closest',
+                xaxis_title='날짜',
+                yaxis_title='감정',
+                showlegend=True,
+                legend=dict(
+                    title="감정",
+                    orientation="v",
+                    yanchor="top",
+                    y=1,
+                    xanchor="left",
+                    x=1.02
+                ),
+                yaxis=dict(
+                    categoryorder='array',
+                    categoryarray=all_emotions  # 모든 감정을 순서대로 표시
+                )
+            )
+            
+            # X축을 하루 간격으로 설정
+            fig_scatter.update_xaxes(
+                dtick=86400000.0,  # 1일 = 86400000 밀리초
+                tickformat='%Y-%m-%d'
+            )
+            
+            st.plotly_chart(fig_scatter, use_container_width=True)
+        else:
+            st.info("시계열 데이터가 충분하지 않습니다.")
 else:
     st.info("📭 아직 저장된 영상 일기가 없습니다. 위에서 녹화를 시작해보세요!")
